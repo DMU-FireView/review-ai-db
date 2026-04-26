@@ -1,0 +1,2156 @@
+{
+    "contents": [
+        {
+            "id": 4964384060,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "팩트랑 썬크림 샀는데 증정품 있는거 알았지만 그 외에도 샘플을 아낌없이 넣어주셔서 선물 받은 기분이에요. 쿠션은 엄청 촉촉해요. 바르면 기름광이 아니라 진주가 들어간 거 같은 반짝임이 있어요. 광대 쪽에 살짝 기미가 있는데 살짝 커버되는 정도고 색상은 노란 피부인데 딱 맞는거 같아요. 쭉 써보고 샘플들도 맞으면 구매해 볼게요 😃",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-04-28T11:05:51.337+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "helpCount": 1,
+            "writerId": "anjs****",
+            "maskedWriterId": "anjs****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042780037531",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 21N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3620862922,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260428_192/17773742957240iFkF_JPEG/4489.jpg",
+                    "attachWidth": 4000,
+                    "attachHeight": 3000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260428_192/17773742957240iFkF_JPEG/4489.jpg",
+                    "attachSize": 3101581,
+                    "attachDescription": "본품과 증정품",
+                    "sortOrder": 0,
+                    "attachName": "4489.jpg",
+                    "attachDirectoryName": "/20260428_192/17773742957240iFkF_JPEG"
+                },
+                {
+                    "id": 3620862923,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260428_176/1777374294424GTlwO_JPEG/4490.jpg",
+                    "attachWidth": 4000,
+                    "attachHeight": 3000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260428_176/1777374294424GTlwO_JPEG/4490.jpg",
+                    "attachSize": 3161580,
+                    "attachDescription": "추가로 챙겨준 샘플 👍👍👍",
+                    "sortOrder": 1,
+                    "attachName": "4490.jpg",
+                    "attachDirectoryName": "/20260428_176/1777374294424GTlwO_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000097,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 3,
+                    "itemValue": "복합성"
+                },
+                {
+                    "itemId": 15,
+                    "itemOptionId": 1,
+                    "itemValue": "웜톤"
+                },
+                {
+                    "itemId": 149,
+                    "itemOptionId": 3,
+                    "itemValue": "봄 웜톤"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 1,
+                    "itemValue": "잡티"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 2,
+                    "itemValue": "미백"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 3,
+                    "itemValue": "주름"
+                }
+            ],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 100966,
+                    "representTagNo": 105964,
+                    "tagPatternStartNo": 0,
+                    "tagPatternEndNo": 23
+                },
+                {
+                    "tagGroupNo": 108960,
+                    "representTagNo": 108889,
+                    "tagPatternStartNo": 59,
+                    "tagPatternEndNo": 69
+                },
+                {
+                    "tagGroupNo": 114340,
+                    "representTagNo": 110852,
+                    "tagPatternStartNo": 85,
+                    "tagPatternEndNo": 105
+                },
+                {
+                    "tagGroupNo": 108537,
+                    "representTagNo": 108711,
+                    "tagPatternStartNo": 108,
+                    "tagPatternEndNo": 135
+                },
+                {
+                    "tagGroupNo": 114446,
+                    "representTagNo": 110893,
+                    "tagPatternStartNo": 137,
+                    "tagPatternEndNo": 157
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3620862922,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260428_192/17773742957240iFkF_JPEG/4489.jpg",
+                "attachWidth": 4000,
+                "attachHeight": 3000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260428_192/17773742957240iFkF_JPEG/4489.jpg",
+                "attachSize": 3101581,
+                "attachDescription": "본품과 증정품",
+                "sortOrder": 0,
+                "attachName": "4489.jpg",
+                "attachDirectoryName": "/20260428_192/17773742957240iFkF_JPEG"
+            },
+            "repThumbnailTagNameDescription": {
+                "id": 3620862922,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260428_192/17773742957240iFkF_JPEG/4489.jpg",
+                "attachWidth": 4000,
+                "attachHeight": 3000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260428_192/17773742957240iFkF_JPEG/4489.jpg",
+                "attachSize": 3101581,
+                "attachDescription": "본품과 증정품",
+                "sortOrder": 0,
+                "attachName": "4489.jpg",
+                "attachDirectoryName": "/20260428_192/17773742957240iFkF_JPEG"
+            },
+            "isMyReview": false
+        },
+        {
+            "id": 4969245190,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "저는 커버도 잘안되고 밀리는것도 있고 일찍 무너지는편인데 제일 중요한게 예쁘게 무너지는건데요. 블랙쿠션이 커버가 높다보니 무너지는게 별로인데 이건 진짜 예쁘게 무너져서? 오후에진짜 거지같지않은 상태 유지해서 좋아요. 여름에 어차피 무너질거라면 지저분하게 거지같지않은게 좋은데 딱이에요",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-05T16:03:26.958+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "hjan***",
+            "maskedWriterId": "hjan***",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/profile/blog/13/1/hjandtn.jpg",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042728172851",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 25N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3624379164,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260506_6/17779968154827SeRp_JPEG/1000169913.jpg",
+                    "attachWidth": 4032,
+                    "attachHeight": 3024,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260506_6/17779968154827SeRp_JPEG/1000169913.jpg",
+                    "attachSize": 3100664,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "1000169913.jpg",
+                    "attachDirectoryName": "/20260506_6/17779968154827SeRp_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                2000176,
+                1000096
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 3,
+                    "itemValue": "복합성"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 1,
+                    "itemValue": "잡티"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 9,
+                    "itemValue": "모공"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 8,
+                    "itemValue": "민감성"
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3624379164,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260506_6/17779968154827SeRp_JPEG/1000169913.jpg",
+                "attachWidth": 4032,
+                "attachHeight": 3024,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260506_6/17779968154827SeRp_JPEG/1000169913.jpg",
+                "attachSize": 3100664,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "1000169913.jpg",
+                "attachDirectoryName": "/20260506_6/17779968154827SeRp_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4967290799,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "필릭스가 광고해서 장바구니에 담아뒀다가.. 마침 라이브해서 구매했습니다 \n커버력이 좋진 않지만 피부 좋아보여요 무너질 때도 지저분하지 않구요 \n저처럼 화장 진하게 안 하시는 분들 만족할 것 같습니다",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-02T12:13:40.946+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "hiph*****",
+            "maskedWriterId": "hiph*****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026040891069581",
+            "productNo": "7195971829",
+            "productName": "[LIVE] 포토리뷰 1천점_[브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): [LIVE] NEW 21C1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3622989211,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260502_9/1777723807311YMWsV_JPEG/1000009649.jpg",
+                    "attachWidth": 4000,
+                    "attachHeight": 3000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260502_9/1777723807311YMWsV_JPEG/1000009649.jpg",
+                    "attachSize": 3844453,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "1000009649.jpg",
+                    "attachDirectoryName": "/20260502_9/1777723807311YMWsV_JPEG"
+                },
+                {
+                    "id": 3622989212,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260502_254/1777724009995nY5YM_JPEG/PayApp_20260502_211321_895861451786317152.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260502_254/1777724009995nY5YM_JPEG/PayApp_20260502_211321_895861451786317152.jpg",
+                    "attachSize": 5108362,
+                    "attachDescription": "",
+                    "sortOrder": 1,
+                    "attachName": "PayApp_20260502_211321_895861451786317152.jpg",
+                    "attachDirectoryName": "/20260502_254/1777724009995nY5YM_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000096,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 113996,
+                    "representTagNo": 110737,
+                    "tagPatternStartNo": 53,
+                    "tagPatternEndNo": 60
+                },
+                {
+                    "tagGroupNo": 100806,
+                    "representTagNo": 105866,
+                    "tagPatternStartNo": 80,
+                    "tagPatternEndNo": 109
+                },
+                {
+                    "tagGroupNo": 108537,
+                    "representTagNo": 108711,
+                    "tagPatternStartNo": 41,
+                    "tagPatternEndNo": 51
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3622989211,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260502_9/1777723807311YMWsV_JPEG/1000009649.jpg",
+                "attachWidth": 4000,
+                "attachHeight": 3000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260502_9/1777723807311YMWsV_JPEG/1000009649.jpg",
+                "attachSize": 3844453,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "1000009649.jpg",
+                "attachDirectoryName": "/20260502_9/1777723807311YMWsV_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4967181464,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "블랙쿠션써보고 요아이는 처음써보는 광채가 미쳤어요 제가 건성이라서 확실이 이쿠션이 잘맞는거 같아요 피부톤이 밝게해주고 싶어서 밝은색 주문했는데 찰떡이구요 라이브때 주문했더니 사은품도 주셔서 잘쓸꺼같아요 무엇보다 매트하지않아서 저녁까지 수정한번만하면 쭉 유지되서 좋았어요",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-02T08:41:01.964+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "meji*****",
+            "maskedWriterId": "meji*****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042792655501",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 17N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3622908045,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260502_272/1777711040788vu2pb_JPEG/6820.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260502_272/1777711040788vu2pb_JPEG/6820.jpg",
+                    "attachSize": 5048757,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "6820.jpg",
+                    "attachDirectoryName": "/20260502_272/1777711040788vu2pb_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000095,
+                1000097,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 2,
+                    "itemValue": "건성"
+                },
+                {
+                    "itemId": 15,
+                    "itemOptionId": 1,
+                    "itemValue": "웜톤"
+                },
+                {
+                    "itemId": 149,
+                    "itemOptionId": 5,
+                    "itemValue": "가을 웜톤"
+                },
+                {
+                    "itemId": 16,
+                    "itemOptionId": 3,
+                    "itemValue": "보통"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 8,
+                    "itemValue": "민감성"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 3,
+                    "itemValue": "주름"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 1,
+                    "itemValue": "잡티"
+                }
+            ],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 117393,
+                    "representTagNo": 108315,
+                    "tagPatternStartNo": 28,
+                    "tagPatternEndNo": 53
+                },
+                {
+                    "tagGroupNo": 113324,
+                    "representTagNo": 110447,
+                    "tagPatternStartNo": 0,
+                    "tagPatternEndNo": 26
+                },
+                {
+                    "tagGroupNo": 100966,
+                    "representTagNo": 105964,
+                    "tagPatternStartNo": 86,
+                    "tagPatternEndNo": 111
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3622908045,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260502_272/1777711040788vu2pb_JPEG/6820.jpg",
+                "attachWidth": 3000,
+                "attachHeight": 4000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260502_272/1777711040788vu2pb_JPEG/6820.jpg",
+                "attachSize": 5048757,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "6820.jpg",
+                "attachDirectoryName": "/20260502_272/1777711040788vu2pb_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4964588246,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "역시 대헤라 ㅠ 주문 후 바로 당일 배송시작에 담날 바로 도착 ㅠㅠ\n기존 글로우쿠션은 너무 별로였는데 이번건 리뉴얼 됐대서 새로 샀어요.\n코렉팅베이스랑 꿀조합이라 같이 구메 ㅠㅠ\n봄이라 사실 파우더리하게 살라그랬는데\n피부 자체가 너무 건조함이 느껴져서 글로우쿠션 구매했어요\n\n본품 두개 구매하고 이렇게 샘플이 많이 왔네요\n짱 🖤🤍🖤🤍🖤🤍🖤🤍",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-04-28T14:29:23.570+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "bonn*******",
+            "maskedWriterId": "bonn*******",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/20260417_150/17763866699898pNUe_JPEG/image.jpg",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042791062741",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 21C1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3621027225,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260428_292/1777386558133fTASY_JPEG/IMG_1502.jpeg",
+                    "attachWidth": 3024,
+                    "attachHeight": 4032,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260428_292/1777386558133fTASY_JPEG/IMG_1502.jpeg",
+                    "attachSize": 2402470,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "IMG_1502.jpeg",
+                    "attachDirectoryName": "/20260428_292/1777386558133fTASY_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000095,
+                1000098,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 110186,
+                    "representTagNo": 109228,
+                    "tagPatternStartNo": 154,
+                    "tagPatternEndNo": 180
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3621027225,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260428_292/1777386558133fTASY_JPEG/IMG_1502.jpeg",
+                "attachWidth": 3024,
+                "attachHeight": 4032,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260428_292/1777386558133fTASY_JPEG/IMG_1502.jpeg",
+                "attachSize": 2402470,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "IMG_1502.jpeg",
+                "attachDirectoryName": "/20260428_292/1777386558133fTASY_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4966475056,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "블랙쿠션살때 샘플로 받은 글로우쿠션이 너무 좋아서 구매했습니다.\n커버를 위해 구매한건 아니고 화장 후 생기부여~~\n그리고 잠시 외출시 살짝 하면, 생얼이지만 피부가 좋아보이는 착시효과 최고입니다!",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-01T06:00:44.029+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "helpCount": 1,
+            "writerId": "jade*****",
+            "maskedWriterId": "jade*****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042790972471",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 21N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3622403007,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_121/1777615236085EfKSQ_JPEG/1777615207798.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_121/1777615236085EfKSQ_JPEG/1777615207798.jpg",
+                    "attachSize": 4227483,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "1777615207798.jpg",
+                    "attachDirectoryName": "/20260501_121/1777615236085EfKSQ_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000095,
+                1000097,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 3,
+                    "itemValue": "복합성"
+                },
+                {
+                    "itemId": 15,
+                    "itemOptionId": 1,
+                    "itemValue": "웜톤"
+                },
+                {
+                    "itemId": 149,
+                    "itemOptionId": 5,
+                    "itemValue": "가을 웜톤"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 2,
+                    "itemValue": "미백"
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3622403007,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_121/1777615236085EfKSQ_JPEG/1777615207798.jpg",
+                "attachWidth": 3000,
+                "attachHeight": 4000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_121/1777615236085EfKSQ_JPEG/1777615207798.jpg",
+                "attachSize": 4227483,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "1777615207798.jpg",
+                "attachDirectoryName": "/20260501_121/1777615236085EfKSQ_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4951066545,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "리플렉션 파운데이션 샀을때 마음에 들어서 나중에 쿠션도 사야지 했는데 할인 시즌까지 좀 기다렸다가 이번 네플스 구성이 좋아서 한번 사봤습니다\n커버력은 거의 없어서 컨실러 꼭 써야하고, 나중에 헤라 컨실러도 사볼까 싶네요\n파운데이션으로 아침에 화장하고 수정용으로 쓰려고 쿠션도 샀습니다 테스트 해봤는데 역시 윤광이 마음에 들어요",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-04-10T13:46:56.930+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "helpCount": 2,
+            "writerId": "yebi******",
+            "maskedWriterId": "yebi******",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/20240925_283/1727243885996COq3y_JPEG/image.jpg",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026040864179521",
+            "productNo": "7195971829",
+            "productName": "[LIVE] 포토리뷰 1천점_[브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): [LIVE] NEW 25N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3611338483,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_45/1775828763596vnSfp_JPEG/tmp_4717361129105018237.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_45/1775828763596vnSfp_JPEG/tmp_4717361129105018237.jpg",
+                    "attachSize": 3755929,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "tmp_4717361129105018237.jpg",
+                    "attachDirectoryName": "/20260410_45/1775828763596vnSfp_JPEG"
+                },
+                {
+                    "id": 3611338484,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_137/1775828782342d6To4_JPEG/tmp_5476235102864612091.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_137/1775828782342d6To4_JPEG/tmp_5476235102864612091.jpg",
+                    "attachSize": 3164579,
+                    "attachDescription": "",
+                    "sortOrder": 1,
+                    "attachName": "tmp_5476235102864612091.jpg",
+                    "attachDirectoryName": "/20260410_137/1775828782342d6To4_JPEG"
+                },
+                {
+                    "id": 3611338485,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_278/1775828802432zHKvp_JPEG/tmp_1790382106914785046.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_278/1775828802432zHKvp_JPEG/tmp_1790382106914785046.jpg",
+                    "attachSize": 3775659,
+                    "attachDescription": "",
+                    "sortOrder": 2,
+                    "attachName": "tmp_1790382106914785046.jpg",
+                    "attachDirectoryName": "/20260410_278/1775828802432zHKvp_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000096,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 15,
+                    "itemOptionId": 2,
+                    "itemValue": "쿨톤"
+                },
+                {
+                    "itemId": 149,
+                    "itemOptionId": 6,
+                    "itemValue": "겨울 쿨톤"
+                },
+                {
+                    "itemId": 16,
+                    "itemOptionId": 4,
+                    "itemValue": "어두움"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 9,
+                    "itemValue": "모공"
+                }
+            ],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 100548,
+                    "representTagNo": 105807,
+                    "tagPatternStartNo": 39,
+                    "tagPatternEndNo": 77
+                },
+                {
+                    "tagGroupNo": 111438,
+                    "representTagNo": 109752,
+                    "tagPatternStartNo": 79,
+                    "tagPatternEndNo": 100
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3611338483,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_45/1775828763596vnSfp_JPEG/tmp_4717361129105018237.jpg",
+                "attachWidth": 3000,
+                "attachHeight": 4000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_45/1775828763596vnSfp_JPEG/tmp_4717361129105018237.jpg",
+                "attachSize": 3755929,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "tmp_4717361129105018237.jpg",
+                "attachDirectoryName": "/20260410_45/1775828763596vnSfp_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4970169311,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "사은품보고 놀랐어요. 팩트 하나 샀는데...감사합니다. 저한테는 조금 밝은거 같은데 과하게만 하지않음 괜찮을거 같습니다.",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-07T00:48:27.167+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "uo****",
+            "maskedWriterId": "uo****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/20200211_289/1581393262822SXn1G_JPEG/profileimage.jpg",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026043044552961",
+            "productNo": "7195971829",
+            "productName": "[브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): [NEW 21N1]",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3625032766,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260507_103/1778114901822MM5O7_JPEG/1000031685.jpg",
+                    "attachWidth": 4000,
+                    "attachHeight": 2252,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260507_103/1778114901822MM5O7_JPEG/1000031685.jpg",
+                    "attachSize": 3344613,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "1000031685.jpg",
+                    "attachDirectoryName": "/20260507_103/1778114901822MM5O7_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000097,
+                2000176
+            ],
+            "subReviewEvaluationValueIds": [],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3625032766,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260507_103/1778114901822MM5O7_JPEG/1000031685.jpg",
+                "attachWidth": 4000,
+                "attachHeight": 2252,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260507_103/1778114901822MM5O7_JPEG/1000031685.jpg",
+                "attachSize": 3344613,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "1000031685.jpg",
+                "attachDirectoryName": "/20260507_103/1778114901822MM5O7_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4966769719,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "완전 맘에 들어요\n헤라 제품은 여기서만 사요\n사은품도 빵빵하고 배송도 빠르고 안살 이유가 없어요\n\n사은품 많이 챙겨주시는데\n사용해보면서 잘맞으니 구매하게 되는 제품도 많네요 😍\n헤라 최고",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-01T14:10:57.304+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "helpCount": 1,
+            "writerId": "na****",
+            "maskedWriterId": "na****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042739794681",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 17N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3622620042,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_299/1777644654066h2XyN_JPEG/IMG_8191.jpeg",
+                    "attachWidth": 335,
+                    "attachHeight": 447,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_299/1777644654066h2XyN_JPEG/IMG_8191.jpeg",
+                    "attachSize": 70374,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "IMG_8191.jpeg",
+                    "attachDirectoryName": "/20260501_299/1777644654066h2XyN_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000097,
+                2000176
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 106122,
+                    "representTagNo": 107681,
+                    "tagPatternStartNo": 99,
+                    "tagPatternEndNo": 103
+                },
+                {
+                    "tagGroupNo": 100966,
+                    "representTagNo": 105964,
+                    "tagPatternStartNo": 25,
+                    "tagPatternEndNo": 33
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3622620042,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_299/1777644654066h2XyN_JPEG/IMG_8191.jpeg",
+                "attachWidth": 335,
+                "attachHeight": 447,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_299/1777644654066h2XyN_JPEG/IMG_8191.jpeg",
+                "attachSize": 70374,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "IMG_8191.jpeg",
+                "attachDirectoryName": "/20260501_299/1777644654066h2XyN_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4954419055,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 4,
+            "reviewContent": "64세 건조한피부라서 촉초쿠션 알아보다 구매하였는데 배송받고 기초 탄탄하게 하고 발라보니 처음에는 겉도는 느낌이고 잡티커버도 거의 안되는거 같았는데 그대로 외출후 몇시간후 피부를보니 피부에 밀착되어 촉촉하고 약간의 광도 났어요 기대했던 만큼의 광은 아니지만 나름 만족합니다 색상고민도 많이 했었는데 적당히 화사하고 얇게 커버되며 피부가 좋아보이네요",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-04-15T06:35:46.465+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "helpCount": 2,
+            "writerId": "duri******",
+            "maskedWriterId": "duri******",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026040888157371",
+            "productNo": "7195971829",
+            "productName": "[LIVE] 포토리뷰 1천점_[브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): [LIVE] NEW 21C1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3613723911,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260415_141/1776234635526L748S_JPEG/tmp_234119777254971805.jpg",
+                    "attachWidth": 3024,
+                    "attachHeight": 4032,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260415_141/1776234635526L748S_JPEG/tmp_234119777254971805.jpg",
+                    "attachSize": 3817533,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "tmp_234119777254971805.jpg",
+                    "attachDirectoryName": "/20260415_141/1776234635526L748S_JPEG"
+                },
+                {
+                    "id": 3613723912,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260415_96/17762346629007qh6r_JPEG/tmp_6071713772836399337.jpg",
+                    "attachWidth": 3024,
+                    "attachHeight": 4032,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260415_96/17762346629007qh6r_JPEG/tmp_6071713772836399337.jpg",
+                    "attachSize": 3569317,
+                    "attachDescription": "",
+                    "sortOrder": 1,
+                    "attachName": "tmp_6071713772836399337.jpg",
+                    "attachDirectoryName": "/20260415_96/17762346629007qh6r_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000095,
+                1000097,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 2,
+                    "itemValue": "건성"
+                },
+                {
+                    "itemId": 15,
+                    "itemOptionId": 2,
+                    "itemValue": "쿨톤"
+                },
+                {
+                    "itemId": 149,
+                    "itemOptionId": 4,
+                    "itemValue": "여름 쿨톤"
+                },
+                {
+                    "itemId": 16,
+                    "itemOptionId": 2,
+                    "itemValue": "밝음"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 10,
+                    "itemValue": "탄력"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 9,
+                    "itemValue": "모공"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 3,
+                    "itemValue": "주름"
+                }
+            ],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 100968,
+                    "representTagNo": 105978,
+                    "tagPatternStartNo": 176,
+                    "tagPatternEndNo": 182
+                },
+                {
+                    "tagGroupNo": 113996,
+                    "representTagNo": 110737,
+                    "tagPatternStartNo": 184,
+                    "tagPatternEndNo": 193
+                },
+                {
+                    "tagGroupNo": 108960,
+                    "representTagNo": 108889,
+                    "tagPatternStartNo": 111,
+                    "tagPatternEndNo": 125
+                },
+                {
+                    "tagGroupNo": 107508,
+                    "representTagNo": 108280,
+                    "tagPatternStartNo": 167,
+                    "tagPatternEndNo": 174
+                },
+                {
+                    "tagGroupNo": 108032,
+                    "representTagNo": 108501,
+                    "tagPatternStartNo": 83,
+                    "tagPatternEndNo": 109
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3613723911,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260415_141/1776234635526L748S_JPEG/tmp_234119777254971805.jpg",
+                "attachWidth": 3024,
+                "attachHeight": 4032,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260415_141/1776234635526L748S_JPEG/tmp_234119777254971805.jpg",
+                "attachSize": 3817533,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "tmp_234119777254971805.jpg",
+                "attachDirectoryName": "/20260415_141/1776234635526L748S_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4967492232,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "커버력은 약하지만 광나구요ㅎ\n수분감 아주 좋아요\n화장한듯 않한듯 자연스러움 추구하는데\n저에게는 딱 좋네요\n블래쿠션도 사용해보고 싶네요",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-03T01:56:20.813+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "dca2***",
+            "maskedWriterId": "dca2***",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/20201124_271/16061785522721cwDB_JPEG/200626_YG_298.jpg",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042737780641",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 21N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3623130936,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260503_251/1777773249595YuX4H_JPEG/4997.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260503_251/1777773249595YuX4H_JPEG/4997.jpg",
+                    "attachSize": 3989820,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "4997.jpg",
+                    "attachDirectoryName": "/20260503_251/1777773249595YuX4H_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000096,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 1,
+                    "itemValue": "지성"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 2,
+                    "itemValue": "미백"
+                }
+            ],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 113324,
+                    "representTagNo": 110447,
+                    "tagPatternStartNo": 10,
+                    "tagPatternEndNo": 13
+                },
+                {
+                    "tagGroupNo": 111438,
+                    "representTagNo": 109752,
+                    "tagPatternStartNo": 0,
+                    "tagPatternEndNo": 8
+                },
+                {
+                    "tagGroupNo": 109849,
+                    "representTagNo": 109127,
+                    "tagPatternStartNo": 27,
+                    "tagPatternEndNo": 57
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3623130936,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260503_251/1777773249595YuX4H_JPEG/4997.jpg",
+                "attachWidth": 3000,
+                "attachHeight": 4000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260503_251/1777773249595YuX4H_JPEG/4997.jpg",
+                "attachSize": 3989820,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "4997.jpg",
+                "attachDirectoryName": "/20260503_251/1777773249595YuX4H_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4965076871,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "색상이나 촉촉함등 전반적으로 마음에 들어요. 건조하지 않으나, 커버력보다는 결광 느낌으로 생얼느낌처럼 표현할때 쓰기 좋아요! 다만 안에 내부가 스크레치가 쓰기 전 부터 있어서 좀 아쉬웠어요 ㅠ",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-04-29T07:39:38.817+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "cjst******",
+            "maskedWriterId": "cjst******",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/20221021_216/1666353259472M51DM_PNG/%C4%B8%C3%B3.PNG",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026040870272021",
+            "productNo": "7195971829",
+            "productName": "[LIVE] 포토리뷰 1천점_[브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): [LIVE] NEW 13N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3621372141,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260429_257/1777448321825un079_JPEG/KakaoTalk_20260429_163817615.jpg",
+                    "attachWidth": 1050,
+                    "attachHeight": 1400,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260429_257/1777448321825un079_JPEG/KakaoTalk_20260429_163817615.jpg",
+                    "attachSize": 275873,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "KakaoTalk_20260429_163817615.jpg",
+                    "attachDirectoryName": "/20260429_257/1777448321825un079_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000098,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 110497,
+                    "representTagNo": 109394,
+                    "tagPatternStartNo": 5,
+                    "tagPatternEndNo": 22
+                },
+                {
+                    "tagGroupNo": 114446,
+                    "representTagNo": 110893,
+                    "tagPatternStartNo": 0,
+                    "tagPatternEndNo": 3
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3621372141,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260429_257/1777448321825un079_JPEG/KakaoTalk_20260429_163817615.jpg",
+                "attachWidth": 1050,
+                "attachHeight": 1400,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260429_257/1777448321825un079_JPEG/KakaoTalk_20260429_163817615.jpg",
+                "attachSize": 275873,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "KakaoTalk_20260429_163817615.jpg",
+                "attachDirectoryName": "/20260429_257/1777448321825un079_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4950349575,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "라이브할때 기다려서 모아서 샀는데 이것저것 엄청와서 좋았습니다. ㅎㅎ 글로시 광택 톤업을 모두 만족시켜주는 파데입니다. 반짝반짝 예쁜 톤을 만들어줘요.",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-04-09T22:52:12.565+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "helpCount": 1,
+            "writerId": "bjor*****",
+            "maskedWriterId": "bjor*****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/20240303_70/1709449580234CXMOp_JPEG/profileImage.jpg",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026040865880031",
+            "productNo": "7195971829",
+            "productName": "[LIVE] 포토리뷰 1천점_[브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): [LIVE] NEW 21C1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3610839246,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_281/1775775071176Axyhv_JPEG/1000020987.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_281/1775775071176Axyhv_JPEG/1000020987.jpg",
+                    "attachSize": 2428447,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "1000020987.jpg",
+                    "attachDirectoryName": "/20260410_281/1775775071176Axyhv_JPEG"
+                },
+                {
+                    "id": 3610839247,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_160/1775775071366OJPWK_JPEG/1000020991.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_160/1775775071366OJPWK_JPEG/1000020991.jpg",
+                    "attachSize": 3372360,
+                    "attachDescription": "",
+                    "sortOrder": 1,
+                    "attachName": "1000020991.jpg",
+                    "attachDirectoryName": "/20260410_160/1775775071366OJPWK_JPEG"
+                },
+                {
+                    "id": 3610839248,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_59/17757750715462XNQh_JPEG/1000020982.jpg",
+                    "attachWidth": 4000,
+                    "attachHeight": 3000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_59/17757750715462XNQh_JPEG/1000020982.jpg",
+                    "attachSize": 3170890,
+                    "attachDescription": "",
+                    "sortOrder": 2,
+                    "attachName": "1000020982.jpg",
+                    "attachDirectoryName": "/20260410_59/17757750715462XNQh_JPEG"
+                },
+                {
+                    "id": 3610839249,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_65/1775775071509NHs4v_JPEG/1000020984.jpg",
+                    "attachWidth": 4000,
+                    "attachHeight": 3000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_65/1775775071509NHs4v_JPEG/1000020984.jpg",
+                    "attachSize": 2432640,
+                    "attachDescription": "",
+                    "sortOrder": 3,
+                    "attachName": "1000020984.jpg",
+                    "attachDirectoryName": "/20260410_65/1775775071509NHs4v_JPEG"
+                },
+                {
+                    "id": 3610839250,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_146/1775775071374yMakg_JPEG/1000020981.jpg",
+                    "attachWidth": 4000,
+                    "attachHeight": 3000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_146/1775775071374yMakg_JPEG/1000020981.jpg",
+                    "attachSize": 2075793,
+                    "attachDescription": "",
+                    "sortOrder": 4,
+                    "attachName": "1000020981.jpg",
+                    "attachDirectoryName": "/20260410_146/1775775071374yMakg_JPEG"
+                },
+                {
+                    "id": 3610839251,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_196/1775775071425PJPFM_JPEG/1000020983.jpg",
+                    "attachWidth": 4000,
+                    "attachHeight": 3000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_196/1775775071425PJPFM_JPEG/1000020983.jpg",
+                    "attachSize": 2755495,
+                    "attachDescription": "",
+                    "sortOrder": 5,
+                    "attachName": "1000020983.jpg",
+                    "attachDirectoryName": "/20260410_196/1775775071425PJPFM_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000097,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 2,
+                    "itemValue": "건성"
+                },
+                {
+                    "itemId": 15,
+                    "itemOptionId": 1,
+                    "itemValue": "웜톤"
+                },
+                {
+                    "itemId": 149,
+                    "itemOptionId": 3,
+                    "itemValue": "봄 웜톤"
+                },
+                {
+                    "itemId": 16,
+                    "itemOptionId": 2,
+                    "itemValue": "밝음"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 10,
+                    "itemValue": "탄력"
+                }
+            ],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 113324,
+                    "representTagNo": 110447,
+                    "tagPatternStartNo": 39,
+                    "tagPatternEndNo": 64
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3610839246,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260410_281/1775775071176Axyhv_JPEG/1000020987.jpg",
+                "attachWidth": 3000,
+                "attachHeight": 4000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260410_281/1775775071176Axyhv_JPEG/1000020987.jpg",
+                "attachSize": 2428447,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "1000020987.jpg",
+                "attachDirectoryName": "/20260410_281/1775775071176Axyhv_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4967005468,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "너무 좋네요. 제가 리뷰수가 블랙쿠션보다 이게 더 많아서 블랙 살려다가 이거 샀거든요. 근데 완전 만족!!!! \n좋아요~ 노란끼얼굴인데 21호 잘 맞네요. 굳굳~~",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-02T03:42:10.387+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "my****",
+            "maskedWriterId": "my****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042740463741",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 21N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3622782012,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260502_227/1777693052942LXCPU_JPEG/image.jpg",
+                    "attachWidth": 3024,
+                    "attachHeight": 4032,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260502_227/1777693052942LXCPU_JPEG/image.jpg",
+                    "attachSize": 2090823,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "image.jpg",
+                    "attachDirectoryName": "/20260502_227/1777693052942LXCPU_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000095,
+                1000097,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 100806,
+                    "representTagNo": 105866,
+                    "tagPatternStartNo": 0,
+                    "tagPatternEndNo": 5
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3622782012,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260502_227/1777693052942LXCPU_JPEG/image.jpg",
+                "attachWidth": 3024,
+                "attachHeight": 4032,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260502_227/1777693052942LXCPU_JPEG/image.jpg",
+                "attachSize": 2090823,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "image.jpg",
+                "attachDirectoryName": "/20260502_227/1777693052942LXCPU_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4966106336,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 4,
+            "reviewContent": "건성, 붉은기 있는 21-22호 정도의 피부입니다.\n뉴트럴 색감 치고는 처음 바를 때 핑크빛이 돌아요. 무너짐, 다크닝이 거의 없어서 일단 사용해볼 생각입니다.",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-04-30T14:14:20.616+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "lmh5***",
+            "maskedWriterId": "lmh5***",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/profile/blog/33/15/lmh5267.jpg",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042795690231",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 21N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3622145197,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260430_64/1777558452428p9lMl_JPEG/IMG_9470.jpeg",
+                    "attachWidth": 3024,
+                    "attachHeight": 4032,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260430_64/1777558452428p9lMl_JPEG/IMG_9470.jpeg",
+                    "attachSize": 2758429,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "IMG_9470.jpeg",
+                    "attachDirectoryName": "/20260430_64/1777558452428p9lMl_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                2000176,
+                1000096
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 113828,
+                    "representTagNo": 110695,
+                    "tagPatternStartNo": 58,
+                    "tagPatternEndNo": 87
+                },
+                {
+                    "tagGroupNo": 102267,
+                    "representTagNo": 106371,
+                    "tagPatternStartNo": 29,
+                    "tagPatternEndNo": 55
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3622145197,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260430_64/1777558452428p9lMl_JPEG/IMG_9470.jpeg",
+                "attachWidth": 3024,
+                "attachHeight": 4032,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260430_64/1777558452428p9lMl_JPEG/IMG_9470.jpeg",
+                "attachSize": 2758429,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "IMG_9470.jpeg",
+                "attachDirectoryName": "/20260430_64/1777558452428p9lMl_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4968334437,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "쿠션만 샀는데..구성이 미쳤더라구요;; 대박입니다 커버도 잘되고 물광올라오고 이번에 잘 득템했네요!",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-04T08:59:32.302+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "spri******",
+            "maskedWriterId": "spri******",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://phinf.pstatic.net/contact/20250625_289/1750826752633nEBlr_JPEG/image.jpg",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026041562614211",
+            "productNo": "7195971829",
+            "productName": "[브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): [NEW 17N1]",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3623708778,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260504_217/1777885127229LX7qj_JPEG/IMG_6471.jpeg",
+                    "attachWidth": 3024,
+                    "attachHeight": 4032,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260504_217/1777885127229LX7qj_JPEG/IMG_6471.jpeg",
+                    "attachSize": 1847953,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "IMG_6471.jpeg",
+                    "attachDirectoryName": "/20260504_217/1777885127229LX7qj_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000095,
+                1000098,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 2,
+                    "itemValue": "건성"
+                },
+                {
+                    "itemId": 15,
+                    "itemOptionId": 2,
+                    "itemValue": "쿨톤"
+                },
+                {
+                    "itemId": 149,
+                    "itemOptionId": 4,
+                    "itemValue": "여름 쿨톤"
+                },
+                {
+                    "itemId": 16,
+                    "itemOptionId": 3,
+                    "itemValue": "보통"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 3,
+                    "itemValue": "주름"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 14,
+                    "itemValue": "여드름"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 9,
+                    "itemValue": "모공"
+                }
+            ],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 108537,
+                    "representTagNo": 108711,
+                    "tagPatternStartNo": 28,
+                    "tagPatternEndNo": 34
+                },
+                {
+                    "tagGroupNo": 100548,
+                    "representTagNo": 105807,
+                    "tagPatternStartNo": 0,
+                    "tagPatternEndNo": 18
+                },
+                {
+                    "tagGroupNo": 100806,
+                    "representTagNo": 105866,
+                    "tagPatternStartNo": 43,
+                    "tagPatternEndNo": 53
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "NAVER_PROFILE",
+            "repThumbnailAttach": {
+                "id": 3623708778,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260504_217/1777885127229LX7qj_JPEG/IMG_6471.jpeg",
+                "attachWidth": 3024,
+                "attachHeight": 4032,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260504_217/1777885127229LX7qj_JPEG/IMG_6471.jpeg",
+                "attachSize": 1847953,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "IMG_6471.jpeg",
+                "attachDirectoryName": "/20260504_217/1777885127229LX7qj_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4966726926,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "두번째 구매에요. 샤넬 이후로 같은 립스틱 두 번 산건 처음이에요",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-01T12:46:13.427+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "june***",
+            "maskedWriterId": "june***",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042732020371",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 21N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3622587445,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_137/1777639548634LV7LR_JPEG/20260501_180846.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_137/1777639548634LV7LR_JPEG/20260501_180846.jpg",
+                    "attachSize": 3729202,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "20260501_180846.jpg",
+                    "attachDirectoryName": "/20260501_137/1777639548634LV7LR_JPEG"
+                },
+                {
+                    "id": 3622587446,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_19/1777639560624Pyv7V_JPEG/20260501_180903.jpg",
+                    "attachWidth": 3000,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_19/1777639560624Pyv7V_JPEG/20260501_180903.jpg",
+                    "attachSize": 3876035,
+                    "attachDescription": "",
+                    "sortOrder": 1,
+                    "attachName": "20260501_180903.jpg",
+                    "attachDirectoryName": "/20260501_19/1777639560624Pyv7V_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000095,
+                1000098,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 3,
+                    "itemValue": "복합성"
+                },
+                {
+                    "itemId": 16,
+                    "itemOptionId": 2,
+                    "itemValue": "밝음"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 10,
+                    "itemValue": "탄력"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 9,
+                    "itemValue": "모공"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 3,
+                    "itemValue": "주름"
+                }
+            ],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 106658,
+                    "representTagNo": 107906,
+                    "tagPatternStartNo": 10,
+                    "tagPatternEndNo": 35
+                },
+                {
+                    "tagGroupNo": 111852,
+                    "representTagNo": 109900,
+                    "tagPatternStartNo": 0,
+                    "tagPatternEndNo": 7
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3622587445,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_137/1777639548634LV7LR_JPEG/20260501_180846.jpg",
+                "attachWidth": 3000,
+                "attachHeight": 4000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_137/1777639548634LV7LR_JPEG/20260501_180846.jpg",
+                "attachSize": 3729202,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "20260501_180846.jpg",
+                "attachDirectoryName": "/20260501_137/1777639548634LV7LR_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4957131550,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "맨날 블랙쿠션 쓰다가 새로운 쿠션 경험해보고싶어서 구매했습니다 써보고 한달 후기 올릴게요",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-04-18T19:50:02.361+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "jode*****",
+            "maskedWriterId": "jode*****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026040866297821",
+            "productNo": "7195971829",
+            "productName": "[LIVE] 포토리뷰 1천점_[브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): [LIVE] NEW 21N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3615694470,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260419_267/1776541770627tzIGJ_JPEG/24571.jpg",
+                    "attachWidth": 2252,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260419_267/1776541770627tzIGJ_JPEG/24571.jpg",
+                    "attachSize": 3168007,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "24571.jpg",
+                    "attachDirectoryName": "/20260419_267/1776541770627tzIGJ_JPEG"
+                },
+                {
+                    "id": 3615694471,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260419_101/1776541770228c6esP_JPEG/24569.jpg",
+                    "attachWidth": 2252,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260419_101/1776541770228c6esP_JPEG/24569.jpg",
+                    "attachSize": 3295155,
+                    "attachDescription": "",
+                    "sortOrder": 1,
+                    "attachName": "24569.jpg",
+                    "attachDirectoryName": "/20260419_101/1776541770228c6esP_JPEG"
+                },
+                {
+                    "id": 3615694472,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260419_8/177654177046027L4c_JPEG/24567.jpg",
+                    "attachWidth": 2252,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260419_8/177654177046027L4c_JPEG/24567.jpg",
+                    "attachSize": 3891630,
+                    "attachDescription": "",
+                    "sortOrder": 2,
+                    "attachName": "24567.jpg",
+                    "attachDirectoryName": "/20260419_8/177654177046027L4c_JPEG"
+                },
+                {
+                    "id": 3615694473,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260419_160/1776541770289YCDoj_JPEG/24570.jpg",
+                    "attachWidth": 2252,
+                    "attachHeight": 4000,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260419_160/1776541770289YCDoj_JPEG/24570.jpg",
+                    "attachSize": 3159160,
+                    "attachDescription": "",
+                    "sortOrder": 3,
+                    "attachName": "24570.jpg",
+                    "attachDirectoryName": "/20260419_160/1776541770289YCDoj_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                1000097,
+                2000176
+            ],
+            "subReviewEvaluationValueIds": [],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3615694470,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260419_267/1776541770627tzIGJ_JPEG/24571.jpg",
+                "attachWidth": 2252,
+                "attachHeight": 4000,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260419_267/1776541770627tzIGJ_JPEG/24571.jpg",
+                "attachSize": 3168007,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "24571.jpg",
+                "attachDirectoryName": "/20260419_267/1776541770627tzIGJ_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4966494234,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 4,
+            "reviewContent": "건조피부 엄마가 지속적으로 쓰던 제품이라 같이 구매했어요~ 제품 사진을 다 못찍었어요 사은품까지 많이 받았아요!!",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-01T06:26:27.749+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "an****",
+            "maskedWriterId": "an****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026042792365001",
+            "productNo": "7195971829",
+            "productName": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 라이브 21N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3622416326,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_138/1777616754135H3xY2_JPEG/IMG_7874.jpeg",
+                    "attachWidth": 4032,
+                    "attachHeight": 3024,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_138/1777616754135H3xY2_JPEG/IMG_7874.jpeg",
+                    "attachSize": 1930279,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "IMG_7874.jpeg",
+                    "attachDirectoryName": "/20260501_138/1777616754135H3xY2_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000094,
+                2000176,
+                1000096
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewContentAnalysisSummaryTags": [
+                {
+                    "tagGroupNo": 100966,
+                    "representTagNo": 105964,
+                    "tagPatternStartNo": 48,
+                    "tagPatternEndNo": 60
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3622416326,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260501_138/1777616754135H3xY2_JPEG/IMG_7874.jpeg",
+                "attachWidth": 4032,
+                "attachHeight": 3024,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260501_138/1777616754135H3xY2_JPEG/IMG_7874.jpeg",
+                "attachSize": 1930279,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "IMG_7874.jpeg",
+                "attachDirectoryName": "/20260501_138/1777616754135H3xY2_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        },
+        {
+            "id": 4969801519,
+            "reviewType": "NORMAL",
+            "reviewServiceType": "SELLBLOG",
+            "reviewContentClassType": "PHOTO",
+            "reviewScore": 5,
+            "reviewContent": "너무 좋구요\n파우치 주신거 너무 예뻐요\n다른 샘필도 너무 맘에 들고\n굿굿입니다",
+            "contentsStatusType": "NORMAL",
+            "createDate": "2026-05-06T10:38:46.380+00:00",
+            "freeTrial": false,
+            "repurchase": false,
+            "writerId": "jisa*****",
+            "maskedWriterId": "jisa*****",
+            "writerIdNo": "",
+            "writerMemberNo": 0,
+            "writerProfileImageUrl": "https://profile-phinf.pstatic.net/404/default.png",
+            "storeType": "STOREFARM",
+            "storeNo": 100770445,
+            "checkoutMerchantId": "",
+            "checkoutMerchantNo": 0,
+            "orderNo": "",
+            "productOrderNo": "2026050362735261",
+            "productNo": "7195971829",
+            "productName": "[컨투어링 듀오 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+            "productUrl": "https://smartstore.naver.com/main/products/7195971829",
+            "largeCategorizeCategoryId": "50000002",
+            "middleCategorizeCategoryId": "50000194",
+            "smallCategorizeCategoryId": "50020859",
+            "productOptionContent": "홋수 선택(택1): 13N1",
+            "knowledgeShoppingMallProductId": "7195971829",
+            "originProductNo": 7161850422,
+            "reviewAttaches": [
+                {
+                    "id": 3624763407,
+                    "reviewAttachmentType": "I",
+                    "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260506_135/1778063921462WDIbO_JPEG/image.jpg",
+                    "attachWidth": 3024,
+                    "attachHeight": 4032,
+                    "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260506_135/1778063921462WDIbO_JPEG/image.jpg",
+                    "attachSize": 1613525,
+                    "attachDescription": "",
+                    "sortOrder": 0,
+                    "attachName": "image.jpg",
+                    "attachDirectoryName": "/20260506_135/1778063921462WDIbO_JPEG"
+                }
+            ],
+            "reviewEvaluationValueIds": [
+                1000095,
+                1000098,
+                2000177
+            ],
+            "subReviewEvaluationValueIds": [],
+            "reviewUserInfoValues": [
+                {
+                    "itemId": 14,
+                    "itemOptionId": 3,
+                    "itemValue": "복합성"
+                },
+                {
+                    "itemId": 17,
+                    "itemOptionId": 3,
+                    "itemValue": "주름"
+                }
+            ],
+            "eventTitle": "",
+            "profileImageSourceType": "DEFAULT",
+            "repThumbnailAttach": {
+                "id": 3624763407,
+                "reviewAttachmentType": "I",
+                "attachUrl": "https://phinf.pstatic.net/checkout.phinf/20260506_135/1778063921462WDIbO_JPEG/image.jpg",
+                "attachWidth": 3024,
+                "attachHeight": 4032,
+                "attachPath": "https://phinf.pstatic.net/checkout.phinf/20260506_135/1778063921462WDIbO_JPEG/image.jpg",
+                "attachSize": 1613525,
+                "attachDescription": "",
+                "sortOrder": 0,
+                "attachName": "image.jpg",
+                "attachDirectoryName": "/20260506_135/1778063921462WDIbO_JPEG"
+            },
+            "repThumbnailTagNameDescription": {},
+            "isMyReview": false
+        }
+    ],
+    "page": 1,
+    "size": 20,
+    "totalElements": 20805,
+    "totalPages": 1041,
+    "sort": {
+        "sorted": true,
+        "fields": [
+            {
+                "name": "reviewRankingScore",
+                "direction": "desc"
+            },
+            {
+                "name": "createDate",
+                "direction": "desc"
+            }
+        ]
+    },
+    "first": true,
+    "last": false
+}
