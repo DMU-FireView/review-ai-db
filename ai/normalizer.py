@@ -26,6 +26,26 @@ def save_json_file(path, data):
     with path.open("w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=2)
 
+def clean_html_text(value):
+    if value is None:
+        return None
+
+    text = str(value)
+
+    # HTML 태그 제거
+    text = re.sub(r"<[^>]+>", "", text)
+
+    # HTML 엔티티 정리
+    text = (
+        text.replace("&amp;", "&")
+        .replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", '"')
+        .replace("&#39;", "'")
+    )
+
+    return text.strip()
+
 
 def normalize_bin_review_data(data):
     """
@@ -46,7 +66,7 @@ def normalize_bin_review_data(data):
             "source": "bin",
             "review_id": review.get("review_id") or raw.get("id"),
             "product_id": review.get("product_id") or product.get("productId"),
-            "product_name": product.get("title"),
+            "product_name": clean_html_text(product.get("title")),
             "product_url": product.get("link") or review.get("page_url"),
             "user_id": review.get("author") or raw.get("userId"),
             "rating": review.get("rating") or raw.get("starScore"),
@@ -87,7 +107,7 @@ def normalize_hayeon_review_data(data):
             "source": "hayeon",
             "review_id": review.get("id"),
             "product_id": review.get("productNo") or review.get("knowledgeShoppingMallProductId"),
-            "product_name": review.get("productName"),
+            "product_name": clean_html_text(review.get("productName")),
             "product_url": review.get("productUrl"),
             "user_id": review.get("maskedWriterId") or review.get("writerId"),
             "rating": review.get("reviewScore"),
