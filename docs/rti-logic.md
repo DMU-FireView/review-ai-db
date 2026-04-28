@@ -144,7 +144,7 @@ RTI = Text Score * 0.4 + Behavior Score * 0.35 + Network Score * 0.25
   "rating": 5,
   "review_date": "2026-01-07",
   "rti": 92,
-  "level": "safe",
+  "level": "warn",
   "signals": {
     "text": 100,
     "behavior": 90,
@@ -165,14 +165,42 @@ RTI = Text Score * 0.4 + Behavior Score * 0.35 + Network Score * 0.25
 }
 ```
 
-## 10. 향후 개선 방향
+## 10. 현재 모듈화 구조
 
-v0 이후에는 RTI 계산 코드를 다음과 같이 모듈화할 예정입니다.
+RTI 계산 코드는 현재 다음과 같이 모듈화되어 있습니다.
 
 ```txt
 ai/text_analyzer.py
 ai/behavior_analyzer.py
 ai/network_analyzer.py
+ai/rti_scoring.py
 ```
 
-각 모듈이 개별 분석 결과를 반환하고, `rti_scoring.py`에서 최종 RTI 점수를 통합 산출하는 구조로 개선합니다.
+각 파일의 역할은 다음과 같습니다.
+
+| 파일명 | 역할 |
+|---|---|
+| `text_analyzer.py` | 리뷰 본문 표현, 길이, 느낌표, 품질 점수 기반 Text Score 계산 |
+| `behavior_analyzer.py` | 구매 여부, 체험단 여부, 이미지 첨부, 같은 날짜 작성 수 기반 Behavior Score 계산 |
+| `network_analyzer.py` | 유사 리뷰 개수 기반 Network Score 계산 |
+| `rti_scoring.py` | 세 분석 점수를 통합하여 최종 RTI와 level 산출 |
+
+현재 `rti_scoring.py`는 개별 분석 로직을 직접 가지고 있지 않고, 각 analyzer 모듈에서 점수를 받아 최종 RTI만 계산합니다.
+
+## 11. 향후 개선 방향
+
+다음 단계에서는 Text Score 계산에 Google Cloud Natural Language API를 보조 신호로 추가할 예정입니다.
+
+예상 구조는 다음과 같습니다.
+
+```txt
+ai/text_analyzer.py
+ai/sentiment_client.py
+ai/behavior_analyzer.py
+ai/network_analyzer.py
+ai/rti_scoring.py
+```
+
+`sentiment_client.py`는 Google Cloud Natural Language API 호출을 담당하고, `text_analyzer.py`는 해당 감성 분석 결과를 Text Score 계산에 보조 신호로 반영하는 구조로 확장할 예정입니다.
+
+현재 v0에서는 API 호출 없이 규칙 기반 mock scoring 방식으로 동작합니다.
