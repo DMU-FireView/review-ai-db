@@ -1,0 +1,52 @@
+[
+  {
+    "review_id": 1,
+    "user_id": "reviewer_0099",
+    "product_id": "p001",
+    "rti": 28,
+    "level": "danger",
+    "signals": {
+      "text": 25,
+      "behavior": 15,
+      "network": 50
+    },
+    "reasons": [
+      "반복 표현 탐지: '대박' 2회",
+      "반복 표현 탐지: '강력추천' 2회",
+      "반복 표현 탐지: '완전' 2회",
+      "구매 이력 미확인",
+      "계정 생성 직후 리뷰 작성",
+      "짧은 시간 내 다수 리뷰 작성",
+      "유사 리뷰 네트워크 군집 탐지"
+    ]
+  },
+  {
+    "review_id": 2,
+    "user_id": "kim_realbuyer",
+    "product_id": "p001",
+    "rti": 100,
+    "level": "safe",
+    "signals": {
+      "text": 100,
+      "behavior": 100,
+      "network": 100
+    },
+    "reasons": []
+  },
+  {
+    "review_id": 3,
+    "user_id": "new_user_102",
+    "product_id": "p002",
+    "rti": 86,
+    "level": "warn",
+    "signals": {
+      "text": 100,
+      "behavior": 70,
+      "network": 85
+    },
+    "reasons": [
+      "구매 이력 미확인",
+      "일부 유사 리뷰 패턴 탐지"
+    ]
+  }
+]
