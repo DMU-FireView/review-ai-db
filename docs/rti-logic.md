@@ -187,20 +187,47 @@ ai/rti_scoring.py
 
 현재 `rti_scoring.py`는 개별 분석 로직을 직접 가지고 있지 않고, 각 analyzer 모듈에서 점수를 받아 최종 RTI만 계산합니다.
 
-## 11. 향후 개선 방향
+## 11. Cloud Natural Language API 연결 준비 구조
 
-다음 단계에서는 Text Score 계산에 Google Cloud Natural Language API를 보조 신호로 추가할 예정입니다.
+Text Score 계산에는 Google Cloud Natural Language API 감성 분석 결과를 보조 신호로 추가할 예정입니다.
 
-예상 구조는 다음과 같습니다.
+현재는 실제 API 호출이 아니라, 연결 준비용 구조만 추가된 상태입니다.
+
+추가된 파일은 다음과 같습니다.
+
+```txt
+ai/sentiment_client.py
+```
+
+현재 구조는 다음과 같습니다.
 
 ```txt
 ai/text_analyzer.py
+        ↓
 ai/sentiment_client.py
-ai/behavior_analyzer.py
-ai/network_analyzer.py
-ai/rti_scoring.py
+        ↓
+Google Cloud Natural Language API
 ```
 
-`sentiment_client.py`는 Google Cloud Natural Language API 호출을 담당하고, `text_analyzer.py`는 해당 감성 분석 결과를 Text Score 계산에 보조 신호로 반영하는 구조로 확장할 예정입니다.
+현재 `sentiment_client.py`는 기본적으로 mock/fallback 모드로 동작합니다.
 
-현재 v0에서는 API 호출 없이 규칙 기반 mock scoring 방식으로 동작합니다.
+즉, API 키나 Google Cloud 인증 정보가 없어도 로컬에서 RTI 계산이 정상적으로 실행됩니다.
+
+현재 기본 상태:
+
+```txt
+ENABLE_CLOUD_NLP=false
+```
+
+이 경우 실제 Google Cloud Natural Language API는 호출되지 않고, neutral mock 결과를 반환합니다.
+
+추후 실제 API 연결 시에는 다음 작업이 필요합니다.
+
+- Google Cloud 프로젝트 생성 또는 확인
+- Cloud Natural Language API 활성화
+- 서비스 계정 키 발급
+- 로컬 환경변수 설정
+- `ENABLE_CLOUD_NLP=true` 설정
+- 실제 sentiment score / magnitude를 Text Score 계산에 반영
+
+현재 v0에서는 API 호출 없이 규칙 기반 mock scoring + sentiment fallback 구조로 동작합니다.

@@ -179,3 +179,57 @@ ai/network_analyzer.py
 ```
 
 각 모듈이 개별 점수를 계산하고, `rti_scoring.py`에서 최종 RTI를 통합 산출하는 구조로 확장합니다.
+
+## 11. Cloud Natural Language API 연결 준비 상태
+
+Text Score 계산에는 추후 Google Cloud Natural Language API 감성 분석 결과를 보조 신호로 반영할 예정입니다.
+
+현재는 실제 API 호출이 아니라, 연결 준비용 fallback 구조만 추가된 상태입니다.
+
+추가된 파일은 다음과 같습니다.
+
+```txt
+ai/sentiment_client.py
+```
+
+현재 기본 동작은 다음과 같습니다.
+
+```txt
+ENABLE_CLOUD_NLP=false
+```
+
+이 상태에서는 Google Cloud Natural Language API를 실제로 호출하지 않고, mock/fallback 감성 분석 결과를 반환합니다.
+
+따라서 현재 서버 연동 시에는 기존 RTI 응답 구조를 그대로 사용하면 됩니다.
+
+현재 응답 구조:
+
+```json
+{
+  "review_id": "4879548868-ncp_1nucl1_01-11590446932",
+  "product_id": "53530143052",
+  "rti": 92,
+  "level": "warn",
+  "signals": {
+    "text": 90,
+    "behavior": 90,
+    "network": 100
+  },
+  "input_features": {
+    "image_count": 3,
+    "quality_score": 0.761338,
+    "verified_purchase": "unknown",
+    "repurchase": "unknown",
+    "free_trial": "unknown",
+    "reviews_written_today": 1,
+    "similar_review_count": 0
+  },
+  "reasons": [
+    "구매 여부 확인 불가"
+  ]
+}
+```
+
+추후 실제 Google Cloud Natural Language API 연결 후에는 `signals.text` 계산 과정에 sentiment score / magnitude가 보조 신호로 반영될 수 있습니다.
+
+다만 서버 응답 필드 구조는 최대한 유지하고, 필요한 경우 `input_features` 또는 별도 필드에 sentiment 결과를 추가하는 방식으로 확장할 예정입니다.
