@@ -1,0 +1,284 @@
+[
+  {
+    "source": "hayeon",
+    "review_id": 4964384060,
+    "user_id": "anjs****",
+    "product_id": "7195971829",
+    "product_name": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+    "rating": 5,
+    "review_date": "2026-04-28T11:05:51.337+00:00",
+    "rti": 100,
+    "level": "safe",
+    "signals": {
+      "text": 100,
+      "behavior": 100,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 2,
+      "quality_score": null,
+      "verified_purchase": true,
+      "repurchase": false,
+      "free_trial": false,
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": []
+  },
+  {
+    "source": "hayeon",
+    "review_id": 4969245190,
+    "user_id": "hjan***",
+    "product_id": "7195971829",
+    "product_name": "[LIVE 포토리뷰 1천점+브러쉬+퍼프 키트 증정] 헤라 리플렉션 스킨 글로우 쿠션 싱글 SPF40/PA++ 15g / 촉촉한쿠션",
+    "rating": 5,
+    "review_date": "2026-05-05T16:03:26.958+00:00",
+    "rti": 100,
+    "level": "safe",
+    "signals": {
+      "text": 100,
+      "behavior": 100,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 1,
+      "quality_score": null,
+      "verified_purchase": true,
+      "repurchase": false,
+      "free_trial": false,
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": []
+  },
+  {
+    "source": "bin",
+    "review_id": "4879548868-ncp_1nucl1_01-11590446932",
+    "user_id": "bouo****",
+    "product_id": "53530143052",
+    "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+    "rating": 5,
+    "review_date": "2026-01-07",
+    "rti": 92,
+    "level": "warn",
+    "signals": {
+      "text": 90,
+      "behavior": 90,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 3,
+      "quality_score": 0.761338,
+      "verified_purchase": "unknown",
+      "repurchase": "unknown",
+      "free_trial": "unknown",
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": [
+      "과도한 느낌표 사용",
+      "구매 여부 확인 불가"
+    ]
+  },
+  {
+    "source": "bin",
+    "review_id": "4815766526-ncp_1nucl1_01-11590446932",
+    "user_id": "jj42****",
+    "product_id": "53530143052",
+    "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+    "rating": 4,
+    "review_date": "2025-10-03",
+    "rti": 96,
+    "level": "warn",
+    "signals": {
+      "text": 100,
+      "behavior": 90,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 3,
+      "quality_score": 0.738395,
+      "verified_purchase": "unknown",
+      "repurchase": "unknown",
+      "free_trial": "unknown",
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": [
+      "구매 여부 확인 불가"
+    ]
+  },
+  {
+    "source": "bin",
+    "review_id": "4794227775-ncp_1nucl1_01-11590446932",
+    "user_id": "tera****",
+    "product_id": "53530143052",
+    "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+    "rating": 5,
+    "review_date": "2025-08-31",
+    "rti": 92,
+    "level": "warn",
+    "signals": {
+      "text": 90,
+      "behavior": 90,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 2,
+      "quality_score": 0.708564,
+      "verified_purchase": "unknown",
+      "repurchase": "unknown",
+      "free_trial": "unknown",
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": [
+      "과도한 느낌표 사용",
+      "구매 여부 확인 불가"
+    ]
+  },
+  {
+    "source": "bin",
+    "review_id": "4723415738-ncp_1nucl1_01-11590446932",
+    "user_id": "bonn****",
+    "product_id": "53530143052",
+    "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+    "rating": 5,
+    "review_date": "2025-05-15",
+    "rti": 96,
+    "level": "warn",
+    "signals": {
+      "text": 100,
+      "behavior": 90,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 1,
+      "quality_score": 0.677691,
+      "verified_purchase": "unknown",
+      "repurchase": "unknown",
+      "free_trial": "unknown",
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": [
+      "구매 여부 확인 불가"
+    ]
+  },
+  {
+    "source": "bin",
+    "review_id": "4943497106-ncp_1nucl1_01-11590446932",
+    "user_id": "mski****",
+    "product_id": "53530143052",
+    "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+    "rating": 5,
+    "review_date": "2026-04-01",
+    "rti": 92,
+    "level": "warn",
+    "signals": {
+      "text": 90,
+      "behavior": 90,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 3,
+      "quality_score": 0.066472,
+      "verified_purchase": "unknown",
+      "repurchase": "unknown",
+      "free_trial": "unknown",
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": [
+      "리뷰 품질 점수 낮음",
+      "구매 여부 확인 불가"
+    ]
+  },
+  {
+    "source": "bin",
+    "review_id": "4921902451-ncp_1nucl1_01-11590446932",
+    "user_id": "wogh****",
+    "product_id": "53530143052",
+    "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+    "rating": 5,
+    "review_date": "2026-03-04",
+    "rti": 92,
+    "level": "warn",
+    "signals": {
+      "text": 90,
+      "behavior": 90,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 3,
+      "quality_score": 0.065307,
+      "verified_purchase": "unknown",
+      "repurchase": "unknown",
+      "free_trial": "unknown",
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": [
+      "리뷰 품질 점수 낮음",
+      "구매 여부 확인 불가"
+    ]
+  },
+  {
+    "source": "bin",
+    "review_id": "4787883473-ncp_1nucl1_01-11590446932",
+    "user_id": "eung****",
+    "product_id": "53530143052",
+    "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+    "rating": 4,
+    "review_date": "2025-08-21",
+    "rti": 92,
+    "level": "warn",
+    "signals": {
+      "text": 90,
+      "behavior": 90,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 2,
+      "quality_score": 0.067228,
+      "verified_purchase": "unknown",
+      "repurchase": "unknown",
+      "free_trial": "unknown",
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": [
+      "리뷰 품질 점수 낮음",
+      "구매 여부 확인 불가"
+    ]
+  },
+  {
+    "source": "bin",
+    "review_id": "4837563876-ncp_1nucl1_01-11590446932",
+    "user_id": "wldu****",
+    "product_id": "53530143052",
+    "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+    "rating": 5,
+    "review_date": "2025-11-08",
+    "rti": 92,
+    "level": "warn",
+    "signals": {
+      "text": 90,
+      "behavior": 90,
+      "network": 100
+    },
+    "input_features": {
+      "image_count": 1,
+      "quality_score": 0.06524,
+      "verified_purchase": "unknown",
+      "repurchase": "unknown",
+      "free_trial": "unknown",
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    },
+    "reasons": [
+      "리뷰 품질 점수 낮음",
+      "구매 여부 확인 불가"
+    ]
+  }
+]

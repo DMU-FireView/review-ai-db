@@ -233,3 +233,73 @@ ENABLE_CLOUD_NLP=false
 추후 실제 Google Cloud Natural Language API 연결 후에는 `signals.text` 계산 과정에 sentiment score / magnitude가 보조 신호로 반영될 수 있습니다.
 
 다만 서버 응답 필드 구조는 최대한 유지하고, 필요한 경우 `input_features` 또는 별도 필드에 sentiment 결과를 추가하는 방식으로 확장할 예정입니다.
+
+## 12. RTI 결과 샘플 파일
+
+서버/프론트 연동 참고용 RTI 결과 샘플은 아래 파일에서 확인할 수 있습니다.
+
+```txt
+output/rti_results_sample.json
+```
+
+전체 RTI 분석 결과는 아래 파일에 저장됩니다.
+
+```txt
+output/rti_results.json
+```
+
+현재 v0에서는 네이버 데이터에서 구매 확인 여부가 명확하지 않은 경우가 많아 `verified_purchase`가 `unknown`으로 처리됩니다.
+
+이로 인해 샘플 결과에서도 `구매 여부 확인 불가` 사유가 포함되고, `warn` 등급이 많이 나올 수 있습니다.
+
+샘플 파일은 전체 결과 중 일부만 추출한 파일이며, 서버/프론트에서 응답 구조를 확인하기 위한 참고용입니다.
+
+샘플 데이터의 주요 필드는 다음과 같습니다.
+
+| 필드명 | 설명 |
+|---|---|
+| `review_id` | 리뷰 ID |
+| `product_id` | 상품 ID |
+| `product_name` | 상품명 |
+| `user_id` | 작성자 마스킹 ID |
+| `rating` | 별점 |
+| `review_date` | 리뷰 작성일 |
+| `rti` | 최종 리뷰 신뢰도 점수 |
+| `level` | `safe / warn / danger` 등급 |
+| `signals` | text / behavior / network 점수 |
+| `input_features` | RTI 계산에 사용된 입력 특성 |
+| `reasons` | 판단 사유 목록 |
+
+예시 구조:
+
+```json
+{
+  "source": "bin",
+  "review_id": "4879548868-ncp_1nucl1_01-11590446932",
+  "user_id": "bouo****",
+  "product_id": "53530143052",
+  "product_name": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+  "rating": 5,
+  "review_date": "2026-01-07",
+  "rti": 92,
+  "level": "warn",
+  "signals": {
+    "text": 90,
+    "behavior": 90,
+    "network": 100
+  },
+  "input_features": {
+    "image_count": 3,
+    "quality_score": 0.761338,
+    "verified_purchase": "unknown",
+    "repurchase": "unknown",
+    "free_trial": "unknown",
+    "reviews_written_today": 1,
+    "similar_review_count": 0
+  },
+  "reasons": [
+    "과도한 느낌표 사용",
+    "구매 여부 확인 불가"
+  ]
+}
+```
