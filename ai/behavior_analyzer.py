@@ -1,4 +1,11 @@
-﻿def calculate_behavior_score(review):
+﻿def make_reason(code, message):
+    return {
+        "code": code,
+        "message": message
+    }
+
+
+def calculate_behavior_score(review):
     score = 100
     reasons = []
 
@@ -10,25 +17,55 @@
 
     if verified_purchase is False:
         score -= 30
-        reasons.append("구매 이력 미확인")
+        reasons.append(
+            make_reason(
+                "PURCHASE_NOT_VERIFIED",
+                "구매 이력 미확인"
+            )
+        )
     elif verified_purchase == "unknown":
         score -= 10
-        reasons.append("구매 여부 확인 불가")
+        reasons.append(
+            make_reason(
+                "PURCHASE_UNKNOWN",
+                "구매 여부 확인 불가"
+            )
+        )
 
     if free_trial is True:
         score -= 10
-        reasons.append("체험단/무상 제공 리뷰 가능성")
+        reasons.append(
+            make_reason(
+                "FREE_TRIAL_REVIEW",
+                "체험단/무상 제공 리뷰 가능성"
+            )
+        )
 
     if reviews_written_today is not None and reviews_written_today >= 3:
         score -= 15
-        reasons.append("동일 작성자의 같은 날짜 다수 리뷰 작성")
+        reasons.append(
+            make_reason(
+                "MULTIPLE_REVIEWS_SAME_DAY",
+                "동일 작성자의 같은 날짜 다수 리뷰 작성"
+            )
+        )
 
     if image_count == 0:
         score -= 5
-        reasons.append("이미지 첨부 없음")
+        reasons.append(
+            make_reason(
+                "NO_IMAGE_ATTACHED",
+                "이미지 첨부 없음"
+            )
+        )
 
     if repurchase is True:
         score += 5
-        reasons.append("재구매 리뷰 신호")
+        reasons.append(
+            make_reason(
+                "REPURCHASE_SIGNAL",
+                "재구매 리뷰 신호"
+            )
+        )
 
     return min(max(score, 0), 100), reasons

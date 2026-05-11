@@ -19,7 +19,7 @@ def get_level(rti, reasons):
 
     penalty_reasons = [
         reason for reason in reasons
-        if reason != "재구매 리뷰 신호"
+        if reason.get("code") != "REPURCHASE_SIGNAL"
     ]
 
     if len(penalty_reasons) > 0:
@@ -85,6 +85,7 @@ def main():
     with INPUT_PATH.open("r", encoding="utf-8") as file:
         reviews = json.load(file)
 
+    # 현재 v0는 normalized 리뷰 배열 전체를 batch로 분석합니다.
     results = [calculate_rti(review) for review in reviews]
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -93,7 +94,7 @@ def main():
         json.dump(results, file, ensure_ascii=False, indent=2)
 
     print(json.dumps(results[:5], ensure_ascii=False, indent=2))
-    print(f"\n총 {len(results)}개 리뷰 RTI 분석 완료")
+    print(f"\n총 {len(results)}개 리뷰 RTI batch 분석 완료")
     print(f"RTI 분석 결과가 저장되었습니다: {OUTPUT_PATH}")
 
 

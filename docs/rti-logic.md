@@ -231,3 +231,34 @@ ENABLE_CLOUD_NLP=false
 - 실제 sentiment score / magnitude를 Text Score 계산에 반영
 
 현재 v0에서는 API 호출 없이 규칙 기반 mock scoring + sentiment fallback 구조로 동작합니다.
+
+## 12. 회의 반영 사항
+
+금일 회의 결과, RTI 분석은 batch 분석 구조를 기준으로 진행하기로 했습니다.
+
+즉, 여러 리뷰를 한 번에 입력받고, 각 리뷰별 RTI 결과를 배열로 반환하는 구조입니다.
+
+또한 판단 사유인 `reasons`는 문자열 배열이 아니라 `code/message` 객체 배열로 변경되었습니다.
+
+예시:
+
+```json
+"reasons": [
+  {
+    "code": "PURCHASE_UNKNOWN",
+    "message": "구매 여부 확인 불가"
+  },
+  {
+    "code": "LOW_QUALITY_SCORE",
+    "message": "리뷰 품질 점수 낮음"
+  }
+]
+```
+
+현재 analyzer 모듈들은 모두 위 구조에 맞춰 reasons를 반환합니다.
+
+| 모듈 | reasons 예시 코드 |
+|---|---|
+| `text_analyzer.py` | `REPETITIVE_KEYWORD`, `SHORT_REVIEW`, `EXCESSIVE_EXCLAMATION`, `LOW_QUALITY_SCORE` |
+| `behavior_analyzer.py` | `PURCHASE_UNKNOWN`, `PURCHASE_NOT_VERIFIED`, `FREE_TRIAL_REVIEW`, `MULTIPLE_REVIEWS_SAME_DAY`, `NO_IMAGE_ATTACHED`, `REPURCHASE_SIGNAL` |
+| `network_analyzer.py` | `SIMILAR_REVIEW_PATTERN`, `SIMILAR_REVIEW_CLUSTER` |
