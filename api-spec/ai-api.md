@@ -303,3 +303,143 @@ output/rti_results.json
   ]
 }
 ```
+
+서버는 최종적으로 어떤 응답 필드를 받으면 되는지
+필수 필드와 선택 필드는 무엇인지
+현재 v0에서 확정된 응답 구조는 무엇인지 !! 
+
+## 13. 회의 반영 사항: Batch 분석 및 Reasons 구조
+
+금일 회의 결과, AI 분석 요청 방식은 단건 분석이 아니라 batch 분석 방식으로 진행하기로 했습니다.
+
+즉, 서버는 리뷰 1개씩 AI 서버에 요청하는 것이 아니라, 여러 개의 리뷰를 배열로 묶어서 요청하는 구조를 기준으로 합니다.
+
+Endpoint 이름은 아직 확정되지 않았으며, 예시는 다음과 같습니다.
+
+```txt
+POST /api/ai/reviews/analyze-batch
+```
+
+### Batch Request 예시
+
+```json
+{
+  "reviews": [
+    {
+      "review_id": "r001",
+      "product_id": "p001",
+      "user_id": "user001",
+      "rating": 5,
+      "content": "배송도 빠르고 좋아요",
+      "review_date": "2026-01-07",
+      "verified_purchase": "unknown",
+      "image_count": 1,
+      "quality_score": 0.75
+    },
+    {
+      "review_id": "r002",
+      "product_id": "p001",
+      "user_id": "user002",
+      "rating": 5,
+      "content": "완전 대박 강력추천!!!",
+      "review_date": "2026-01-07",
+      "verified_purchase": "unknown",
+      "image_count": 0,
+      "quality_score": 0.08
+    }
+  ]
+}
+```
+
+### Batch Response 예시
+
+```json
+{
+  "results": [
+    {
+      "review_id": "r001",
+      "product_id": "p001",
+      "rti": 96,
+      "level": "warn",
+      "signals": {
+        "text": 100,
+        "behavior": 90,
+        "network": 100
+      },
+      "reasons": [
+        {
+          "code": "PURCHASE_UNKNOWN",
+          "message": "구매 여부 확인 불가"
+        }
+      ]
+    },
+    {
+      "review_id": "r002",
+      "product_id": "p001",
+      "rti": 75,
+      "level": "warn",
+      "signals": {
+        "text": 80,
+        "behavior": 85,
+        "network": 100
+      },
+      "reasons": [
+        {
+          "code": "EXCESSIVE_EXCLAMATION",
+          "message": "과도한 느낌표 사용"
+        },
+        {
+          "code": "LOW_QUALITY_SCORE",
+          "message": "리뷰 품질 점수 낮음"
+        },
+        {
+          "code": "PURCHASE_UNKNOWN",
+          "message": "구매 여부 확인 불가"
+        },
+        {
+          "code": "NO_IMAGE_ATTACHED",
+          "message": "이미지 첨부 없음"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Reasons 구조
+
+회의 결과, `reasons`는 문자열 배열이 아니라 `code/message` 객체 배열로 사용합니다.
+
+기존 구조:
+
+```json
+"reasons": [
+  "구매 여부 확인 불가",
+  "리뷰 품질 점수 낮음"
+]
+```
+
+변경 구조:
+
+```json
+"reasons": [
+  {
+    "code": "PURCHASE_UNKNOWN",
+    "message": "구매 여부 확인 불가"
+  },
+  {
+    "code": "LOW_QUALITY_SCORE",
+    "message": "리뷰 품질 점수 낮음"
+  }
+]
+```
+
+이 구조를 사용하면 프론트에서는 `code` 기준으로 칩 색상, 아이콘, 필터링 등을 처리할 수 있고, 서버에서는 판단 사유를 더 안정적으로 저장할 수 있습니다.
+
+### 현재 미확정 사항
+
+아래 항목은 추후 백엔드/서버 회의 후 확정 예정입니다.
+
+- API endpoint 이름
+- Request 필수 필드
+- Response 필수 필드

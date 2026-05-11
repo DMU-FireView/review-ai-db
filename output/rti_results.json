@@ -24,8 +24,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "과도한 느낌표 사용",
-      "구매 여부 확인 불가"
+      {
+        "code": "EXCESSIVE_EXCLAMATION",
+        "message": "과도한 느낌표 사용"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -53,7 +59,10 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "구매 여부 확인 불가"
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -81,8 +90,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "과도한 느낌표 사용",
-      "구매 여부 확인 불가"
+      {
+        "code": "EXCESSIVE_EXCLAMATION",
+        "message": "과도한 느낌표 사용"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -110,7 +125,10 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "구매 여부 확인 불가"
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -138,8 +156,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -167,8 +191,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -196,8 +226,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -225,8 +261,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -254,9 +296,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -284,8 +335,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -313,8 +370,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -342,8 +405,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -371,8 +440,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -400,8 +475,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -429,8 +510,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -458,8 +545,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -487,9 +580,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -517,8 +619,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -546,8 +654,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -575,8 +689,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -604,8 +724,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -633,8 +759,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -662,9 +794,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -692,9 +833,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -722,8 +872,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -751,8 +907,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -780,8 +942,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -809,8 +977,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -838,9 +1012,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -868,9 +1051,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -898,9 +1090,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -928,9 +1129,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -958,9 +1168,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -988,9 +1207,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1018,9 +1246,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1048,9 +1285,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1078,9 +1324,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1108,9 +1363,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1138,9 +1402,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1168,9 +1441,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1198,9 +1480,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -1228,8 +1519,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1257,8 +1554,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1286,8 +1589,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1315,8 +1624,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1344,8 +1659,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1373,8 +1694,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1402,8 +1729,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1431,8 +1764,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1460,8 +1799,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1489,8 +1834,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1518,8 +1869,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1547,8 +1904,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1576,8 +1939,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1605,8 +1974,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1634,8 +2009,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1663,8 +2044,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1692,8 +2079,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1721,8 +2114,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1750,8 +2149,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1779,8 +2184,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1808,8 +2219,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1837,8 +2254,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1866,8 +2289,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1895,8 +2324,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1924,8 +2359,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1953,8 +2394,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -1982,8 +2429,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2011,8 +2464,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2040,8 +2499,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2069,8 +2534,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2098,8 +2569,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2127,8 +2604,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2156,9 +2639,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2186,9 +2678,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2216,8 +2717,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2245,9 +2752,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2275,9 +2791,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2305,9 +2830,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2335,9 +2869,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2365,8 +2908,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2394,9 +2943,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2424,9 +2982,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2454,9 +3021,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2484,9 +3060,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2514,9 +3099,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2544,9 +3138,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2574,9 +3177,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2604,9 +3216,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2634,9 +3255,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2664,9 +3294,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2694,9 +3333,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2724,9 +3372,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2754,9 +3411,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2784,9 +3450,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2814,9 +3489,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2844,9 +3528,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2874,9 +3567,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2904,9 +3606,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2934,9 +3645,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2964,9 +3684,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -2994,9 +3723,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3024,9 +3762,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3054,9 +3801,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3084,9 +3840,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3114,9 +3879,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3144,9 +3918,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3174,9 +3957,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3204,9 +3996,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3234,9 +4035,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3264,9 +4074,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3294,9 +4113,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3324,9 +4152,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3354,9 +4191,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3384,9 +4230,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3414,9 +4269,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3444,9 +4308,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3474,9 +4347,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3504,9 +4386,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3534,9 +4425,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3564,9 +4464,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3594,9 +4503,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3624,9 +4542,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3654,9 +4581,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3684,9 +4620,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3714,9 +4659,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3744,9 +4698,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3774,9 +4737,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3804,9 +4776,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3834,9 +4815,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3864,9 +4854,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3894,9 +4893,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3924,9 +4932,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3954,9 +4971,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -3984,9 +5010,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4014,9 +5049,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4044,9 +5088,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4074,9 +5127,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4104,9 +5166,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4134,9 +5205,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4164,9 +5244,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4194,9 +5283,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4224,8 +5322,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4253,9 +5357,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4283,8 +5396,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4312,8 +5431,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4341,8 +5466,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4370,8 +5501,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4399,8 +5536,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4428,8 +5571,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4457,8 +5606,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4486,8 +5641,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4515,9 +5676,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4545,9 +5715,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4575,8 +5754,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4604,9 +5789,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4634,8 +5828,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4663,8 +5863,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4692,9 +5898,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4722,9 +5937,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4752,9 +5976,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4782,9 +6015,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -4812,9 +6054,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -4842,10 +6093,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -4873,10 +6136,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "반복 표현 탐지: '좋아요' 3회",
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "REPETITIVE_KEYWORD",
+        "message": "반복 표현 탐지: '좋아요' 3회"
+      },
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -4904,9 +6179,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -4934,9 +6218,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -4964,9 +6257,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -4994,10 +6296,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5025,9 +6339,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "반복 표현 탐지: '좋아요' 9회",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "REPETITIVE_KEYWORD",
+        "message": "반복 표현 탐지: '좋아요' 9회"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -5055,9 +6378,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "반복 표현 탐지: '좋아요' 12회",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "REPETITIVE_KEYWORD",
+        "message": "반복 표현 탐지: '좋아요' 12회"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -5085,9 +6417,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5115,9 +6456,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5145,9 +6495,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5175,9 +6534,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5205,9 +6573,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5235,9 +6612,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5265,10 +6651,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5296,10 +6694,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5327,10 +6737,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5358,10 +6780,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5389,10 +6823,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5420,10 +6866,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5451,10 +6909,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5482,10 +6952,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5513,10 +6995,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5544,10 +7038,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5575,10 +7081,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5606,10 +7124,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5637,10 +7167,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5668,10 +7210,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5699,10 +7253,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5730,10 +7296,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5761,10 +7339,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5792,9 +7382,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5822,9 +7421,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5852,9 +7460,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5882,9 +7499,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5912,9 +7538,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5942,9 +7577,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -5972,9 +7616,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6002,9 +7655,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6032,9 +7694,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6062,9 +7733,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6092,9 +7772,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6122,9 +7811,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6152,9 +7850,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6182,10 +7889,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "과도한 느낌표 사용",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "EXCESSIVE_EXCLAMATION",
+        "message": "과도한 느낌표 사용"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6213,9 +7932,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6243,9 +7971,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6273,9 +8010,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6303,9 +8049,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6333,9 +8088,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6363,9 +8127,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6393,9 +8166,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6423,9 +8205,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6453,9 +8244,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6483,9 +8283,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6513,9 +8322,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6543,9 +8361,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6573,9 +8400,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6603,9 +8439,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6633,9 +8478,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6663,9 +8517,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6693,9 +8556,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6723,9 +8595,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6753,9 +8634,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6783,9 +8673,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6813,9 +8712,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6843,9 +8751,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6873,9 +8790,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6903,9 +8829,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6933,9 +8868,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6963,10 +8907,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -6994,10 +8950,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7025,10 +8993,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7056,10 +9036,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7087,10 +9079,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7118,10 +9122,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7149,10 +9165,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7180,10 +9208,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7211,10 +9251,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7242,10 +9294,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7273,10 +9337,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7304,10 +9380,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7335,10 +9423,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "반복 표현 탐지: '좋아요' 2회",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "REPETITIVE_KEYWORD",
+        "message": "반복 표현 탐지: '좋아요' 2회"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7366,10 +9466,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7397,10 +9509,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7428,10 +9552,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7459,10 +9595,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7490,10 +9638,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7521,10 +9681,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7552,10 +9724,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7583,10 +9767,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7614,10 +9810,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7645,10 +9853,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7676,10 +9896,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7707,10 +9939,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7738,10 +9982,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7769,10 +10025,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7800,10 +10068,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7831,10 +10111,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7862,10 +10154,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7893,10 +10197,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7924,10 +10240,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7955,10 +10283,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -7986,10 +10326,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8017,10 +10369,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8048,10 +10412,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8079,10 +10455,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8110,10 +10498,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8141,10 +10541,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8172,10 +10584,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8203,10 +10627,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8234,10 +10670,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8265,10 +10713,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8296,10 +10756,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8327,10 +10799,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8358,10 +10842,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8389,10 +10885,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8420,10 +10928,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8451,10 +10971,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8482,10 +11014,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8513,10 +11057,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8544,10 +11100,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8575,10 +11143,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8606,10 +11186,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8637,10 +11229,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8668,10 +11272,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8699,10 +11315,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8730,10 +11358,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8761,10 +11401,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8792,10 +11444,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8823,10 +11487,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8854,10 +11530,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8885,11 +11573,26 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "과도한 느낌표 사용",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "EXCESSIVE_EXCLAMATION",
+        "message": "과도한 느낌표 사용"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8917,10 +11620,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8948,9 +11663,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -8978,9 +11702,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9008,9 +11741,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9038,9 +11780,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9068,9 +11819,18 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9098,10 +11858,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9129,10 +11901,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9160,10 +11944,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9191,10 +11987,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9222,10 +12030,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9253,10 +12073,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9284,10 +12116,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9315,11 +12159,26 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "반복 표현 탐지: '좋아요' 2회",
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "REPETITIVE_KEYWORD",
+        "message": "반복 표현 탐지: '좋아요' 2회"
+      },
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9347,10 +12206,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9378,10 +12249,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9409,11 +12292,26 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "반복 표현 탐지: '좋아요' 3회",
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "REPETITIVE_KEYWORD",
+        "message": "반복 표현 탐지: '좋아요' 3회"
+      },
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9441,11 +12339,26 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "반복 표현 탐지: '좋아요' 3회",
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "REPETITIVE_KEYWORD",
+        "message": "반복 표현 탐지: '좋아요' 3회"
+      },
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9473,10 +12386,22 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 내용이 지나치게 짧음",
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가",
-      "이미지 첨부 없음"
+      {
+        "code": "SHORT_REVIEW",
+        "message": "리뷰 내용이 지나치게 짧음"
+      },
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      },
+      {
+        "code": "NO_IMAGE_ATTACHED",
+        "message": "이미지 첨부 없음"
+      }
     ]
   },
   {
@@ -9842,7 +12767,10 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "과도한 느낌표 사용"
+      {
+        "code": "EXCESSIVE_EXCLAMATION",
+        "message": "과도한 느낌표 사용"
+      }
     ]
   },
   {

@@ -76,8 +76,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "과도한 느낌표 사용",
-      "구매 여부 확인 불가"
+      {
+        "code": "EXCESSIVE_EXCLAMATION",
+        "message": "과도한 느낌표 사용"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -105,7 +111,10 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "구매 여부 확인 불가"
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -133,8 +142,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "과도한 느낌표 사용",
-      "구매 여부 확인 불가"
+      {
+        "code": "EXCESSIVE_EXCLAMATION",
+        "message": "과도한 느낌표 사용"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -162,7 +177,10 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "구매 여부 확인 불가"
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -190,8 +208,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -219,8 +243,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -248,8 +278,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   },
   {
@@ -277,8 +313,14 @@
       "similar_review_count": 0
     },
     "reasons": [
-      "리뷰 품질 점수 낮음",
-      "구매 여부 확인 불가"
+      {
+        "code": "LOW_QUALITY_SCORE",
+        "message": "리뷰 품질 점수 낮음"
+      },
+      {
+        "code": "PURCHASE_UNKNOWN",
+        "message": "구매 여부 확인 불가"
+      }
     ]
   }
 ]
