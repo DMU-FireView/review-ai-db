@@ -17,6 +17,7 @@ def get_level(rti, reasons):
     if rti < 80:
         return "warn"
 
+    # 이 부분을 '문자열' 비교에서 '딕셔너리의 code' 비교로 수정!
     penalty_reasons = [
         reason for reason in reasons
         if reason.get("code") != "REPURCHASE_SIGNAL"

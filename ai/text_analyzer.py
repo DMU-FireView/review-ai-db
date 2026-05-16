@@ -27,42 +27,33 @@ def calculate_text_score(content, quality_score=None):
 
     for keyword in REPETITIVE_KEYWORDS:
         count = content.count(keyword)
-
         if count >= 2:
             score -= 15
-            reasons.append(
-                make_reason(
-                    "REPETITIVE_KEYWORD",
-                    f"반복 표현 탐지: '{keyword}' {count}회"
-                )
-            )
+            reasons.append({
+                "code": "REPETITIVE_WORD",
+                "message": f"반복 표현 탐지: '{keyword}' {count}회"
+            })
 
     if len(content.strip()) < 20:
         score -= 25
-        reasons.append(
-            make_reason(
-                "SHORT_REVIEW",
-                "리뷰 내용이 지나치게 짧음"
-            )
-        )
+        reasons.append({
+            "code": "SHORT_CONTENT",
+            "message": "리뷰 내용이 지나치게 짧음"
+        })
 
     if content.count("!") >= 3:
         score -= 10
-        reasons.append(
-            make_reason(
-                "EXCESSIVE_EXCLAMATION",
-                "과도한 느낌표 사용"
-            )
-        )
+        reasons.append({
+            "code": "EXCESSIVE_EXCLAMATION",
+            "message": "과도한 느낌표 사용"
+        })
 
     if quality_score is not None and quality_score < 0.1:
         score -= 10
-        reasons.append(
-            make_reason(
-                "LOW_QUALITY_SCORE",
-                "리뷰 품질 점수 낮음"
-            )
-        )
+        reasons.append({
+            "code": "LOW_QUALITY_SCORE",
+            "message": "리뷰 품질 점수 낮음"
+        })
 
     sentiment_result = analyze_sentiment(content)
 
