@@ -1,35 +1,299 @@
-[
-  {
-    "review_id": 1,
-    "user_id": "reviewer_0099",
-    "product_id": "p001",
-    "rating": 5,
-    "content": "이 제품 정말 최고예요. 품질 완전 대박. 이런 제품은 처음봐요. 품질 완전 대박. 모든 분들께 강력추천드립니다. 강력추천!!",
-    "verified_purchase": false,
-    "account_age_days": 2,
-    "reviews_written_today": 12,
-    "similar_review_count": 8
-  },
-  {
-    "review_id": 2,
-    "user_id": "kim_realbuyer",
-    "product_id": "p001",
-    "rating": 4,
-    "content": "배송도 빠르고 품질도 좋네요. 다만 색상이 사진과 조금 달라서 별 하나 뺐어요. ANC 성능은 지하철에서 꽤 괜찮았습니다.",
-    "verified_purchase": true,
-    "account_age_days": 540,
-    "reviews_written_today": 1,
-    "similar_review_count": 0
-  },
-  {
-    "review_id": 3,
-    "user_id": "new_user_102",
-    "product_id": "p002",
-    "rating": 5,
-    "content": "전반적으로 만족합니다. 음질도 괜찮고 착용감도 좋아요. 추천드립니다.",
-    "verified_purchase": false,
-    "account_age_days": 15,
-    "reviews_written_today": 3,
-    "similar_review_count": 1
-  }
-]
+from fastapi import FastAPI, Query
+from pydantic import BaseModel, Field
+from typing import List, Optional, Any, Dict
+from collections import defaultdict
+from datetime import datetime
+
+# 기존 프로젝트의 AI 분석 모듈 로드
+from ai.text_analyzer import calculate_text_score
+from ai.behavior_analyzer import calculate_behavior_score
+from ai.network_analyzer import calculate_network_score
+
+app = FastAPI(title="Re:view AI Analysis Server", version="v0.2")
+
+
+# ==========================================
+# 1. 크롤링 원본(Raw) 입력 스키마 정의 (모든 API 공통)
+# ==========================================
+class RawProductInfo(BaseModel):
+    productId: str
+    title: Optional[str] = None
+    category1: Optional[str] = None
+    category2: Optional[str] = None
+    brand: Optional[str] = None
+
+class RawReviewItem(BaseModel):
+    review_id: str
+    product_id: str
+    content: Optional[str] = ""
+    rating: Optional[int] = 0
+    author: Optional[str] = "unknown"
+    review_date: Optional[str] = None
+    image_count: Optional[int] = 0
+    quality_score: Optional[float] = None
+    # 이 외에 raw 데이터에 있는 수많은 불필요한 필드는 FastAPI가 알아서 무시(필터링)합니다.
+
+class RawCrawlResult(BaseModel):
+    total_count: int
+    reviews: List[RawReviewItem]
+
+class RawCrawlPayload(BaseModel):
+    """3개 API 모두 이 동일한 크롤링 생데이터 형식을 받습니다."""
+    query: Optional[str] = None
+    product: RawProductInfo
+    crawl_result: RawCrawlResult
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "query": "무선이어폰",
+                "product": {
+                    "title": "로랜텍 커널형 버즈 무선 블루투스 이어폰 RSM-R510",
+                    "productId": "53530143052",
+                    "category1": "디지털/가전",
+                    "category2": "음향가전"
+                },
+                "crawl_result": {
+                    "total_count": 315,
+                    "reviews": [
+                        {
+                            "review_id": "4879548868-ncp_1nuc11_01-11590446932",
+                            "product_id": "53530143052",
+                            "rating": 5,
+                            "content": "굉장히 작고 귀엽고 가볍습니다!! 너무 행복하네요 대박 대박",
+                            "author": "bouo****",
+                            "review_date": "2026-01-07",
+                            "image_count": 3,
+                            "quality_score": 0.761338
+                        }
+                    ]
+                }
+            }
+        }
+
+
+# ==========================================
+# 2. 내부 분석용 스키마 및 응답 스키마
+# ==========================================
+class ReviewInput(BaseModel):
+    """AI 엔진이 실제로 사용하는 정제된 내부 데이터 형태"""
+    review_id: str
+    product_id: str
+    content: str
+    user_id: Optional[str] = None
+    rating: Optional[int] = None
+    review_date: Optional[str] = None
+    image_count: int = 0
+    quality_score: Optional[float] = None
+    verified_purchase: str = "unknown"
+    repurchase: str = "unknown"
+    free_trial: str = "unknown"
+    reviews_written_today: int = 1
+    similar_review_count: int = 0
+
+class ReasonObject(BaseModel):
+    code: str
+    message: str
+
+class SignalScores(BaseModel):
+    text: int
+    behavior: int
+    network: int
+
+class AnalysisResult(BaseModel):
+    review_id: str
+    product_id: str
+    rti: int
+    level: str
+    signals: SignalScores
+    reasons: List[ReasonObject]
+
+class ProductSummaryResult(BaseModel):
+    product_id: str
+    average_rti: float
+    level: str
+    review_count: int
+    safe_count: int
+    warn_count: int
+    danger_count: int
+
+class BatchResponse(BaseModel):
+    results: List[AnalysisResult]
+
+class TrendItem(BaseModel):
+    date: str
+    average_rti: float
+    review_count: int
+    safe_count: int
+    warn_count: int
+    danger_count: int
+
+class TrendResponse(BaseModel):
+    product_id: str
+    group_by: str
+    trend: List[TrendItem]
+
+
+# ==========================================
+# 3. 데이터 파싱 및 핵심 AI 분석 로직
+# ==========================================
+def parse_raw_to_internal(raw_review: RawReviewItem) -> ReviewInput:
+    """크롤링된 생데이터에서 AI 분석에 필요한 값만 쏙 뽑아냅니다."""
+    return ReviewInput(
+        review_id=raw_review.review_id,
+        product_id=raw_review.product_id,
+        content=raw_review.content,
+        user_id=raw_review.author,          # 생데이터의 author를 user_id로 매핑
+        rating=raw_review.rating,
+        review_date=raw_review.review_date,
+        image_count=raw_review.image_count,
+        quality_score=raw_review.quality_score,
+        
+        # 아래 값들은 생데이터(크롤링)에 기본적으로 없으므로 기본값 세팅 
+        # (추후 크롤러가 고도화되어 이 데이터를 넘겨주면 스키마에 추가하면 됨)
+        verified_purchase="unknown",
+        repurchase="unknown",
+        free_trial="unknown",
+        reviews_written_today=1,
+        similar_review_count=0
+    )
+
+def get_level(rti: int, reasons: list) -> str:
+    """최종 점수 및 사유 기반 위험도 등급 판별"""
+    if rti < 50: return "danger"
+    if rti < 80: return "warn"
+    
+    penalty_reasons = [r for r in reasons if r.get("code") != "REPURCHASE_SIGNAL"]
+    if len(penalty_reasons) > 0: return "warn"
+    
+    return "safe"
+
+def analyze_single_review(review: ReviewInput) -> AnalysisResult:
+    """단일 리뷰를 분석하는 코어 로직 (기존 ai 모듈 활용)"""
+    text_score, text_reasons = calculate_text_score(review.content, review.quality_score)
+    
+    review_dict = review.model_dump()
+    behavior_score, behavior_reasons = calculate_behavior_score(review_dict)
+    network_score, network_reasons = calculate_network_score(review_dict)
+
+    # v0 가중치: Text 40%, Behavior 35%, Network 25%
+    rti_score = round(text_score * 0.4 + behavior_score * 0.35 + network_score * 0.25)
+
+    all_reasons = text_reasons + behavior_reasons + network_reasons
+    level = get_level(rti_score, all_reasons)
+
+    return AnalysisResult(
+        review_id=review.review_id, 
+        product_id=review.product_id,
+        rti=rti_score, 
+        level=level,
+        signals=SignalScores(text=text_score, behavior=behavior_score, network=network_score),
+        reasons=[ReasonObject(**r) for r in all_reasons]
+    )
+
+
+# ==========================================
+# 4. 결과 집계(Aggregation) 로직
+# ==========================================
+def extract_product_summary(product_id: str, analyzed_reviews: List[AnalysisResult]) -> ProductSummaryResult:
+    review_count = len(analyzed_reviews)
+    if review_count == 0:
+        return ProductSummaryResult(product_id=product_id, average_rti=0.0, level="safe", review_count=0, safe_count=0, warn_count=0, danger_count=0)
+
+    total_rti = sum(r.rti for r in analyzed_reviews)
+    average_rti = round(total_rti / review_count, 2)
+    safe_count = sum(1 for r in analyzed_reviews if r.level == "safe")
+    warn_count = sum(1 for r in analyzed_reviews if r.level == "warn")
+    danger_count = sum(1 for r in analyzed_reviews if r.level == "danger")
+    
+    overall_level = "safe" if average_rti >= 80 else ("warn" if average_rti >= 50 else "danger")
+    
+    return ProductSummaryResult(
+        product_id=product_id, 
+        average_rti=average_rti, 
+        level=overall_level,
+        review_count=review_count, 
+        safe_count=safe_count, 
+        warn_count=warn_count, 
+        danger_count=danger_count
+    )
+
+def extract_trend_data(raw_reviews: List[RawReviewItem], analyzed_reviews: List[AnalysisResult], group_by: str) -> List[TrendItem]:
+    date_groups = defaultdict(lambda: {"total_rti": 0, "count": 0, "safe": 0, "warn": 0, "danger": 0})
+    
+    for raw, analyzed in zip(raw_reviews, analyzed_reviews):
+        # 기본 날짜 파싱 (현재는 day 기준. 추후 week, month 기능 확장 가능)
+        date_key = raw.review_date if raw.review_date else datetime.now().strftime("%Y-%m-%d")
+        
+        date_groups[date_key]["total_rti"] += analyzed.rti
+        date_groups[date_key]["count"] += 1
+        date_groups[date_key][analyzed.level] += 1
+
+    trend_items = []
+    for date_str, data in sorted(date_groups.items()):
+        trend_items.append(TrendItem(
+            date=date_str, 
+            average_rti=round(data["total_rti"] / data["count"], 2),
+            review_count=data["count"], 
+            safe_count=data["safe"], 
+            warn_count=data["warn"], 
+            danger_count=data["danger"]
+        ))
+    return trend_items
+
+
+# ==========================================
+# 5. API Endpoints (입력은 동일하게 묶고, 출력은 목적에 맞게 분리)
+# ==========================================
+
+@app.post("/api/internal/ai/products/rti-summary", response_model=Dict[str, List[ProductSummaryResult]], tags=["Internal AI API"])
+async def analyze_rti_summary(payload: RawCrawlPayload):
+    """
+    [API 1] 상품 요약: 크롤링 생데이터를 던지면, 상품 관점의 리뷰 통계(카운트, 평균점수)만 리턴
+    """
+    # 1. 생데이터 -> AI 엔진용 규격 파싱 및 분석
+    mapped_reviews = [parse_raw_to_internal(r) for r in payload.crawl_result.reviews]
+    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
+    
+    # 2. 요약 결과만 추출
+    summary = extract_product_summary(payload.product.productId, analyzed_reviews)
+    return {"products": [summary]}
+
+
+@app.post("/api/internal/ai/reviews/analyze-batch", response_model=BatchResponse, tags=["Internal AI API"])
+async def analyze_reviews_batch(payload: RawCrawlPayload):
+    """
+    [API 2] 리뷰 상세 분석: 크롤링 생데이터를 던지면, 리뷰 1개 1개에 대한 신뢰도 점수와 사유를 리턴
+    """
+    # 1. 생데이터 -> AI 엔진용 규격 파싱 및 분석
+    mapped_reviews = [parse_raw_to_internal(r) for r in payload.crawl_result.reviews]
+    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
+    
+    # 2. 별도 집계 없이 분석 결과 배열을 그대로 리턴
+    return BatchResponse(results=analyzed_reviews)
+
+
+@app.post("/api/internal/ai/products/rti-trend", response_model=TrendResponse, tags=["Internal AI API"])
+async def analyze_rti_trend(payload: RawCrawlPayload, group_by: str = Query("day", description="집계 기준 (day, week, month)")):
+    """
+    [API 3] 추이 그래프: 크롤링 생데이터를 던지면, 날짜별로 묶어 통계 데이터(카운트, 평균점수)를 리턴
+    """
+    if not payload.crawl_result.reviews:
+        return TrendResponse(product_id=payload.product.productId, group_by=group_by, trend=[])
+
+    # 1. 생데이터 -> AI 엔진용 규격 파싱 및 분석
+    mapped_reviews = [parse_raw_to_internal(r) for r in payload.crawl_result.reviews]
+    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
+    
+    # 2. 날짜별 추이 결과만 추출
+    trend_items = extract_trend_data(payload.crawl_result.reviews, analyzed_reviews, group_by)
+        
+    return TrendResponse(
+        product_id=payload.product.productId,
+        group_by=group_by,
+        trend=trend_items
+    )
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
