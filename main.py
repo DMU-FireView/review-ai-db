@@ -95,7 +95,6 @@ class ProductSummaryResult(BaseModel):
     warn_count: int
     danger_count: int
 
-# 새로 추가된 명확한 응답 스키마 (additionalProp 제거용)
 class SummaryResponse(BaseModel):
     products: List[ProductSummaryResult]
 
@@ -110,7 +109,6 @@ class TrendItem(BaseModel):
     warn_count: int
     danger_count: int
 
-# 새로 추가된 명확한 응답 스키마 (additionalProp 제거용)
 class TrendResponse(BaseModel):
     trend: List[TrendItem]
 
@@ -126,7 +124,6 @@ def parse_raw_to_internal(raw_review: Dict[str, Any]) -> ReviewInput:
         content=str(raw_review.get("content", "")),
         user_id=str(raw_review.get("author", "unknown")),
         
-        # 숫자형 데이터들은 None 방어 처리
         rating=int(raw_review.get("rating", 0) or 0),
         review_date=str(raw_review.get("review_date", "")),
         image_count=int(raw_review.get("image_count", 0) or 0),
@@ -171,7 +168,7 @@ def analyze_single_review(review: ReviewInput) -> AnalysisResult:
 
 
 # ==========================================
-# 4. 결과 집계(Aggregation) 로직
+# 4. 결과 집계(Aggregation) 로직 (하연님 요청 반영)
 # ==========================================
 def extract_product_summary(product_id: str, analyzed_reviews: List[AnalysisResult]) -> ProductSummaryResult:
     review_count = len(analyzed_reviews)
@@ -180,15 +177,28 @@ def extract_product_summary(product_id: str, analyzed_reviews: List[AnalysisResu
 
     total_rti = sum(r.rti for r in analyzed_reviews)
     average_rti = round(total_rti / review_count, 2)
+    
+    # 등급별 카운트 집계
     safe_count = sum(1 for r in analyzed_reviews if r.level == "safe")
     warn_count = sum(1 for r in analyzed_reviews if r.level == "warn")
     danger_count = sum(1 for r in analyzed_reviews if r.level == "danger")
     
-    overall_level = "safe" if average_rti >= 80 else ("warn" if average_rti >= 50 else "danger")
+    # [하연님 요청 반영]: 수치 기반 직관적인 종합 레벨 산정 규칙
+    if danger_count > 0:
+        overall_level = "danger"
+    elif warn_count > 0:
+        overall_level = "warn"
+    else:
+        overall_level = "safe"
     
     return ProductSummaryResult(
-        product_id=product_id, average_rti=average_rti, level=overall_level,
-        review_count=review_count, safe_count=safe_count, warn_count=warn_count, danger_count=danger_count
+        product_id=product_id, 
+        average_rti=average_rti, 
+        level=overall_level,
+        review_count=review_count, 
+        safe_count=safe_count, 
+        warn_count=warn_count, 
+        danger_count=danger_count
     )
 
 def extract_trend_data(raw_reviews: List[Dict[str, Any]], analyzed_reviews: List[AnalysisResult]) -> List[TrendItem]:
@@ -214,8 +224,11 @@ def extract_trend_data(raw_reviews: List[Dict[str, Any]], analyzed_reviews: List
 # 5. API Endpoints
 # ==========================================
 
-@app.post("/api/internal/ai/products/rti-summary", response_model=SummaryResponse, tags=["Internal AI API"])
+@app.post("/api/internal/ai/products/product-list", response_model=SummaryResponse, tags=["Internal AI API"])
 async def analyze_rti_summary(payload: RawCrawlPayload):
+    """
+    [API 1] 상품 요약: 크롤링 생데이터를 받아 상품 관점의 리뷰 통계(카운트, 평균점수)만 리턴
+    """
     raw_reviews_list = payload.crawl_result.get("reviews", [])
     product_id = str(payload.product.get("productId", "unknown"))
 
@@ -226,8 +239,11 @@ async def analyze_rti_summary(payload: RawCrawlPayload):
     return {"products": [summary]}
 
 
-@app.post("/api/internal/ai/reviews/analyze-batch", response_model=BatchResponse, tags=["Internal AI API"])
+@app.post("/api/internal/ai/reviews/product-detail", response_model=BatchResponse, tags=["Internal AI API"])
 async def analyze_reviews_batch(payload: RawCrawlPayload):
+    """
+    [API 2] 리뷰 상세 분석: 크롤링 생데이터를 받아 개별 리뷰에 대한 점수 및 상세 분석 사유를 리턴
+    """
     raw_reviews_list = payload.crawl_result.get("reviews", [])
     
     mapped_reviews = [parse_raw_to_internal(r) for r in raw_reviews_list]
@@ -238,6 +254,9 @@ async def analyze_reviews_batch(payload: RawCrawlPayload):
 
 @app.post("/api/internal/ai/products/rti-trend", response_model=TrendResponse, tags=["Internal AI API"])
 async def analyze_rti_trend(payload: RawCrawlPayload):
+    """
+    [API 3] 추이 그래프: 크롤링 생데이터를 받아 날짜별로 묶어 통계 데이터(카운트, 평균점수)를 리턴
+    """
     raw_reviews_list = payload.crawl_result.get("reviews", [])
 
     if not raw_reviews_list:
