@@ -11,17 +11,34 @@ from ai.text_analyzer import calculate_text_score
 from ai.behavior_analyzer import calculate_behavior_score
 from ai.network_analyzer import calculate_network_score
 
-app = FastAPI(title="Re:view AI Analysis Server (Robust Rescue Edition)", version="v0.3")
+app = FastAPI(title="Re:view AI Analysis Server (Hybrid Edition)", version="v0.4")
 
 # ==========================================
-# 1. 문서화용 Pydantic 스키마 정의 (Swagger 노출용)
+# 1. 문서화용 Pydantic 스키마 정의
 # ==========================================
 class RawCrawlPayload(BaseModel):
+    """(요약, 추이 API용) 원본 생데이터 유연 수신 스키마"""
     source: str = Field(default="bin")
     query: Optional[str] = None
     product: Dict[str, Any] = Field(default_factory=dict)
     crawl_result: Dict[str, Any] = Field(default_factory=dict)
     contents: Optional[List[Dict[str, Any]]] = Field(default=None)
+
+# 💡 [추가] product-detail API 전용 가벼운(Clean) 페이로드 스키마
+class IncomingReview(BaseModel):
+    """백엔드/크롤러가 8개 필수 필드만 정제하여 보내주는 스키마"""
+    review_id: str
+    product_id: str
+    content: str
+    user_id: str
+    rating: int
+    review_date: str
+    image_count: int = 0
+    quality_score: Optional[float] = None
+
+class AnalyzeRequest(BaseModel):
+    """product-detail 전용 DTO"""
+    reviews: List[IncomingReview]
 
 # ==========================================
 # 2. 내부 분석용 및 응답 스키마
@@ -104,19 +121,14 @@ class TrendResponse(BaseModel):
 
 
 # ==========================================
-# 3. 🚨 짤린 JSON 자동 구조 복구 엔진 🚨
+# 3. 🚨 짤린 JSON 자동 구조 복구 엔진 (product-list, rti-trend 용) 🚨
 # ==========================================
 def rescue_truncated_json(raw_str: str) -> dict:
-    """
-    텍스트 복사 짤림 등으로 손상된 JSON 문자열에서 
-    정상 완료된 리뷰 객체들만 스택 분석으로 안전하게 구출해 냅니다.
-    """
     reconstructed = {
         "source": "bin", "query": None, "product": {},
         "crawl_result": {"reviews": []}, "contents": None
     }
     
-    # 1. 정규식을 이용하여 문자열 전반에서 메타데이터 복원 구출
     source_match = re.search(re.compile(r'"source"\s*:\s*"([^"]+)"'), raw_str)
     if source_match: reconstructed["source"] = source_match.group(1)
     
@@ -129,15 +141,13 @@ def rescue_truncated_json(raw_str: str) -> dict:
     prod_title_match = re.search(re.compile(r'"(title|productName)"\s*:\s*"([^"]+)"'), raw_str)
     if prod_title_match: reconstructed["product"]["title"] = prod_title_match.group(2)
 
-    # 2. 하연님 포맷(contents)인지 빈님 포맷(reviews)인지 배열 마커 확인
     array_marker = re.search(re.compile(r'"(contents|reviews)"\s*:\s*\['), raw_str)
     if not array_marker:
-        return reconstructed # 배열이 시작되기도 전에 짤렸으면 빈 값 리턴
+        return reconstructed 
         
     is_contents_format = array_marker.group(1) == "contents"
     array_body = raw_str[array_marker.end():]
     
-    # 3. 괄호 쌍 매칭 스택으로 정상 완성된 개별 딕셔너리 객체만 구출
     valid_objects = []
     stack = []
     obj_start = -1
@@ -150,14 +160,13 @@ def rescue_truncated_json(raw_str: str) -> dict:
         elif char == '}':
             if stack:
                 stack.pop()
-                if not stack: # 한 리뷰 오브젝트가 완벽하게 닫힘!
+                if not stack: 
                     obj_str = array_body[obj_start:i+1]
                     try:
                         valid_objects.append(json.loads(obj_str))
                     except:
-                        pass # 불완전 조각 폐기
+                        pass 
                         
-    # 4. 정규 규격으로 안착
     if is_contents_format:
         reconstructed["contents"] = valid_objects
         if reconstructed["source"] == "bin": reconstructed["source"] = "naver"
@@ -218,14 +227,12 @@ def parse_raw_to_internal(raw_review: Dict[str, Any], product_name: Optional[str
         
     quality_score = float(raw_review.get("quality_score")) if raw_review.get("quality_score") is not None else None
     
-    # Boolean 타입 방어 코드 (freeTrial)
     free_trial_val = get_compatible_field(raw_review, ["freeTrial", "free_trial"])
     free_trial = "true" if isinstance(free_trial_val, bool) and free_trial_val else ("false" if isinstance(free_trial_val, bool) else str(free_trial_val or "unknown"))
         
     repurchase_val = get_compatible_field(raw_review, ["repurchase"])
     repurchase = "true" if isinstance(repurchase_val, bool) and repurchase_val else ("false" if isinstance(repurchase_val, bool) else str(repurchase_val or "unknown"))
 
-    # [하연님 요청 반영] verified_purchase 매핑 및 DB 스펙(true/false/unknown) 호환 정규화
     verified_purchase_val = get_compatible_field(raw_review, ["verifiedPurchase", "verified_purchase"])
     if isinstance(verified_purchase_val, bool):
         verified_purchase = "true" if verified_purchase_val else "false"
@@ -300,45 +307,67 @@ def extract_trend_data(raw_reviews: List[Dict[str, Any]], analyzed_reviews: List
 
 
 # ==========================================
-# 5. [초강력 업그레이드] API Endpoints (422 완전 방어 가드 장착)
+# 5. API Endpoints (하이브리드 모드)
 # ==========================================
 async def get_robust_json_data(request: Request) -> dict:
-    """엔드포인트 공용 텍스트 스트림 수신 및 자동 복구 래퍼"""
     body_bytes = await request.body()
     raw_text = body_bytes.decode("utf-8").strip()
     try:
         return json.loads(raw_text)
     except json.JSONDecodeError:
-        # 문법 에러 감지 시 즉시 복구 엔진 가동!!
         return rescue_truncated_json(raw_text)
 
-# Swagger 연동 문서 강제 주입 규격 정의
 SWAGGER_BODY_SCHEMA = {"requestBody": {"content": {"application/json": {"schema": RawCrawlPayload.model_json_schema()}}}}
 
 @app.post("/api/internal/ai/products/product-list", response_model=SummaryResponse, tags=["Internal AI API"], openapi_extra=SWAGGER_BODY_SCHEMA)
 async def analyze_rti_summary(request: Request):
+    """[API 1] 생데이터 기반 유연한 파싱 및 요약"""
     data = await get_robust_json_data(request)
     raw_reviews_list, product_id, product_name, source = resolve_payload_data(data)
     mapped_reviews = [parse_raw_to_internal(r, product_name, source) for r in raw_reviews_list]
     analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
     return {"products": [extract_product_summary(product_id, analyzed_reviews)]}
 
-@app.post("/api/internal/ai/reviews/product-detail", response_model=BatchResponse, tags=["Internal AI API"], openapi_extra=SWAGGER_BODY_SCHEMA)
-async def analyze_reviews_batch(request: Request):
-    data = await get_robust_json_data(request)
-    raw_reviews_list, product_id, product_name, source = resolve_payload_data(data)
-    mapped_reviews = [parse_raw_to_internal(r, product_name, source) for r in raw_reviews_list]
-    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
-    return BatchResponse(results=analyzed_reviews)
-
 @app.post("/api/internal/ai/products/rti-trend", response_model=TrendResponse, tags=["Internal AI API"], openapi_extra=SWAGGER_BODY_SCHEMA)
 async def analyze_rti_trend(request: Request):
+    """[API 3] 생데이터 기반 유연한 파싱 및 추이 그래프"""
     data = await get_robust_json_data(request)
     raw_reviews_list, product_id, product_name, source = resolve_payload_data(data)
     if not raw_reviews_list: return {"trend": []}
     mapped_reviews = [parse_raw_to_internal(r, product_name, source) for r in raw_reviews_list]
     analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
     return {"trend": extract_trend_data(raw_reviews_list, analyzed_reviews)}
+
+# 💡 [수정됨] API 2는 가공된 8개 필수 필드(AnalyzeRequest)만 엄격하게 받습니다!
+@app.post("/api/internal/ai/reviews/product-detail", response_model=BatchResponse, tags=["Internal AI API"])
+async def analyze_reviews_batch(payload: AnalyzeRequest):
+    """
+    [API 2] 리뷰 상세 분석: (가공된 Clean Payload 전용)
+    백엔드에서 8개 필수 필드만 정제하여 보내주면, 나머지는 내부 기본값으로 채워 분석합니다.
+    """
+    mapped_reviews = []
+    for incoming in payload.reviews:
+        # 백엔드가 보내준 8개 필드에 AI 내부 기본값 5개를 채워 넣음
+        mapped_reviews.append(ReviewInput(
+            source="clean_api",
+            review_id=incoming.review_id,
+            product_id=incoming.product_id,
+            product_name=None,
+            content=incoming.content,
+            user_id=incoming.user_id,
+            rating=incoming.rating,
+            review_date=incoming.review_date,
+            image_count=incoming.image_count,
+            quality_score=incoming.quality_score,
+            verified_purchase="unknown",
+            repurchase="unknown",
+            free_trial="unknown",
+            reviews_written_today=1,
+            similar_review_count=0
+        ))
+        
+    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
+    return BatchResponse(results=analyzed_reviews)
 
 if __name__ == "__main__":
     import uvicorn
