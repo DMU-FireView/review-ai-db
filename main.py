@@ -122,21 +122,24 @@ def parse_raw_to_internal(raw_review: Dict[str, Any]) -> ReviewInput:
         review_id=str(raw_review.get("review_id", "")),
         product_id=str(raw_review.get("product_id", "")),
         content=str(raw_review.get("content", "")),
-        user_id=str(raw_review.get("author", "unknown")),
+        user_id=str(raw_review.get("author", raw_review.get("user_id", "unknown"))),
         
+        # 숫자형 데이터들은 None 방어 처리
         rating=int(raw_review.get("rating", 0) or 0),
         review_date=str(raw_review.get("review_date", "")),
         image_count=int(raw_review.get("image_count", 0) or 0),
         quality_score=float(raw_review.get("quality_score")) if raw_review.get("quality_score") is not None else None,
         
-        verified_purchase="unknown",
-        repurchase="unknown",
-        free_trial="unknown",
-        reviews_written_today=1,
-        similar_review_count=0
+        # 기본값 방어 처리 (로컬 스크립트 rti_scoring.py 연동 대응)
+        verified_purchase=str(raw_review.get("verified_purchase", "unknown")),
+        repurchase=str(raw_review.get("repurchase", "unknown")),
+        free_trial=str(raw_review.get("free_trial", "unknown")),
+        reviews_written_today=int(raw_review.get("reviews_written_today", 1) or 1),
+        similar_review_count=int(raw_review.get("similar_review_count", 0) or 0)
     )
 
 def get_level(rti: int, reasons: list) -> str:
+    """최종 점수 및 감점 사유 기반 위험 등급 산출"""
     if rti < 50: return "danger"
     if rti < 80: return "warn"
     
@@ -146,12 +149,14 @@ def get_level(rti: int, reasons: list) -> str:
     return "safe"
 
 def analyze_single_review(review: ReviewInput) -> AnalysisResult:
+    """단일 리뷰를 분석하여 최종 RTI 점수 및 등급, 사유를 생성하는 핵심 코어 엔진"""
     text_score, text_reasons = calculate_text_score(review.content, review.quality_score)
     
     review_dict = review.model_dump()
     behavior_score, behavior_reasons = calculate_behavior_score(review_dict)
     network_score, network_reasons = calculate_network_score(review_dict)
 
+    # v0 가중치 공식 반영
     rti_score = round(text_score * 0.4 + behavior_score * 0.35 + network_score * 0.25)
 
     all_reasons = text_reasons + behavior_reasons + network_reasons
@@ -168,7 +173,7 @@ def analyze_single_review(review: ReviewInput) -> AnalysisResult:
 
 
 # ==========================================
-# 4. 결과 집계(Aggregation) 로직 (하연님 요청 반영)
+# 4. 결과 집계(Aggregation) 로직
 # ==========================================
 def extract_product_summary(product_id: str, analyzed_reviews: List[AnalysisResult]) -> ProductSummaryResult:
     review_count = len(analyzed_reviews)
@@ -183,7 +188,7 @@ def extract_product_summary(product_id: str, analyzed_reviews: List[AnalysisResu
     warn_count = sum(1 for r in analyzed_reviews if r.level == "warn")
     danger_count = sum(1 for r in analyzed_reviews if r.level == "danger")
     
-    # [하연님 요청 반영]: 수치 기반 직관적인 종합 레벨 산정 규칙
+    # [하연님 요청]: 수치 기반 직관적인 종합 레벨 산정 규칙
     if danger_count > 0:
         overall_level = "danger"
     elif warn_count > 0:
