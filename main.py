@@ -27,6 +27,7 @@ class RawCrawlPayload(BaseModel):
 # 2. 내부 분석용 및 응답 스키마
 # ==========================================
 class ReviewInput(BaseModel):
+    """AI 엔진이 실제로 사용하는 정제된 내부 데이터 형태"""
     source: str = "bin"
     review_id: str
     product_id: str
@@ -103,7 +104,7 @@ class TrendResponse(BaseModel):
 
 
 # ==========================================
-# 3. 🚨 [핵심 추가] 짤린 JSON 자동 구조 복구 엔진 🚨
+# 3. 🚨 짤린 JSON 자동 구조 복구 엔진 🚨
 # ==========================================
 def rescue_truncated_json(raw_str: str) -> dict:
     """
@@ -217,16 +218,30 @@ def parse_raw_to_internal(raw_review: Dict[str, Any], product_name: Optional[str
         
     quality_score = float(raw_review.get("quality_score")) if raw_review.get("quality_score") is not None else None
     
+    # Boolean 타입 방어 코드 (freeTrial)
     free_trial_val = get_compatible_field(raw_review, ["freeTrial", "free_trial"])
     free_trial = "true" if isinstance(free_trial_val, bool) and free_trial_val else ("false" if isinstance(free_trial_val, bool) else str(free_trial_val or "unknown"))
         
     repurchase_val = get_compatible_field(raw_review, ["repurchase"])
     repurchase = "true" if isinstance(repurchase_val, bool) and repurchase_val else ("false" if isinstance(repurchase_val, bool) else str(repurchase_val or "unknown"))
 
+    # [하연님 요청 반영] verified_purchase 매핑 및 DB 스펙(true/false/unknown) 호환 정규화
+    verified_purchase_val = get_compatible_field(raw_review, ["verifiedPurchase", "verified_purchase"])
+    if isinstance(verified_purchase_val, bool):
+        verified_purchase = "true" if verified_purchase_val else "false"
+    elif verified_purchase_val is not None:
+        val_str = str(verified_purchase_val).lower().strip()
+        if val_str in ["true", "false", "unknown"]:
+            verified_purchase = val_str
+        else:
+            verified_purchase = "unknown"
+    else:
+        verified_purchase = "unknown"
+
     return ReviewInput(
         source=source, review_id=review_id, product_id=product_id, product_name=product_name,
         content=content, user_id=user_id, rating=rating, review_date=review_date, image_count=image_count,
-        quality_score=quality_score, verified_purchase=str(raw_review.get("verified_purchase", "unknown")),
+        quality_score=quality_score, verified_purchase=verified_purchase,
         repurchase=repurchase, free_trial=free_trial,
         reviews_written_today=int(raw_review.get("reviews_written_today", 1) or 1),
         similar_review_count=int(raw_review.get("similar_review_count", 0) or 0)
