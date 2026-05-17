@@ -1,4 +1,4 @@
-﻿from sentiment_client import analyze_sentiment
+﻿from ai.sentiment_client import analyze_sentiment
 
 
 REPETITIVE_KEYWORDS = [

@@ -3,9 +3,10 @@ from pydantic import BaseModel
 from typing import List, Optional, Any
 
 # 기존 분석 모듈 로드
-from text_analyzer import calculate_text_score
-from behavior_analyzer import calculate_behavior_score
-from network_analyzer import calculate_network_score
+from ai.text_analyzer import calculate_text_score
+from ai.behavior_analyzer import calculate_behavior_score
+from ai.network_analyzer import calculate_network_score
+from ai.sentiment_client import analyze_sentiment
 
 app = FastAPI(title="Re:view AI Analysis Server", version="v0.1")
 
@@ -65,7 +66,7 @@ def get_level(rti: int, reasons: list) -> str:
 
 
 # --- API Endpoint ---
-@app.post("/api/ai/reviews/analyze-batch", response_model=BatchResponse)
+@app.post("/api/internal/ai/reviews/analyze-batch", response_model=BatchResponse, tags=["Internal AI API"])
 async def analyze_reviews_batch(payload: BatchRequest):
     analysis_results = []
 
@@ -99,7 +100,7 @@ async def analyze_reviews_batch(payload: BatchRequest):
                 signals=SignalScores(
                     text=text_score,
                     behavior=behavior_score,
-                    network=network_network_score if 'network_network_score' in locals() else network_score
+                    network=network_score
                 ),
                 reasons=[ReasonObject(**r) for r in all_reasons]
             )
