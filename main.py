@@ -1,32 +1,21 @@
-from fastapi import FastAPI, Query, Request
+from fastapi import FastAPI
 from pydantic import BaseModel, Field
-from typing import List, Optional, Any, Dict
+from typing import List, Optional
 from collections import defaultdict
 from datetime import datetime
-import json
-import re
 
 # 기존 프로젝트의 AI 분석 모듈 로드
 from ai.text_analyzer import calculate_text_score
 from ai.behavior_analyzer import calculate_behavior_score
 from ai.network_analyzer import calculate_network_score
 
-app = FastAPI(title="Re:view AI Analysis Server (Hybrid Edition)", version="v0.4")
+app = FastAPI(title="Re:view AI Analysis Server (Clean Payload Edition)", version="v3.0")
 
 # ==========================================
-# 1. 문서화용 Pydantic 스키마 정의
+# 1. 🚀 최적화된 Request 스키마 (3개 API 공통 사용)
 # ==========================================
-class RawCrawlPayload(BaseModel):
-    """(요약, 추이 API용) 원본 생데이터 유연 수신 스키마"""
-    source: str = Field(default="bin")
-    query: Optional[str] = None
-    product: Dict[str, Any] = Field(default_factory=dict)
-    crawl_result: Dict[str, Any] = Field(default_factory=dict)
-    contents: Optional[List[Dict[str, Any]]] = Field(default=None)
-
-# 💡 [추가] product-detail API 전용 가벼운(Clean) 페이로드 스키마
 class IncomingReview(BaseModel):
-    """백엔드/크롤러가 8개 필수 필드만 정제하여 보내주는 스키마"""
+    """백엔드/크롤러 모듈에서 AI 분석을 위해 정제해서 넘겨주는 필수 8개 필드"""
     review_id: str
     product_id: str
     content: str
@@ -37,24 +26,29 @@ class IncomingReview(BaseModel):
     quality_score: Optional[float] = None
 
 class AnalyzeRequest(BaseModel):
-    """product-detail 전용 DTO"""
+    """3개 API 모두 똑같이 이 가벼운 페이로드를 받습니다."""
+    source: str = Field(default="clean_api", description="데이터 출처")
+    product_name: Optional[str] = Field(default=None, description="상품명")
     reviews: List[IncomingReview]
+
 
 # ==========================================
 # 2. 내부 분석용 및 응답 스키마
 # ==========================================
 class ReviewInput(BaseModel):
-    """AI 엔진이 실제로 사용하는 정제된 내부 데이터 형태"""
-    source: str = "bin"
+    """AI 엔진이 실제로 사용하는 데이터 형태 (기본값 자동 세팅용)"""
+    source: str
     review_id: str
     product_id: str
     product_name: Optional[str] = None
     content: str
-    user_id: Optional[str] = None
-    rating: Optional[int] = None
-    review_date: Optional[str] = None
-    image_count: int = 0
+    user_id: str
+    rating: int
+    review_date: str
+    image_count: int
     quality_score: Optional[float] = None
+    
+    # 💡 AI 서버에서 분석을 위해 강제 세팅하는 기본값 5개
     verified_purchase: str = "unknown"
     repurchase: str = "unknown"
     free_trial: str = "unknown"
@@ -121,253 +115,153 @@ class TrendResponse(BaseModel):
 
 
 # ==========================================
-# 3. 🚨 짤린 JSON 자동 구조 복구 엔진 (product-list, rti-trend 용) 🚨
+# 3. 데이터 준비 및 핵심 AI 분석 로직
 # ==========================================
-def rescue_truncated_json(raw_str: str) -> dict:
-    reconstructed = {
-        "source": "bin", "query": None, "product": {},
-        "crawl_result": {"reviews": []}, "contents": None
-    }
-    
-    source_match = re.search(re.compile(r'"source"\s*:\s*"([^"]+)"'), raw_str)
-    if source_match: reconstructed["source"] = source_match.group(1)
-    
-    query_match = re.search(re.compile(r'"query"\s*:\s*"([^"]+)"'), raw_str)
-    if query_match: reconstructed["query"] = query_match.group(1)
-    
-    prod_id_match = re.search(re.compile(r'"(productId|productNo)"\s*:\s*"([^"]+)"'), raw_str)
-    if prod_id_match: reconstructed["product"]["productId"] = prod_id_match.group(2)
-    
-    prod_title_match = re.search(re.compile(r'"(title|productName)"\s*:\s*"([^"]+)"'), raw_str)
-    if prod_title_match: reconstructed["product"]["title"] = prod_title_match.group(2)
-
-    array_marker = re.search(re.compile(r'"(contents|reviews)"\s*:\s*\['), raw_str)
-    if not array_marker:
-        return reconstructed 
-        
-    is_contents_format = array_marker.group(1) == "contents"
-    array_body = raw_str[array_marker.end():]
-    
-    valid_objects = []
-    stack = []
-    obj_start = -1
-    
-    for i, char in enumerate(array_body):
-        if char == '{':
-            if not stack:
-                obj_start = i
-            stack.append('{')
-        elif char == '}':
-            if stack:
-                stack.pop()
-                if not stack: 
-                    obj_str = array_body[obj_start:i+1]
-                    try:
-                        valid_objects.append(json.loads(obj_str))
-                    except:
-                        pass 
-                        
-    if is_contents_format:
-        reconstructed["contents"] = valid_objects
-        if reconstructed["source"] == "bin": reconstructed["source"] = "naver"
-    else:
-        reconstructed["crawl_result"]["reviews"] = valid_objects
-        
-    return reconstructed
-
-
-# ==========================================
-# 4. 공통 데이터 프로세싱 파트
-# ==========================================
-def get_compatible_field(d: Dict[str, Any], keys: List[str], default: Any = None) -> Any:
-    for k in keys:
-        val = d.get(k)
-        if val is not None and val != "": return val
-    return default
-
-def resolve_payload_data(data: dict):
-    if data.get("contents") is not None:
-        raw_reviews_list = data["contents"]
-        source = data.get("source", "naver")
-    else:
-        crawl_res = data.get("crawl_result", {})
-        raw_reviews_list = crawl_res.get("reviews", []) if isinstance(crawl_res, dict) else []
-        source = data.get("source", "bin")
-
-    product_obj = data.get("product", {})
-    product_id = "unknown"
-    if product_obj and product_obj.get("productId"):
-        product_id = str(product_obj.get("productId"))
-    elif raw_reviews_list:
-        product_id = str(get_compatible_field(raw_reviews_list[0], ["productNo", "product_id"], "unknown"))
-
-    product_name = None
-    if product_obj and product_obj.get("title"):
-        product_name = product_obj.get("title")
-    elif raw_reviews_list:
-        product_name = get_compatible_field(raw_reviews_list[0], ["productName", "product_name"])
-
-    return raw_reviews_list, product_id, product_name, source
-
-def parse_raw_to_internal(raw_review: Dict[str, Any], product_name: Optional[str] = None, source: str = "bin") -> ReviewInput:
-    review_id = str(get_compatible_field(raw_review, ["mall_review_id", "id", "review_id"], ""))
-    product_id = str(get_compatible_field(raw_review, ["productNo", "product_id"], ""))
-    content = str(get_compatible_field(raw_review, ["reviewContent", "content"], ""))
-    user_id = str(get_compatible_field(raw_review, ["writerId", "author", "user_id"], "unknown"))
-    
-    rating_val = get_compatible_field(raw_review, ["reviewScore", "rating"])
-    rating = int(rating_val) if rating_val is not None else 0
-    
-    raw_date = get_compatible_field(raw_review, ["createDate", "review_date"])
-    review_date = str(raw_date).split("T")[0] if raw_date and "T" in str(raw_date) else (str(raw_date) if raw_date else None)
-        
-    image_count = int(raw_review.get("image_count", 0) or 0)
-    if not image_count and "reviewAttaches" in raw_review:
-        image_count = len(raw_review["reviewAttaches"] or [])
-        
-    quality_score = float(raw_review.get("quality_score")) if raw_review.get("quality_score") is not None else None
-    
-    free_trial_val = get_compatible_field(raw_review, ["freeTrial", "free_trial"])
-    free_trial = "true" if isinstance(free_trial_val, bool) and free_trial_val else ("false" if isinstance(free_trial_val, bool) else str(free_trial_val or "unknown"))
-        
-    repurchase_val = get_compatible_field(raw_review, ["repurchase"])
-    repurchase = "true" if isinstance(repurchase_val, bool) and repurchase_val else ("false" if isinstance(repurchase_val, bool) else str(repurchase_val or "unknown"))
-
-    verified_purchase_val = get_compatible_field(raw_review, ["verifiedPurchase", "verified_purchase"])
-    if isinstance(verified_purchase_val, bool):
-        verified_purchase = "true" if verified_purchase_val else "false"
-    elif verified_purchase_val is not None:
-        val_str = str(verified_purchase_val).lower().strip()
-        if val_str in ["true", "false", "unknown"]:
-            verified_purchase = val_str
-        else:
-            verified_purchase = "unknown"
-    else:
-        verified_purchase = "unknown"
-
+def prepare_review_input(incoming: IncomingReview, source: str, product_name: Optional[str]) -> ReviewInput:
+    """받은 8개 필드 + AI 서버의 5개 기본값을 조합하여 코어 엔진에 전달합니다."""
     return ReviewInput(
-        source=source, review_id=review_id, product_id=product_id, product_name=product_name,
-        content=content, user_id=user_id, rating=rating, review_date=review_date, image_count=image_count,
-        quality_score=quality_score, verified_purchase=verified_purchase,
-        repurchase=repurchase, free_trial=free_trial,
-        reviews_written_today=int(raw_review.get("reviews_written_today", 1) or 1),
-        similar_review_count=int(raw_review.get("similar_review_count", 0) or 0)
+        source=source,
+        review_id=incoming.review_id,
+        product_id=incoming.product_id,
+        product_name=product_name,
+        content=incoming.content,
+        user_id=incoming.user_id,
+        rating=incoming.rating,
+        review_date=incoming.review_date,
+        image_count=incoming.image_count,
+        quality_score=incoming.quality_score,
+        # 프론트/백에서 보내지 않는 AI 자체 기본값
+        verified_purchase="unknown",
+        repurchase="unknown",
+        free_trial="unknown",
+        reviews_written_today=1,
+        similar_review_count=0
     )
 
 def get_level(rti: int, reasons: list) -> str:
     if rti < 50: return "danger"
     if rti < 80: return "warn"
-    if len([r for r in reasons if r.get("code") != "REPURCHASE_SIGNAL"]) > 0: return "warn"
+    
+    penalty_reasons = [r for r in reasons if r.get("code") != "REPURCHASE_SIGNAL"]
+    if len(penalty_reasons) > 0: return "warn"
+    
     return "safe"
 
 def analyze_single_review(review: ReviewInput) -> AnalysisResult:
     text_score, text_reasons = calculate_text_score(review.content, review.quality_score)
+    
     review_dict = review.model_dump()
     behavior_score, behavior_reasons = calculate_behavior_score(review_dict)
     network_score, network_reasons = calculate_network_score(review_dict)
 
     rti_score = round(text_score * 0.4 + behavior_score * 0.35 + network_score * 0.25)
     all_reasons = text_reasons + behavior_reasons + network_reasons
+    level = get_level(rti_score, all_reasons)
 
     return AnalysisResult(
-        source=review.source, review_id=review.review_id, user_id=review.user_id,
-        product_id=review.product_id, product_name=review.product_name, rating=review.rating or 0,
-        review_date=review.review_date, rti=rti_score, level=get_level(rti_score, all_reasons),
+        source=review.source,
+        review_id=review.review_id,
+        user_id=review.user_id,
+        product_id=review.product_id,
+        product_name=review.product_name,
+        rating=review.rating,
+        review_date=review.review_date,
+        rti=rti_score, 
+        level=level,
         signals=SignalScores(text=text_score, behavior=behavior_score, network=network_score),
         input_features=InputFeatures(
-            image_count=review.image_count, quality_score=review.quality_score,
-            verified_purchase=review.verified_purchase, repurchase=review.repurchase,
-            free_trial=review.free_trial, reviews_written_today=review.reviews_written_today,
+            image_count=review.image_count,
+            quality_score=review.quality_score,
+            verified_purchase=review.verified_purchase,
+            repurchase=review.repurchase,
+            free_trial=review.free_trial,
+            reviews_written_today=review.reviews_written_today,
             similar_review_count=review.similar_review_count
         ),
         reasons=[ReasonObject(**r) for r in all_reasons]
     )
 
+
+# ==========================================
+# 4. 결과 집계(Aggregation) 로직
+# ==========================================
 def extract_product_summary(product_id: str, analyzed_reviews: List[AnalysisResult]) -> ProductSummaryResult:
     review_count = len(analyzed_reviews)
     if review_count == 0:
         return ProductSummaryResult(product_id=product_id, average_rti=0.0, level="safe", review_count=0, safe_count=0, warn_count=0, danger_count=0)
+
+    total_rti = sum(r.rti for r in analyzed_reviews)
+    average_rti = round(total_rti / review_count, 2)
     
-    average_rti = round(sum(r.rti for r in analyzed_reviews) / review_count, 2)
     safe_count = sum(1 for r in analyzed_reviews if r.level == "safe")
     warn_count = sum(1 for r in analyzed_reviews if r.level == "warn")
     danger_count = sum(1 for r in analyzed_reviews if r.level == "danger")
     
-    overall_level = "danger" if danger_count > 0 else ("warn" if warn_count > 0 else "safe")
-    return ProductSummaryResult(product_id=product_id, average_rti=average_rti, level=overall_level, review_count=review_count, safe_count=safe_count, warn_count=warn_count, danger_count=danger_count)
+    if danger_count > 0:
+        overall_level = "danger"
+    elif warn_count > 0:
+        overall_level = "warn"
+    else:
+        overall_level = "safe"
+    
+    return ProductSummaryResult(
+        product_id=product_id, average_rti=average_rti, level=overall_level,
+        review_count=review_count, safe_count=safe_count, warn_count=warn_count, danger_count=danger_count
+    )
 
-def extract_trend_data(raw_reviews: List[Dict[str, Any]], analyzed_reviews: List[AnalysisResult]) -> List[TrendItem]:
+def extract_trend_data(analyzed_reviews: List[AnalysisResult]) -> List[TrendItem]:
     date_groups = defaultdict(lambda: {"total_rti": 0, "count": 0, "safe": 0, "warn": 0, "danger": 0})
-    for raw, analyzed in zip(raw_reviews, analyzed_reviews):
+    
+    for analyzed in analyzed_reviews:
         date_key = analyzed.review_date if analyzed.review_date else datetime.now().strftime("%Y-%m-%d")
         date_groups[date_key]["total_rti"] += analyzed.rti
         date_groups[date_key]["count"] += 1
         date_groups[date_key][analyzed.level] += 1
-    return [TrendItem(date=d, average_rti=round(v["total_rti"]/v["count"], 2), review_count=v["count"], safe_count=v["safe"], warn_count=v["warn"], danger_count=v["danger"]) for d, v in sorted(date_groups.items())]
+
+    trend_items = []
+    for date_str, data in sorted(date_groups.items()):
+        trend_items.append(TrendItem(
+            date=date_str, average_rti=round(data["total_rti"] / data["count"], 2),
+            review_count=data["count"], safe_count=data["safe"], warn_count=data["warn"], danger_count=data["danger"]
+        ))
+    return trend_items
 
 
 # ==========================================
-# 5. API Endpoints (하이브리드 모드)
+# 5. API Endpoints (3개 모두 AnalyzeRequest 하나로 완전 통일)
 # ==========================================
-async def get_robust_json_data(request: Request) -> dict:
-    body_bytes = await request.body()
-    raw_text = body_bytes.decode("utf-8").strip()
-    try:
-        return json.loads(raw_text)
-    except json.JSONDecodeError:
-        return rescue_truncated_json(raw_text)
 
-SWAGGER_BODY_SCHEMA = {"requestBody": {"content": {"application/json": {"schema": RawCrawlPayload.model_json_schema()}}}}
-
-@app.post("/api/internal/ai/products/product-list", response_model=SummaryResponse, tags=["Internal AI API"], openapi_extra=SWAGGER_BODY_SCHEMA)
-async def analyze_rti_summary(request: Request):
-    """[API 1] 생데이터 기반 유연한 파싱 및 요약"""
-    data = await get_robust_json_data(request)
-    raw_reviews_list, product_id, product_name, source = resolve_payload_data(data)
-    mapped_reviews = [parse_raw_to_internal(r, product_name, source) for r in raw_reviews_list]
+@app.post("/api/internal/ai/products/product-list", response_model=SummaryResponse, tags=["Internal AI API"])
+async def analyze_rti_summary(payload: AnalyzeRequest):
+    """[API 1] 상품 요약: 8개 필드로 정제된 배열을 받아 요약 통계 리턴"""
+    if not payload.reviews: 
+        return {"products": []}
+    
+    mapped_reviews = [prepare_review_input(r, payload.source, payload.product_name) for r in payload.reviews]
     analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
-    return {"products": [extract_product_summary(product_id, analyzed_reviews)]}
+    
+    product_id = payload.reviews[0].product_id
+    summary = extract_product_summary(product_id, analyzed_reviews)
+    return {"products": [summary]}
 
-@app.post("/api/internal/ai/products/rti-trend", response_model=TrendResponse, tags=["Internal AI API"], openapi_extra=SWAGGER_BODY_SCHEMA)
-async def analyze_rti_trend(request: Request):
-    """[API 3] 생데이터 기반 유연한 파싱 및 추이 그래프"""
-    data = await get_robust_json_data(request)
-    raw_reviews_list, product_id, product_name, source = resolve_payload_data(data)
-    if not raw_reviews_list: return {"trend": []}
-    mapped_reviews = [parse_raw_to_internal(r, product_name, source) for r in raw_reviews_list]
-    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
-    return {"trend": extract_trend_data(raw_reviews_list, analyzed_reviews)}
-
-# 💡 [수정됨] API 2는 가공된 8개 필수 필드(AnalyzeRequest)만 엄격하게 받습니다!
 @app.post("/api/internal/ai/reviews/product-detail", response_model=BatchResponse, tags=["Internal AI API"])
 async def analyze_reviews_batch(payload: AnalyzeRequest):
-    """
-    [API 2] 리뷰 상세 분석: (가공된 Clean Payload 전용)
-    백엔드에서 8개 필수 필드만 정제하여 보내주면, 나머지는 내부 기본값으로 채워 분석합니다.
-    """
-    mapped_reviews = []
-    for incoming in payload.reviews:
-        # 백엔드가 보내준 8개 필드에 AI 내부 기본값 5개를 채워 넣음
-        mapped_reviews.append(ReviewInput(
-            source="clean_api",
-            review_id=incoming.review_id,
-            product_id=incoming.product_id,
-            product_name=None,
-            content=incoming.content,
-            user_id=incoming.user_id,
-            rating=incoming.rating,
-            review_date=incoming.review_date,
-            image_count=incoming.image_count,
-            quality_score=incoming.quality_score,
-            verified_purchase="unknown",
-            repurchase="unknown",
-            free_trial="unknown",
-            reviews_written_today=1,
-            similar_review_count=0
-        ))
-        
+    """[API 2] 리뷰 상세 분석: 8개 필드로 정제된 배열을 받아 개별 분석결과 리턴"""
+    mapped_reviews = [prepare_review_input(r, payload.source, payload.product_name) for r in payload.reviews]
     analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
     return BatchResponse(results=analyzed_reviews)
+
+@app.post("/api/internal/ai/products/rti-trend", response_model=TrendResponse, tags=["Internal AI API"])
+async def analyze_rti_trend(payload: AnalyzeRequest):
+    """[API 3] 추이 그래프: 8개 필드로 정제된 배열을 받아 날짜별 추이 리턴"""
+    if not payload.reviews: 
+        return {"trend": []}
+    
+    mapped_reviews = [prepare_review_input(r, payload.source, payload.product_name) for r in payload.reviews]
+    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
+    
+    trend_items = extract_trend_data(analyzed_reviews)
+    return {"trend": trend_items}
 
 if __name__ == "__main__":
     import uvicorn
