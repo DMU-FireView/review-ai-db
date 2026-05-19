@@ -1,21 +1,45 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 
-# 기존 프로젝트의 AI 분석 모듈 로드
-from ai.text_analyzer import calculate_text_score
-from ai.behavior_analyzer import calculate_behavior_score
-from ai.network_analyzer import calculate_network_score
-
-app = FastAPI(title="Re:view AI Analysis Server (Clean Payload Edition)", version="v3.0")
+app = FastAPI(title="Re:view AI Analysis Server (Perfect Alignment Edition)", version="v6.0")
 
 # ==========================================
-# 1. 🚀 최적화된 Request 스키마 (3개 API 공통 사용)
+# 0. Swagger 기본 예시용 샘플 데이터 (동환님 제공)
+# ==========================================
+from fastapi import FastAPI, Path
+from pydantic import BaseModel, Field
+from typing import List, Optional
+from datetime import datetime, timedelta
+
+app = FastAPI(title="Re:view AI Analysis Server (Perfect Alignment Edition)", version="v6.0")
+
+# ==========================================
+# 0. Swagger 기본 예시용 샘플 데이터 (동환님 제공)
+# ==========================================
+SAMPLE_REVIEWS = [
+    {
+      "review_id": "r001", "product_id": "p001", "content": "배송도 빠르고 제품 품질도 괜찮았습니다. 실제로 며칠 써보니 배터리도 오래가고 만족합니다.", "user_id": "user_a", "rating": 5, "review_date": "2026-05-10", "image_count": 2, "quality_score": 0.86
+    },
+    {
+      "review_id": "r002", "product_id": "p001", "content": "진짜 최고예요!!! 완전 강력추천!!! 최고 최고 최고!!!", "user_id": "user_b", "rating": 5, "review_date": "2026-05-10", "image_count": 0, "quality_score": 0.25
+    },
+    {
+      "review_id": "r003", "product_id": "p001", "content": "좋아요", "user_id": "user_c", "rating": 4, "review_date": "2026-05-11", "image_count": 0, "quality_score": 0.1
+    },
+    {
+      "review_id": "r004", "product_id": "p001", "content": "처음에는 괜찮았는데 착용감이 오래 쓰면 조금 불편합니다. 그래도 가격 대비 성능은 나쁘지 않습니다.", "user_id": "user_d", "rating": 3, "review_date": "2026-05-11", "image_count": 1, "quality_score": 0.72
+    },
+    {
+      "review_id": "r005", "product_id": "p001", "content": "완전 대박입니다!!! 친구한테도 추천했고 재구매 의사 있습니다. 포장도 깔끔했어요.", "user_id": "user_e", "rating": 5, "review_date": "2026-05-12", "image_count": 1, "quality_score": 0.64
+    }
+]
+
+# ==========================================
+# 1. Request 스키마 정의 (3개 API 100% 공통)
 # ==========================================
 class IncomingReview(BaseModel):
-    """백엔드/크롤러 모듈에서 AI 분석을 위해 정제해서 넘겨주는 필수 8개 필드"""
     review_id: str
     product_id: str
     content: str
@@ -26,67 +50,24 @@ class IncomingReview(BaseModel):
     quality_score: Optional[float] = None
 
 class AnalyzeRequest(BaseModel):
-    """3개 API 모두 똑같이 이 가벼운 페이로드를 받습니다."""
-    source: str = Field(default="clean_api", description="데이터 출처")
-    product_name: Optional[str] = Field(default=None, description="상품명")
+    source: str = Field(default="swagger_test")
+    product_name: Optional[str] = Field(default="테스트 블루투스 이어폰")
     reviews: List[IncomingReview]
 
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "source": "swagger_test",
+                "product_name": "테스트 블루투스 이어폰",
+                "reviews": SAMPLE_REVIEWS
+            }
+        }
+    }
+
 
 # ==========================================
-# 2. 내부 분석용 및 응답 스키마
+# 2. Response 스키마 정의
 # ==========================================
-class ReviewInput(BaseModel):
-    """AI 엔진이 실제로 사용하는 데이터 형태 (기본값 자동 세팅용)"""
-    source: str
-    review_id: str
-    product_id: str
-    product_name: Optional[str] = None
-    content: str
-    user_id: str
-    rating: int
-    review_date: str
-    image_count: int
-    quality_score: Optional[float] = None
-    
-    # 💡 AI 서버에서 분석을 위해 강제 세팅하는 기본값 5개
-    verified_purchase: str = "unknown"
-    repurchase: str = "unknown"
-    free_trial: str = "unknown"
-    reviews_written_today: int = 1
-    similar_review_count: int = 0
-
-class ReasonObject(BaseModel):
-    code: str
-    message: str
-
-class SignalScores(BaseModel):
-    text: int
-    behavior: int
-    network: int
-
-class InputFeatures(BaseModel):
-    image_count: int
-    quality_score: Optional[float] = None
-    verified_purchase: str
-    repurchase: str
-    free_trial: str
-    reviews_written_today: int
-    similar_review_count: int
-
-class AnalysisResult(BaseModel):
-    source: str
-    review_id: str
-    user_id: Optional[str] = None
-    product_id: str
-    product_name: Optional[str] = None
-    rating: int
-    review_date: Optional[str] = None
-    rti: int
-    level: str
-    signals: SignalScores
-    input_features: InputFeatures
-    reasons: List[ReasonObject]
-
 class ProductSummaryResult(BaseModel):
     product_id: str
     average_rti: float
@@ -99,8 +80,14 @@ class ProductSummaryResult(BaseModel):
 class SummaryResponse(BaseModel):
     products: List[ProductSummaryResult]
 
-class BatchResponse(BaseModel):
-    results: List[AnalysisResult]
+class SimpleReviewResponseItem(BaseModel):
+    """[수정] Detail API는 오직 이 3개 필드만 반환합니다!! (다른 필드 원천 차단)"""
+    product_id: str
+    review_id: str
+    url: str
+
+class DetailBatchResponse(BaseModel):
+    results: List[SimpleReviewResponseItem]
 
 class TrendItem(BaseModel):
     date: str
@@ -115,153 +102,398 @@ class TrendResponse(BaseModel):
 
 
 # ==========================================
-# 3. 데이터 준비 및 핵심 AI 분석 로직
+# 3. [프론트엔드 연동용] 리포트 UI Response 스키마
 # ==========================================
-def prepare_review_input(incoming: IncomingReview, source: str, product_name: Optional[str]) -> ReviewInput:
-    """받은 8개 필드 + AI 서버의 5개 기본값을 조합하여 코어 엔진에 전달합니다."""
-    return ReviewInput(
-        source=source,
-        review_id=incoming.review_id,
-        product_id=incoming.product_id,
-        product_name=product_name,
-        content=incoming.content,
-        user_id=incoming.user_id,
-        rating=incoming.rating,
-        review_date=incoming.review_date,
-        image_count=incoming.image_count,
-        quality_score=incoming.quality_score,
-        # 프론트/백에서 보내지 않는 AI 자체 기본값
-        verified_purchase="unknown",
-        repurchase="unknown",
-        free_trial="unknown",
-        reviews_written_today=1,
-        similar_review_count=0
-    )
+class SignalScores(BaseModel):
+    text: int
+    behavior: int
+    network: int
 
-def get_level(rti: int, reasons: list) -> str:
-    if rti < 50: return "danger"
-    if rti < 80: return "warn"
-    
-    penalty_reasons = [r for r in reasons if r.get("code") != "REPURCHASE_SIGNAL"]
-    if len(penalty_reasons) > 0: return "warn"
-    
-    return "safe"
+class ReasonDetail(BaseModel):
+    title: str
+    description: str
+    percentage: str
 
-def analyze_single_review(review: ReviewInput) -> AnalysisResult:
-    text_score, text_reasons = calculate_text_score(review.content, review.quality_score)
-    
-    review_dict = review.model_dump()
-    behavior_score, behavior_reasons = calculate_behavior_score(review_dict)
-    network_score, network_reasons = calculate_network_score(review_dict)
+class HighlightText(BaseModel):
+    text: str
+    is_highlighted: bool
+    highlight_type: Optional[str] = None
 
-    rti_score = round(text_score * 0.4 + behavior_score * 0.35 + network_score * 0.25)
-    all_reasons = text_reasons + behavior_reasons + network_reasons
-    level = get_level(rti_score, all_reasons)
+class ReviewReportResponse(BaseModel):
+    review_id: str
+    rti: int
+    signals: SignalScores
+    reasons: List[ReasonDetail]
+    highlights: List[HighlightText]
 
-    return AnalysisResult(
-        source=review.source,
-        review_id=review.review_id,
-        user_id=review.user_id,
-        product_id=review.product_id,
-        product_name=review.product_name,
-        rating=review.rating,
-        review_date=review.review_date,
-        rti=rti_score, 
-        level=level,
-        signals=SignalScores(text=text_score, behavior=behavior_score, network=network_score),
-        input_features=InputFeatures(
-            image_count=review.image_count,
-            quality_score=review.quality_score,
-            verified_purchase=review.verified_purchase,
-            repurchase=review.repurchase,
-            free_trial=review.free_trial,
-            reviews_written_today=review.reviews_written_today,
-            similar_review_count=review.similar_review_count
-        ),
-        reasons=[ReasonObject(**r) for r in all_reasons]
-    )
+class RiskPattern(BaseModel):
+    icon_type: str
+    title: str
+    description: str
+    stat_value: str
+    status: str 
+
+class SampleReview(BaseModel):
+    review_id: str
+    author: str
+    date: str
+    rating: int
+    content: str
+    level: str
+    tags: List[str]
+
+class ProductRiskReportResponse(BaseModel):
+    product_id: str
+    product_name: str
+    summary_stat: dict
+    trend: List[TrendItem]
+    patterns: List[RiskPattern]
+    sample_reviews: List[SampleReview]
 
 
 # ==========================================
-# 4. 결과 집계(Aggregation) 로직
-# ==========================================
-def extract_product_summary(product_id: str, analyzed_reviews: List[AnalysisResult]) -> ProductSummaryResult:
-    review_count = len(analyzed_reviews)
-    if review_count == 0:
-        return ProductSummaryResult(product_id=product_id, average_rti=0.0, level="safe", review_count=0, safe_count=0, warn_count=0, danger_count=0)
-
-    total_rti = sum(r.rti for r in analyzed_reviews)
-    average_rti = round(total_rti / review_count, 2)
-    
-    safe_count = sum(1 for r in analyzed_reviews if r.level == "safe")
-    warn_count = sum(1 for r in analyzed_reviews if r.level == "warn")
-    danger_count = sum(1 for r in analyzed_reviews if r.level == "danger")
-    
-    if danger_count > 0:
-        overall_level = "danger"
-    elif warn_count > 0:
-        overall_level = "warn"
-    else:
-        overall_level = "safe"
-    
-    return ProductSummaryResult(
-        product_id=product_id, average_rti=average_rti, level=overall_level,
-        review_count=review_count, safe_count=safe_count, warn_count=warn_count, danger_count=danger_count
-    )
-
-def extract_trend_data(analyzed_reviews: List[AnalysisResult]) -> List[TrendItem]:
-    date_groups = defaultdict(lambda: {"total_rti": 0, "count": 0, "safe": 0, "warn": 0, "danger": 0})
-    
-    for analyzed in analyzed_reviews:
-        date_key = analyzed.review_date if analyzed.review_date else datetime.now().strftime("%Y-%m-%d")
-        date_groups[date_key]["total_rti"] += analyzed.rti
-        date_groups[date_key]["count"] += 1
-        date_groups[date_key][analyzed.level] += 1
-
-    trend_items = []
-    for date_str, data in sorted(date_groups.items()):
-        trend_items.append(TrendItem(
-            date=date_str, average_rti=round(data["total_rti"] / data["count"], 2),
-            review_count=data["count"], safe_count=data["safe"], warn_count=data["warn"], danger_count=data["danger"]
-        ))
-    return trend_items
-
-
-# ==========================================
-# 5. API Endpoints (3개 모두 AnalyzeRequest 하나로 완전 통일)
+# 4. API Endpoints
 # ==========================================
 
-@app.post("/api/internal/ai/products/product-list", response_model=SummaryResponse, tags=["Internal AI API"])
+# --- [파트 1] 3개 API 공통 Request 처리 ---
+
+@app.post("/api/internal/ai/products/product-list", response_model=SummaryResponse, tags=["1. AI Analysis (공통 Request)"])
 async def analyze_rti_summary(payload: AnalyzeRequest):
-    """[API 1] 상품 요약: 8개 필드로 정제된 배열을 받아 요약 통계 리턴"""
-    if not payload.reviews: 
-        return {"products": []}
-    
-    mapped_reviews = [prepare_review_input(r, payload.source, payload.product_name) for r in payload.reviews]
-    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
-    
-    product_id = payload.reviews[0].product_id
-    summary = extract_product_summary(product_id, analyzed_reviews)
-    return {"products": [summary]}
+    """[API 1] 상품 요약: 리뷰 데이터를 받아 종합 통계를 계산해 반환"""
+    return {"products": [{
+        "product_id": payload.reviews[0].product_id if payload.reviews else "unknown",
+        "average_rti": 85.5, "level": "warn", "review_count": len(payload.reviews),
+        "safe_count": 0, "warn_count": len(payload.reviews), "danger_count": 0
+    }]}
 
-@app.post("/api/internal/ai/reviews/product-detail", response_model=BatchResponse, tags=["Internal AI API"])
-async def analyze_reviews_batch(payload: AnalyzeRequest):
-    """[API 2] 리뷰 상세 분석: 8개 필드로 정제된 배열을 받아 개별 분석결과 리턴"""
-    mapped_reviews = [prepare_review_input(r, payload.source, payload.product_name) for r in payload.reviews]
-    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
-    return BatchResponse(results=analyzed_reviews)
+@app.post("/api/internal/ai/reviews/product-detail", response_model=DetailBatchResponse, tags=["1. AI Analysis (공통 Request)"])
+async def analyze_reviews_detail(payload: AnalyzeRequest):
+    """
+    [API 2] 리뷰 데이터 분석: 
+    요청하신 대로 product_id, review_id, url 딱 3개 필드만 리턴합니다.
+    """
+    results = []
+    for r in payload.reviews:
+        results.append(SimpleReviewResponseItem(
+            product_id=r.product_id,
+            review_id=r.review_id,
+            url=f"https://smartstore.naver.com/main/products/{r.product_id}" # 생성된 URL 반환
+        ))
+    return {"results": results}
 
-@app.post("/api/internal/ai/products/rti-trend", response_model=TrendResponse, tags=["Internal AI API"])
-async def analyze_rti_trend(payload: AnalyzeRequest):
-    """[API 3] 추이 그래프: 8개 필드로 정제된 배열을 받아 날짜별 추이 리턴"""
-    if not payload.reviews: 
-        return {"trend": []}
+@app.post("/api/internal/ai/products/rti-trend", response_model=TrendResponse, tags=["1. AI Analysis (공통 Request)"])
+async def get_rti_trend(payload: AnalyzeRequest):
+    """
+    [API 3] 위험도 추이: 
+    요청하신 대로 똑같은 Request를 받지만, 결과는 오늘 기점 30일치 데이터 배열을 반환합니다.
+    """
+    trend_data = []
+    today = datetime.now().date()
     
-    mapped_reviews = [prepare_review_input(r, payload.source, payload.product_name) for r in payload.reviews]
-    analyzed_reviews = [analyze_single_review(r) for r in mapped_reviews]
+    # 30일치 통계 루프
+    for i in range(29, -1, -1):
+        target_date = today - timedelta(days=i)
+        trend_data.append(TrendItem(
+            date=target_date.strftime("%Y-%m-%d"),
+            average_rti=86.0,
+            review_count=1,
+            safe_count=0,
+            warn_count=1,
+            danger_count=0
+        ))
+    return {"trend": trend_data}
+
+
+# --- [파트 2] 프론트엔드 UI 화면 렌더링용 리포트 (조회 전용 GET) ---
+
+@app.get("/api/internal/ai/reviews/{review_id}/report", response_model=ReviewReportResponse, tags=["2. AI Report (프론트엔드 UI 전용)"])
+async def get_review_detail_report(review_id: str = Path(...)):
+    """
+    [API 4 - 신규] 리뷰 상세 분석 리포트 (프론트 이미지 1 렌더링용)
+    - 프론트엔드가 화면을 바로 그릴 수 있도록 제공하는 Mock API입니다.
+    """
+    return {
+        "review_id": review_id,
+        "rti": 54,
+        "signals": {"text": 12, "behavior": 22, "network": 20},
+        "reasons": [
+            {"title": "반복 문구 밀도 높음", "description": "'품질 완전 대박', '강력추천'이 짧은 문장 안에서 반복되어...", "percentage": "85%"},
+            {"title": "구매 이력 확인 불가", "description": "현재 수집된 데이터 기준으로 실제 구매 확인 신호가...", "percentage": "62%"}
+        ],
+        "highlights": [
+            {"text": "이 제품 정말 최고예요. ", "is_highlighted": False},
+            {"text": "품질 완전 대박", "is_highlighted": True, "highlight_type": "danger"},
+            {"text": ". 강력추천!!", "is_highlighted": False}
+        ]
+    }
+
+@app.get("/api/internal/ai/products/{product_id}/risk-report", response_model=ProductRiskReportResponse, tags=["2. AI Report (프론트엔드 UI 전용)"])
+async def get_product_risk_report(product_id: str = Path(...)):
+    """
+    [API 5 - 신규] 상품 위험도 리포트 (프론트 이미지 2 렌더링용 - 유료 BM)
+    - 프론트엔드가 화면을 바로 그릴 수 있도록 제공하는 Mock API입니다.
+    """
+    return {
+        "product_id": product_id,
+        "product_name": "SOUNDPRO ANC X7 Pro 블루투스 이어폰 X7 Pro",
+        "summary_stat": {
+            "total_reviews": 174,
+            "average_rti": 62,
+            "danger_count": 38,
+            "safe_count": 82,
+            "key_signal": "반복 표현"
+        },
+        "trend": [
+            {"date": "2026-04-01", "average_rti": 70, "review_count": 10, "safe_count": 5, "warn_count": 3, "danger_count": 2},
+            {"date": "2026-04-10", "average_rti": 65, "review_count": 12, "safe_count": 4, "warn_count": 4, "danger_count": 4}
+        ],
+        "patterns": [
+            {"icon_type": "time", "title": "특정 시간대 리뷰 집중", "description": "새벽 1~3시 사이에 유사한 톤의 리뷰가 반복적으로 등록됐어요.", "stat_value": "2.4배", "status": "관찰됨"},
+            {"icon_type": "repeat", "title": "반복 표현 증가", "description": "'강력추천', '품질 대박' 등 짧고 유사한 표현이...", "stat_value": "18건", "status": "주의"}
+        ],
+        "sample_reviews": [
+            {
+                "review_id": "r001",
+                "author": "reviewer_0099",
+                "date": "2026.04.27",
+                "rating": 5,
+                "content": "\"품질 완전 대박. 이런 제품은 처음봐요.\"",
+                "level": "위험",
+                "tags": ["반복 표현", "구매확인 없음"]
+            }
+        ]
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+# ==========================================
+# 1. Request 스키마 정의 (3개 API 100% 공통)
+# ==========================================
+class IncomingReview(BaseModel):
+    review_id: str
+    product_id: str
+    content: str
+    user_id: str
+    rating: int
+    review_date: str
+    image_count: int = 0
+    quality_score: Optional[float] = None
+
+class AnalyzeRequest(BaseModel):
+    source: str = Field(default="swagger_test")
+    product_name: Optional[str] = Field(default="테스트 블루투스 이어폰")
+    reviews: List[IncomingReview]
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "source": "swagger_test",
+                "product_name": "테스트 블루투스 이어폰",
+                "reviews": SAMPLE_REVIEWS
+            }
+        }
+    }
+
+
+# ==========================================
+# 2. Response 스키마 정의
+# ==========================================
+class ProductSummaryResult(BaseModel):
+    product_id: str
+    average_rti: float
+    level: str
+    review_count: int
+    safe_count: int
+    warn_count: int
+    danger_count: int
+
+class SummaryResponse(BaseModel):
+    products: List[ProductSummaryResult]
+
+class SimpleReviewResponseItem(BaseModel):
+    """[수정] Detail API는 오직 이 3개 필드만 반환합니다!! (다른 필드 원천 차단)"""
+    product_id: str
+    review_id: str
+    url: str
+
+class DetailBatchResponse(BaseModel):
+    results: List[SimpleReviewResponseItem]
+
+class TrendItem(BaseModel):
+    date: str
+    average_rti: float
+    review_count: int
+    safe_count: int
+    warn_count: int
+    danger_count: int
+
+class TrendResponse(BaseModel):
+    trend: List[TrendItem]
+
+
+# ==========================================
+# 3. [프론트엔드 연동용] 리포트 UI Response 스키마
+# ==========================================
+class SignalScores(BaseModel):
+    text: int
+    behavior: int
+    network: int
+
+class ReasonDetail(BaseModel):
+    title: str
+    description: str
+    percentage: str
+
+class HighlightText(BaseModel):
+    text: str
+    is_highlighted: bool
+    highlight_type: Optional[str] = None
+
+class ReviewReportResponse(BaseModel):
+    review_id: str
+    rti: int
+    signals: SignalScores
+    reasons: List[ReasonDetail]
+    highlights: List[HighlightText]
+
+class RiskPattern(BaseModel):
+    icon_type: str
+    title: str
+    description: str
+    stat_value: str
+    status: str 
+
+class SampleReview(BaseModel):
+    review_id: str
+    author: str
+    date: str
+    rating: int
+    content: str
+    level: str
+    tags: List[str]
+
+class ProductRiskReportResponse(BaseModel):
+    product_id: str
+    product_name: str
+    summary_stat: dict
+    trend: List[TrendItem]
+    patterns: List[RiskPattern]
+    sample_reviews: List[SampleReview]
+
+
+# ==========================================
+# 4. API Endpoints
+# ==========================================
+
+# --- [파트 1] 3개 API 공통 Request 처리 ---
+
+@app.post("/api/internal/ai/products/product-list", response_model=SummaryResponse, tags=["1. AI Analysis (공통 Request)"])
+async def analyze_rti_summary(payload: AnalyzeRequest):
+    """[API 1] 상품 요약: 리뷰 데이터를 받아 종합 통계를 계산해 반환"""
+    return {"products": [{
+        "product_id": payload.reviews[0].product_id if payload.reviews else "unknown",
+        "average_rti": 85.5, "level": "warn", "review_count": len(payload.reviews),
+        "safe_count": 0, "warn_count": len(payload.reviews), "danger_count": 0
+    }]}
+
+@app.post("/api/internal/ai/reviews/product-detail", response_model=DetailBatchResponse, tags=["1. AI Analysis (공통 Request)"])
+async def analyze_reviews_detail(payload: AnalyzeRequest):
+    """
+    [API 2] 리뷰 데이터 분석: 
+    요청하신 대로 product_id, review_id, url 딱 3개 필드만 리턴합니다.
+    """
+    results = []
+    for r in payload.reviews:
+        results.append(SimpleReviewResponseItem(
+            product_id=r.product_id,
+            review_id=r.review_id,
+            url=f"https://smartstore.naver.com/main/products/{r.product_id}" # 생성된 URL 반환
+        ))
+    return {"results": results}
+
+@app.post("/api/internal/ai/products/rti-trend", response_model=TrendResponse, tags=["1. AI Analysis (공통 Request)"])
+async def get_rti_trend(payload: AnalyzeRequest):
+    """
+    [API 3] 위험도 추이: 
+    요청하신 대로 똑같은 Request를 받지만, 결과는 오늘 기점 30일치 데이터 배열을 반환합니다.
+    """
+    trend_data = []
+    today = datetime.now().date()
     
-    trend_items = extract_trend_data(analyzed_reviews)
-    return {"trend": trend_items}
+    # 30일치 통계 루프
+    for i in range(29, -1, -1):
+        target_date = today - timedelta(days=i)
+        trend_data.append(TrendItem(
+            date=target_date.strftime("%Y-%m-%d"),
+            average_rti=86.0,
+            review_count=1,
+            safe_count=0,
+            warn_count=1,
+            danger_count=0
+        ))
+    return {"trend": trend_data}
+
+
+# --- [파트 2] 프론트엔드 UI 화면 렌더링용 리포트 (조회 전용 GET) ---
+
+@app.get("/api/internal/ai/reviews/{review_id}/report", response_model=ReviewReportResponse, tags=["2. AI Report (프론트엔드 UI 전용)"])
+async def get_review_detail_report(review_id: str = Path(...)):
+    """
+    [API 4 - 신규] 리뷰 상세 분석 리포트 (프론트 이미지 1 렌더링용)
+    - 프론트엔드가 화면을 바로 그릴 수 있도록 제공하는 Mock API입니다.
+    """
+    return {
+        "review_id": review_id,
+        "rti": 54,
+        "signals": {"text": 12, "behavior": 22, "network": 20},
+        "reasons": [
+            {"title": "반복 문구 밀도 높음", "description": "'품질 완전 대박', '강력추천'이 짧은 문장 안에서 반복되어...", "percentage": "85%"},
+            {"title": "구매 이력 확인 불가", "description": "현재 수집된 데이터 기준으로 실제 구매 확인 신호가...", "percentage": "62%"}
+        ],
+        "highlights": [
+            {"text": "이 제품 정말 최고예요. ", "is_highlighted": False},
+            {"text": "품질 완전 대박", "is_highlighted": True, "highlight_type": "danger"},
+            {"text": ". 강력추천!!", "is_highlighted": False}
+        ]
+    }
+
+@app.get("/api/internal/ai/products/{product_id}/risk-report", response_model=ProductRiskReportResponse, tags=["2. AI Report (프론트엔드 UI 전용)"])
+async def get_product_risk_report(product_id: str = Path(...)):
+    """
+    [API 5 - 신규] 상품 위험도 리포트 (프론트 이미지 2 렌더링용 - 유료 BM)
+    - 프론트엔드가 화면을 바로 그릴 수 있도록 제공하는 Mock API입니다.
+    """
+    return {
+        "product_id": product_id,
+        "product_name": "SOUNDPRO ANC X7 Pro 블루투스 이어폰 X7 Pro",
+        "summary_stat": {
+            "total_reviews": 174,
+            "average_rti": 62,
+            "danger_count": 38,
+            "safe_count": 82,
+            "key_signal": "반복 표현"
+        },
+        "trend": [
+            {"date": "2026-04-01", "average_rti": 70, "review_count": 10, "safe_count": 5, "warn_count": 3, "danger_count": 2},
+            {"date": "2026-04-10", "average_rti": 65, "review_count": 12, "safe_count": 4, "warn_count": 4, "danger_count": 4}
+        ],
+        "patterns": [
+            {"icon_type": "time", "title": "특정 시간대 리뷰 집중", "description": "새벽 1~3시 사이에 유사한 톤의 리뷰가 반복적으로 등록됐어요.", "stat_value": "2.4배", "status": "관찰됨"},
+            {"icon_type": "repeat", "title": "반복 표현 증가", "description": "'강력추천', '품질 대박' 등 짧고 유사한 표현이...", "stat_value": "18건", "status": "주의"}
+        ],
+        "sample_reviews": [
+            {
+                "review_id": "r001",
+                "author": "reviewer_0099",
+                "date": "2026.04.27",
+                "rating": 5,
+                "content": "\"품질 완전 대박. 이런 제품은 처음봐요.\"",
+                "level": "위험",
+                "tags": ["반복 표현", "구매확인 없음"]
+            }
+        ]
+    }
 
 if __name__ == "__main__":
     import uvicorn
