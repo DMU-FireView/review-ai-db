@@ -67,7 +67,14 @@ def normalize_bin_review_data(data):
             "review_id": review.get("review_id") or raw.get("id"),
             "product_id": review.get("product_id") or product.get("productId"),
             "product_name": clean_html_text(product.get("title")),
-            "product_url": product.get("link") or review.get("page_url"),
+            "product_url": (
+                review.get("page_url")
+                or review.get("productUrl")
+                or review.get("product_url")
+                or product.get("link")
+                or product.get("productUrl")
+                 or product.get("page_url")
+            ),
             "user_id": review.get("author") or raw.get("userId"),
             "rating": review.get("rating") or raw.get("starScore"),
             "content": review.get("content") or raw.get("content"),
@@ -108,7 +115,11 @@ def normalize_hayeon_review_data(data):
             "review_id": review.get("id"),
             "product_id": review.get("productNo") or review.get("knowledgeShoppingMallProductId"),
             "product_name": clean_html_text(review.get("productName")),
-            "product_url": review.get("productUrl"),
+            "product_url": (
+                review.get("productUrl")
+                 or review.get("page_url")
+                  or review.get("product_url")
+            ),
             "user_id": review.get("maskedWriterId") or review.get("writerId"),
             "rating": review.get("reviewScore"),
             "content": review.get("reviewContent"),
