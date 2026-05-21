@@ -1,89 +1,19 @@
-﻿import json
+﻿# ai/rti_scoring.py
+import json
 from pathlib import Path
 
-<<<<<<< Updated upstream
-from text_analyzer import calculate_text_score
-from behavior_analyzer import calculate_behavior_score
-from network_analyzer import calculate_network_score
-=======
 # main.py의 Clean Payload 구조와 분석 엔진을 그대로 사용
 from main import IncomingReview, prepare_review_input, analyze_single_review
->>>>>>> Stashed changes
 
 
 INPUT_PATH = Path("data/normalized/reviews.json")
 OUTPUT_PATH = Path("output/rti_results.json")
 
 
-<<<<<<< Updated upstream
-def get_level(rti, reasons):
-    if rti < 50:
-        return "danger"
-
-    if rti < 80:
-        return "warn"
-
-    penalty_reasons = [
-        reason for reason in reasons
-        if reason.get("code") != "REPURCHASE_SIGNAL"
-    ]
-
-    if len(penalty_reasons) > 0:
-        return "warn"
-
-    return "safe"
-
-
-def calculate_rti(review):
-    text_score, text_reasons = calculate_text_score(
-        review.get("content", ""),
-        review.get("quality_score")
-    )
-
-    behavior_score, behavior_reasons = calculate_behavior_score(review)
-    network_score, network_reasons = calculate_network_score(review)
-
-    # v0 기준 가중치
-    # Text 40%, Behavior 35%, Network 25%
-    rti = round(
-        text_score * 0.4
-        + behavior_score * 0.35
-        + network_score * 0.25
-    )
-
-    reasons = text_reasons + behavior_reasons + network_reasons
-
-    return {
-        "source": review.get("source"),
-        "review_id": review.get("review_id"),
-        "user_id": review.get("user_id"),
-        "product_id": review.get("product_id"),
-        "product_name": review.get("product_name"),
-        "rating": review.get("rating"),
-        "review_date": review.get("review_date"),
-        "rti": rti,
-        "level": get_level(rti, reasons),
-        "signals": {
-            "text": text_score,
-            "behavior": behavior_score,
-            "network": network_score
-        },
-        "input_features": {
-            "image_count": review.get("image_count"),
-            "quality_score": review.get("quality_score"),
-            "verified_purchase": review.get("verified_purchase"),
-            "repurchase": review.get("repurchase"),
-            "free_trial": review.get("free_trial"),
-            "reviews_written_today": review.get("reviews_written_today"),
-            "similar_review_count": review.get("similar_review_count")
-        },
-        "reasons": reasons
-    }
-=======
 def load_reviews(data):
     """
     data/normalized/reviews.json 구조가
-    배열이든, {"reviews": [...]} 형태든 처리
+    배열이든, {"reviews": [...]} 형태든 처리합니다.
     """
     if isinstance(data, list):
         return data
@@ -110,7 +40,8 @@ def get_product_url(review: dict):
 
 def to_incoming_review(review: dict) -> IncomingReview:
     """
-    정규화된 리뷰 1개를 main.py의 IncomingReview 구조로 변환
+    정규화된 리뷰 1개를 main.py의 IncomingReview 구조로 변환합니다.
+    숫자로 들어온 review_id/product_id도 문자열로 변환합니다.
     """
 
     product_url = get_product_url(review)
@@ -134,6 +65,11 @@ def to_incoming_review(review: dict) -> IncomingReview:
 
 
 def calculate_rti(review_dict: dict) -> dict:
+    """
+    main.py의 analyze_single_review를 사용해 RTI를 계산하고,
+    원본 정규화 데이터의 메타정보를 다시 붙여 rti_results.json 형태로 저장합니다.
+    """
+
     incoming_review = to_incoming_review(review_dict)
 
     internal_review = prepare_review_input(
@@ -145,15 +81,35 @@ def calculate_rti(review_dict: dict) -> dict:
     analysis_result = analyze_single_review(internal_review)
 
     if hasattr(analysis_result, "model_dump"):
-        result = analysis_result.model_dump()
-    else:
-        result = analysis_result
+        analysis_result = analysis_result.model_dump()
 
-    # main.py 응답에 product_url이 없거나 누락될 경우를 대비해서 보강
-    result["product_url"] = get_product_url(review_dict)
+    product_url = get_product_url(review_dict)
 
-    return result
->>>>>>> Stashed changes
+    return {
+        "source": review_dict.get("source"),
+        "review_id": str(review_dict.get("review_id")) if review_dict.get("review_id") is not None else None,
+        "user_id": review_dict.get("user_id"),
+        "product_id": str(review_dict.get("product_id")) if review_dict.get("product_id") is not None else None,
+        "product_url": product_url,
+        "product_name": review_dict.get("product_name"),
+        "rating": review_dict.get("rating"),
+        "review_date": review_dict.get("review_date"),
+
+        "rti": analysis_result.get("rti"),
+        "level": analysis_result.get("level"),
+
+        "signals": analysis_result.get("signals", {}),
+        "input_features": analysis_result.get("input_features", {
+            "image_count": review_dict.get("image_count", 0),
+            "quality_score": review_dict.get("quality_score"),
+            "verified_purchase": review_dict.get("verified_purchase", "unknown"),
+            "repurchase": review_dict.get("repurchase", "unknown"),
+            "free_trial": review_dict.get("free_trial", "unknown"),
+            "reviews_written_today": review_dict.get("reviews_written_today", 1),
+            "similar_review_count": review_dict.get("similar_review_count", 0)
+        }),
+        "reasons": analysis_result.get("reasons", [])
+    }
 
 
 def main():
@@ -172,10 +128,6 @@ def main():
         print("분석할 리뷰 데이터가 없습니다.")
         return
 
-<<<<<<< Updated upstream
-    # 현재 v0는 normalized 리뷰 배열 전체를 batch로 분석합니다.
-=======
->>>>>>> Stashed changes
     results = [calculate_rti(review) for review in reviews]
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -185,9 +137,6 @@ def main():
 
     print(json.dumps(results[:3], ensure_ascii=False, indent=2))
     print(f"\n총 {len(results)}개 리뷰 RTI batch 분석 완료")
-<<<<<<< Updated upstream
-    print(f"RTI 분석 결과가 저장되었습니다: {OUTPUT_PATH}")
-=======
     print(f"결과 저장 완료: {OUTPUT_PATH}")
 
     missing_product_url_count = sum(
@@ -196,7 +145,6 @@ def main():
     )
 
     print(f"product_url 누락 개수: {missing_product_url_count}개")
->>>>>>> Stashed changes
 
 
 if __name__ == "__main__":
