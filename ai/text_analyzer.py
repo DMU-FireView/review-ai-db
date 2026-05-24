@@ -1,5 +1,4 @@
-﻿from sentiment_client import analyze_sentiment
-
+﻿from ai.sentiment_client import analyze_sentiment
 
 REPETITIVE_KEYWORDS = [
     "최고",
@@ -11,13 +10,11 @@ REPETITIVE_KEYWORDS = [
     "만족",
 ]
 
-
 def make_reason(code, message):
     return {
         "code": code,
         "message": message
     }
-
 
 def calculate_text_score(content, quality_score=None):
     score = 100
@@ -27,42 +24,33 @@ def calculate_text_score(content, quality_score=None):
 
     for keyword in REPETITIVE_KEYWORDS:
         count = content.count(keyword)
-
         if count >= 2:
             score -= 15
-            reasons.append(
-                make_reason(
-                    "REPETITIVE_KEYWORD",
-                    f"반복 표현 탐지: '{keyword}' {count}회"
-                )
-            )
+            reasons.append({
+                "code": "REPETITIVE_KEYWORD", # 수정: 명세서와 통일
+                "message": f"반복 표현 탐지: '{keyword}' {count}회"
+            })
 
     if len(content.strip()) < 20:
         score -= 25
-        reasons.append(
-            make_reason(
-                "SHORT_REVIEW",
-                "리뷰 내용이 지나치게 짧음"
-            )
-        )
+        reasons.append({
+            "code": "SHORT_REVIEW", # 수정: 명세서와 통일
+            "message": "리뷰 내용이 지나치게 짧음"
+        })
 
     if content.count("!") >= 3:
         score -= 10
-        reasons.append(
-            make_reason(
-                "EXCESSIVE_EXCLAMATION",
-                "과도한 느낌표 사용"
-            )
-        )
+        reasons.append({
+            "code": "EXCESSIVE_EXCLAMATION",
+            "message": "과도한 느낌표 사용"
+        })
 
     if quality_score is not None and quality_score < 0.1:
         score -= 10
-        reasons.append(
-            make_reason(
-                "LOW_QUALITY_SCORE",
-                "리뷰 품질 점수 낮음"
-            )
-        )
+        reasons.append({
+            "code": "LOW_QUALITY_SCORE",
+            "message": "리뷰 품질 점수 낮음"
+        })
 
     sentiment_result = analyze_sentiment(content)
 
@@ -74,7 +62,7 @@ def calculate_text_score(content, quality_score=None):
             score -= 5
             reasons.append(
                 make_reason(
-                    "OVERLY_POSITIVE_SENTIMENT",
+                    "OVERLY_POSITIVE_SENTIMENT", # 프론트엔드 팀에 공유 필요
                     "과도하게 긍정적인 감성 표현 탐지"
                 )
             )
