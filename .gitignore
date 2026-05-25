@@ -16,4 +16,4 @@ data/raw/*.txt
 *_old_*
 
 # 환경 변수 (비밀번호 등 중요 정보)
-.envs
+.env
