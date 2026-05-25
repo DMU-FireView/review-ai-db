@@ -1,5 +1,6 @@
-import sqlite3
 import os
+import pymysql
+from dotenv import load_dotenv
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
@@ -8,7 +9,24 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 
 # ==========================================
-# 🧠 실제 AI 분석 모듈 임포트 (동환님 코드)
+# 🔐 환경 변수 로드 (.env 파일에서 DB 비번 읽기)
+# ==========================================
+load_dotenv()
+
+def get_db_connection():
+    """MySQL 데이터베이스 연결 헬퍼 함수 (보안 적용)"""
+    return pymysql.connect(
+        host=os.environ.get("DB_HOST", "127.0.0.1"),
+        user=os.environ.get("DB_USER", "root"),
+        port=int(os.environ.get("DB_PORT", 3306)), # 💡 이 줄을 추가해 주세요!
+        password=os.environ.get("DB_PASSWORD", "0000"), # 반드시 .env 파일에 실제 비번 입력!
+        database=os.environ.get("DB_NAME", "review_system"),
+        charset='utf8mb4',
+        cursorclass=pymysql.cursors.DictCursor # 💡 DictCursor 기본 적용 (스웨거 완벽 호환)
+    )
+
+# ==========================================
+# 🧠 실제 AI 분석 모듈 임포트
 # ==========================================
 try:
     from ai.text_analyzer import calculate_text_score
@@ -28,24 +46,15 @@ except Exception as e:
 
 
 # ==========================================
-# 🗄️ SQLite Database 초기화 및 시드 세팅
+# 🗄️ MySQL Database 초기화 (시드 데이터 제거)
 # ==========================================
-DB_FILE = "review_system.db"
-
 def init_db():
-    conn = sqlite3.connect(DB_FILE)
+    conn = get_db_connection()
     cursor = conn.cursor()
     
-    # 💡 스키마가 변경되었으므로 기존 테이블 초기화 (테스트 편의성)
-    cursor.execute("DROP TABLE IF EXISTS review_trust_scores")
-    cursor.execute("DROP TABLE IF EXISTS reviews")
-    cursor.execute("DROP TABLE IF EXISTS products")
-
-    print("🚀 [DB 초기화] 최신 스키마로 테이블 생성 및 시드 데이터 주입...")
-
-    # 1. products 테이블 (product_url 추가됨)
+    # 1. products 테이블
     cursor.execute('''
-        CREATE TABLE products (
+        CREATE TABLE IF NOT EXISTS products (
             product_id VARCHAR(50) PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             product_url TEXT,
@@ -54,9 +63,9 @@ def init_db():
         )
     ''')
 
-    # 2. reviews 테이블 (review_date 추가됨)
+    # 2. reviews 테이블
     cursor.execute('''
-        CREATE TABLE reviews (
+        CREATE TABLE IF NOT EXISTS reviews (
             review_id BIGINT PRIMARY KEY,
             product_id VARCHAR(50) NOT NULL,
             user_id VARCHAR(100) NOT NULL,
@@ -72,10 +81,10 @@ def init_db():
         )
     ''')
 
-    # 3. review_trust_scores 테이블
+    # 3. review_trust_scores 테이블 (💡 AUTO_INCREMENT 적용)
     cursor.execute('''
-        CREATE TABLE review_trust_scores (
-            score_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        CREATE TABLE IF NOT EXISTS review_trust_scores (
+            score_id INT AUTO_INCREMENT PRIMARY KEY,
             review_id BIGINT NOT NULL,
             rti INT NOT NULL,
             level VARCHAR(20) NOT NULL,
@@ -88,35 +97,11 @@ def init_db():
         )
     ''')
 
-    # 4. 시드(Seed) 데이터 삽입 (하연님 피드백: 실제 연동 ID 반영)
-    today_str = datetime.now().strftime("%Y-%m-%d")
-    yesterday_str = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-    two_days_ago_str = (datetime.now() - timedelta(days=2)).strftime("%Y-%m-%d")
-
-    cursor.executemany('''
-        INSERT INTO products (product_id, name, product_url, category)
-        VALUES (?, ?, ?, ?)
-    ''', [
-        ('53530143052', 'SOUNDPRO ANC 노이즈캔슬링 블루투스 이어폰 X7 Pro', 'https://smartstore.naver.com/main/products/11590446932', '전자기기'),
-        ('p002', '무선 블루투스 이어폰 Basic', 'https://smartstore.naver.com/main/products/0002', '전자기기')
-    ])
-
-    # Trend 테스트를 위해 날짜를 어제/오늘로 분산
-    cursor.executemany('''
-        INSERT INTO reviews (
-            review_id, product_id, user_id, rating, content, review_date,
-            verified_purchase, account_age_days, reviews_written_today, similar_review_count
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', [
-        (1, '53530143052', 'reviewer_0099', 5, '이 제품 정말 최고예요. 품질 완전 대박. 이런 제품은 처음봐요. 품질 완전 대박. 강력추천!!', today_str, False, 2, 12, 8),
-        (2, '53530143052', 'kim_realbuyer', 4, '배송도 빠르고 품질도 좋네요. 다만 색상이 사진과 조금 달라서 별 하나 뺐어요. ANC 성능은 지하철에서 꽤 괜찮았습니다.', yesterday_str, True, 540, 1, 0),
-        (3, '53530143052', 'new_user_102', 5, '전반적으로 만족합니다. 음질도 괜찮고 착용감도 좋아요. 추천드립니다.', two_days_ago_str, False, 15, 3, 1)
-    ])
-
+    # 🚨 운영 환경이므로 DROP 및 시드 데이터 강제 INSERT 로직은 삭제했습니다. 🚨
+    
     conn.commit()
     conn.close()
-    print("✅ [DB 세팅 완료] review_system.db 준비 끝!")
+    print("✅ [DB 세팅 완료] 프로덕션용 MySQL 준비 끝!")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -125,13 +110,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Re:view AI Analysis Server (Real DB & Trend Integrated)", 
-    version="v13.0",
+    version="v1.0-Production", # 버전명 업데이트
     lifespan=lifespan
 )
 
 
 # ==========================================
-# 1. 🚀 Request 스키마 (초경량 트리거 규격)
+# 1~3. 스키마 영역 (기존과 100% 동일, 생략 없이 유지)
 # ==========================================
 class TriggerRequest(BaseModel):
     product_id: str = Field(..., description="조회할 상품의 고유 식별자 (상품ID)")
@@ -148,15 +133,12 @@ class TriggerRequest(BaseModel):
         }
     }
 
-# ==========================================
-# 2. 내부 데이터 파싱 모델 (AI 엔진 입력용)
-# ==========================================
 class ReviewInput(BaseModel):
     review_id: str
     product_id: str
     user_id: str
     content: str
-    review_date: str # 💡 추가됨: Trend 산출용
+    review_date: str
     rating: int = 5
     image_count: int = 0
     quality_score: Optional[float] = None
@@ -166,9 +148,6 @@ class ReviewInput(BaseModel):
     reviews_written_today: int = 1
     similar_review_count: int = 0
 
-# ==========================================
-# 3. Response 스키마 (MVP 사양 - percentage 삭제 반영)
-# ==========================================
 class SignalScores(BaseModel):
     text: int
     behavior: int
@@ -224,7 +203,6 @@ class TrendResponse(BaseModel):
 class ReasonDetail(BaseModel):
     title: str
     description: str
-    # 💡 percentage 필드 삭제 (하연님 피드백 반영)
 
 class ReviewReportResponse(BaseModel):
     review_id: str
@@ -255,13 +233,11 @@ class ProductRiskReportResponse(BaseModel):
     trend: List[TrendItem]
     sample_reviews: List[SampleReview]
 
-
 # ==========================================
-# 4. 🧠 코어 분석 엔진 통합 함수
+# 4. 코어 분석 엔진 통합 함수 (유지)
 # ==========================================
 def analyze_single_review(review: ReviewInput) -> AnalysisResult:
     t_score, t_reasons = calculate_text_score(review.content, review.quality_score)
-    
     review_dict = review.model_dump()
     b_score, b_reasons = calculate_behavior_score(review_dict)
     n_score, n_reasons = calculate_network_score(review_dict)
@@ -290,32 +266,34 @@ def analyze_single_review(review: ReviewInput) -> AnalysisResult:
     )
 
 # ==========================================
-# 5. 🗄️ 실제 DB 연동 로직 (URL 호환 및 날짜 포함)
+# 5. 🗄️ 실제 DB 연동 로직 (💡 %s 바인딩 적용)
 # ==========================================
 def get_target_product_id(payload: TriggerRequest) -> str:
-    """DB에서 product_id를 찾거나, 못 찾으면 url을 이용해 역추적합니다."""
-    conn = sqlite3.connect(DB_FILE)
+    conn = get_db_connection()
     c = conn.cursor()
     target_id = payload.product_id
 
-    c.execute("SELECT product_id FROM products WHERE product_id = ?", (target_id,))
-    if not c.fetchone():
+    # SQLite의 '?' 대신 MySQL의 '%s' 사용
+    c.execute("SELECT product_id FROM products WHERE product_id = %s", (target_id,))
+    row = c.fetchone()
+    
+    if not row:
         target_url = payload.url or payload.page_url or payload.product_url
         if target_url:
-            c.execute("SELECT product_id FROM products WHERE product_url = ?", (target_url,))
+            c.execute("SELECT product_id FROM products WHERE product_url = %s", (target_url,))
             row = c.fetchone()
             if row:
-                target_id = row[0]
+                target_id = row['product_id'] # DictCursor 호환
     conn.close()
     return target_id
 
 def fetch_raw_reviews_from_db(payload: TriggerRequest) -> List[ReviewInput]:
     target_id = get_target_product_id(payload)
     
-    conn = sqlite3.connect(DB_FILE)
-    conn.row_factory = sqlite3.Row
+    conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM reviews WHERE product_id = ?", (target_id,))
+    # SQLite의 '?' 대신 MySQL의 '%s' 사용
+    cursor.execute("SELECT * FROM reviews WHERE product_id = %s", (target_id,))
     rows = cursor.fetchall()
     conn.close()
 
@@ -328,7 +306,7 @@ def fetch_raw_reviews_from_db(payload: TriggerRequest) -> List[ReviewInput]:
             content=row["content"],
             rating=row["rating"],
             user_id=row["user_id"],
-            review_date=row["review_date"], # 💡 실제 날짜
+            review_date=str(row["review_date"]), # datetime 객체를 문자열로 안전하게 변환
             verified_purchase=ver_pur,
             reviews_written_today=row["reviews_written_today"] or 1,
             similar_review_count=row["similar_review_count"] or 0,
@@ -339,7 +317,6 @@ def fetch_raw_reviews_from_db(payload: TriggerRequest) -> List[ReviewInput]:
     return reviews
 
 def calculate_real_trend(results: List[AnalysisResult], raw_data: List[ReviewInput]) -> List[TrendItem]:
-    """💡 랜덤을 제거하고 100% 실제 날짜 및 점수 기반 30일 추이를 계산합니다."""
     trend_dict = defaultdict(lambda: {"rti_sum": 0, "count": 0, "safe": 0, "warn": 0, "danger": 0})
     
     for res, raw in zip(results, raw_data):
@@ -369,8 +346,13 @@ def calculate_real_trend(results: List[AnalysisResult], raw_data: List[ReviewInp
 
 
 # ==========================================
-# 6. API Endpoints (5개 API)
+# 6. API Endpoints (유지)
 # ==========================================
+from fastapi.responses import RedirectResponse
+
+@app.get("/", include_in_schema=False)
+async def root():
+    return RedirectResponse(url="/docs")
 
 @app.post("/api/internal/ai/products/product-list", response_model=SummaryResponse, tags=["AI Analysis"])
 async def analyze_rti_summary(payload: TriggerRequest):
@@ -401,8 +383,6 @@ async def analyze_reviews_detail(payload: TriggerRequest):
 async def get_rti_trend(payload: TriggerRequest):
     raw_data = fetch_raw_reviews_from_db(payload)
     results = [analyze_single_review(r) for r in raw_data]
-    
-    # 💡 100% 리얼 데이터 기반 트렌드 산출
     real_trend = calculate_real_trend(results, raw_data)
     return {"trend": real_trend}
 
@@ -420,7 +400,6 @@ async def get_review_detail_report(payload: TriggerRequest):
         ui_reasons.append(ReasonDetail(
             title=r.message,
             description=f"[{r.code}] 분석 엔진 감지 결과"
-            # 💡 percentage 랜덤값 완전 삭제 (하연님 피드백 반영)
         ))
         
     return {
@@ -454,7 +433,7 @@ async def get_product_risk_report(payload: TriggerRequest):
             sample_revs.append(SampleReview(
                 review_id=res.review_id,
                 author=raw.user_id,
-                date=raw.review_date.replace("-", "."), # 💡 DB 진짜 날짜
+                date=raw.review_date.replace("-", "."),
                 rating=raw.rating,
                 content=raw.content,
                 level=res.level,
@@ -463,12 +442,15 @@ async def get_product_risk_report(payload: TriggerRequest):
             
     real_trend = calculate_real_trend(results, raw_data)
 
-    conn = sqlite3.connect(DB_FILE)
+    conn = get_db_connection()
     c = conn.cursor()
-    c.execute("SELECT name FROM products WHERE product_id = ?", (target_id,))
+    # 💡 SQLite의 '?' 대신 MySQL의 '%s' 사용
+    c.execute("SELECT name FROM products WHERE product_id = %s", (target_id,))
     prod_row = c.fetchone()
     conn.close()
-    prod_name = prod_row[0] if prod_row else f"알 수 없는 상품 ({target_id})"
+    
+    # DictCursor를 쓰기 때문에 인덱스[0] 대신 딕셔너리 키['name']로 접근
+    prod_name = prod_row['name'] if prod_row else f"알 수 없는 상품 ({target_id})"
 
     return ProductRiskReportResponse(
         product_id=target_id, product_name=prod_name,

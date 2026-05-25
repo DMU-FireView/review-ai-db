@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  ai-db:
+    image: mysql:8.0
+    container_name: review_ai_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: "review_system"
+    ports:
+      - "${DB_HOST_PORT}:3306"  #
+    volumes:
+      - ai-db-data:/var/lib/mysql
+    restart: always
+
+volumes:
+  ai-db-data:
