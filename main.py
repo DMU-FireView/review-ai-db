@@ -120,7 +120,8 @@ def init_db():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
+    # v1: 서버 시작 시 DB를 자동 초기화하지 않습니다.
+    # 테이블 생성 및 seed 삽입은 scripts/load_seed.py에서 수동 실행합니다.
     yield
 
 app = FastAPI(
