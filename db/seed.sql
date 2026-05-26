@@ -1,4 +1,4 @@
-﻿INSERT INTO products (
+﻿INSERT OR REPLACE INTO products (
     product_id,
     name,
     product_url,
@@ -12,7 +12,7 @@ VALUES
     '전자기기'
 );
 
-INSERT INTO reviews (
+INSERT OR REPLACE INTO reviews (
     review_id,
     product_id,
     user_id,
