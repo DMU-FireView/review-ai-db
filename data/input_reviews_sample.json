@@ -1,0 +1,32 @@
+{
+  "product": {
+    "product_id": "53530143052",
+    "product_name": "SOUNDPRO ANC 노이즈캔슬링 블루투스 이어폰 X7 Pro",
+    "product_url": "https://smartstore.naver.com/main/products/11590446932",
+    "category": "전자기기"
+  },
+  "reviews": [
+    {
+      "review_id": "sample_001",
+      "user_id": "reviewer_0099",
+      "rating": 5,
+      "content": "이 제품 정말 최고예요. 품질 완전 대박. 강력추천합니다!",
+      "review_date": "2026-05-25",
+      "verified_purchase": false,
+      "account_age_days": 2,
+      "reviews_written_today": 12,
+      "similar_review_count": 8
+    },
+    {
+      "review_id": "sample_002",
+      "user_id": "kim_realbuyer",
+      "rating": 4,
+      "content": "배송도 빠르고 품질도 좋네요. 다만 색상이 사진과 조금 달랐습니다.",
+      "review_date": "2026-05-24",
+      "verified_purchase": true,
+      "account_age_days": 540,
+      "reviews_written_today": 1,
+      "similar_review_count": 0
+    }
+  ]
+}
