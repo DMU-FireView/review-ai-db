@@ -73,7 +73,7 @@ VALUES
     '6564',
     '나이키 에어맥스 270',
     'https://olvui.co.kr/product/detail.html?product_no=6564&cate_no=198&display_group=1&utm_source=naver&utm_medium=shopping&utm_campaign=knowledge_shopping&mkt_in=Y&ghost_mall_id=naver&ref=naver_open',
-    '패션'
+    '패션잡화'
 );
 
 INSERT OR REPLACE INTO reviews (
