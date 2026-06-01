@@ -180,6 +180,9 @@ class SummaryResponse(BaseModel):
 
 class AnalysisResult(BaseModel):
     review_id: str
+    content: str  # 💡 추가된 부분: 리뷰 본문
+    author: str   # 💡 추가된 부분: 작성자
+    date: str     # 💡 추가된 부분: 작성 날짜
     rti: int
     level: str
     signals: SignalScores
@@ -251,8 +254,12 @@ def analyze_single_review(review: ReviewInput) -> AnalysisResult:
     all_raw_reasons = t_reasons + b_reasons + n_reasons
     combined_reasons = [ReasonObject(code=r["code"], message=r["message"]) for r in all_raw_reasons]
     
+    # 2. 반환할 때 원본 데이터에서 꺼내서 바구니에 담아주기
     return AnalysisResult(
         review_id=review.review_id,
+        content=review.content,        # 💡 추가된 부분
+        author=review.user_id,         # 💡 추가된 부분 (ReviewInput의 user_id를 매핑)
+        date=review.review_date,       # 💡 추가된 부분
         rti=rti_score,
         level=level,
         signals=SignalScores(text=int(t_score), behavior=int(b_score), network=int(n_score)),
@@ -264,7 +271,6 @@ def analyze_single_review(review: ReviewInput) -> AnalysisResult:
         ),
         reasons=combined_reasons
     )
-
 # ==========================================
 # 5. 🗄️ 실제 DB 연동 로직 (💡 %s 바인딩 적용)
 # ==========================================
