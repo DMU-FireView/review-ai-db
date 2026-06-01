@@ -202,6 +202,7 @@ class SummaryResponse(BaseModel):
 
 class AnalysisResult(BaseModel):
     review_id: str
+    content: str
     rti: int
     level: str
     signals: SignalScores
@@ -278,6 +279,7 @@ def analyze_single_review(review: ReviewInput) -> AnalysisResult:
     
     return AnalysisResult(
         review_id=review.review_id,
+        content=review.content,
         rti=rti_score,
         level=level,
         signals=SignalScores(text=int(t_score), behavior=int(b_score), network=int(n_score)),
