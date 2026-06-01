@@ -11,6 +11,9 @@ data/raw/*.json
 data/raw/*.txt
 !data/raw/README.md
 
+# Converted / generated review outputs
+data/converted/
+
 # Temporary / broken files
 *broken*
 *_old_*
