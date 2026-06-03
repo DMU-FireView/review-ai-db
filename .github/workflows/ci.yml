@@ -1,0 +1,23 @@
+name: AI Server CI
+
+on:
+  push:
+    branches: [ "main", "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+        
+    - name: 헬로 월드 찍어보기
+      run: |
+        echo "CI/CD 파이프라인 작동 테스트 성공!"
