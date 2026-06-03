@@ -17,3 +17,6 @@ data/converted/
 # Temporary / broken files
 *broken*
 *_old_*
+
+# 환경 변수 (비밀번호 등 중요 정보)
+.env
