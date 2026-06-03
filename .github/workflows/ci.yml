@@ -1,23 +1,27 @@
-name: AI Server CI
+name: Azure VM Deploy
 
 on:
   push:
-    branches: [ "main", "feature/*" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
+    - name: 애저 서버 원격 접속 및 배포
+      uses: appleboy/ssh-action@master
       with:
-        python-version: "3.10"
-        
-    - name: 헬로 월드 찍어보기
-      run: |
-        echo "CI/CD 파이프라인 작동 테스트 성공!"
+        host: ${{ secrets.AZURE_HOST }}
+        username: ${{ secrets.AZURE_USER }}
+        password: ${{ secrets.AZURE_PASSWORD }}
+        port: 22
+        script: |
+          # 1. 방금 찾아낸 정확한 절대 경로로 이동!
+          cd /home/reviewadmin/review-ai-db
+          
+          # 2. 깃허브에서 최신 코드 당겨오기
+          git pull origin main
+          
+          # 3. 도커 컴포즈로 서버 백그라운드 재시작
+          docker-compose up -d --build
