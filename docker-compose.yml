@@ -7,9 +7,19 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: "review_system"
     ports:
-      - "${DB_HOST_PORT}:3306"  #
+      - "${DB_HOST_PORT}:3306"  # 로컬은 3307, 서버는 3306으로 유동적으로 작동!
     volumes:
       - ai-db-data:/var/lib/mysql
+    restart: always
+
+  # 💡 이번에 새로 추가된 Redis 비동기 큐 서버
+  redis:
+    image: redis:latest
+    container_name: review-redis
+    ports:
+      - "6379:6379"
+    # 깃허브 Action이 만들어준 .env에서 비밀번호를 쏙 가져옵니다.
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     restart: always
 
 volumes:
