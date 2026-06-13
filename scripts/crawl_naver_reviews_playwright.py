@@ -40,6 +40,23 @@ REVIEW_API_KEYWORDS = (
     "exceptional-storepick-review-ids",
 )
 REVIEW_TAB_LABELS = ("리뷰", "구매평", "상품평")
+MOJIBAKE_MARKERS = (
+    "釉",
+    "붾",
+    "荑",
+    "좎",
+    "뀡",
+    "媛",
+    "섎",
+    "떎",
+    "鍮",
+    "쏅",
+)
+REVIEW_CONTENT_FIELDS = {
+    "reviewcontent",
+    "content",
+    "body",
+}
 
 
 def extract_product_id(product_url: str) -> str:
@@ -63,10 +80,95 @@ def save_json(data: object, output_path: Path) -> None:
         file.write("\n")
 
 
+def count_korean_characters(value: str) -> int:
+    return sum("\uac00" <= character <= "\ud7a3" for character in value)
+
+
+def count_korean_signal(value: str) -> int:
+    cleaned_value = value
+    for marker in MOJIBAKE_MARKERS:
+        cleaned_value = cleaned_value.replace(marker, "")
+    return count_korean_characters(cleaned_value)
+
+
+def fix_korean_mojibake(value: str) -> str:
+    if not isinstance(value, str):
+        return value
+    if not any(marker in value for marker in MOJIBAKE_MARKERS):
+        return value
+
+    try:
+        fixed = value.encode(
+            "cp949", errors="ignore"
+        ).decode("utf-8", errors="ignore")
+    except (UnicodeDecodeError, UnicodeEncodeError):
+        return value
+
+    if count_korean_signal(fixed) > count_korean_signal(value):
+        return fixed
+    return value
+
+
+def fix_mojibake_in_json(data):
+    if isinstance(data, dict):
+        return {
+            key: fix_mojibake_in_json(value)
+            for key, value in data.items()
+        }
+    if isinstance(data, list):
+        return [fix_mojibake_in_json(item) for item in data]
+    if isinstance(data, str):
+        return fix_korean_mojibake(data)
+    return data
+
+
+def _fix_review_content_fields(review: dict) -> tuple[dict, bool]:
+    fixed_review = {}
+    content_fixed = False
+
+    for key, value in review.items():
+        if isinstance(value, dict):
+            fixed_value, nested_fixed = _fix_review_content_fields(value)
+            content_fixed = content_fixed or nested_fixed
+        elif isinstance(value, list):
+            fixed_value = []
+            for item in value:
+                if isinstance(item, dict):
+                    fixed_item, nested_fixed = (
+                        _fix_review_content_fields(item)
+                    )
+                    content_fixed = content_fixed or nested_fixed
+                    fixed_value.append(fixed_item)
+                else:
+                    fixed_value.append(fix_mojibake_in_json(item))
+        elif (
+            isinstance(value, str)
+            and key.lower() in REVIEW_CONTENT_FIELDS
+        ):
+            fixed_value = fix_korean_mojibake(value)
+            content_fixed = content_fixed or fixed_value != value
+        else:
+            fixed_value = value
+        fixed_review[key] = fixed_value
+
+    return fixed_review, content_fixed
+
+
+def fix_review_content_fields(review: dict) -> dict:
+    fixed_review, content_fixed = _fix_review_content_fields(review)
+    if content_fixed:
+        print("[INFO] Fixed Korean mojibake text in review content.")
+    return fixed_review
+
+
 def build_raw_result(
     product_url: str, product_id: str, reviews: list[dict]
 ) -> dict:
     crawled_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
+    fixed_reviews = [
+        fix_review_content_fields(review)
+        for review in reviews
+    ]
     return {
         "source": "naver",
         "mall": "NAVER",
@@ -77,7 +179,7 @@ def build_raw_result(
             "product_url": product_url,
             "category": "unknown",
         },
-        "reviews": reviews,
+        "reviews": fixed_reviews,
     }
 
 
@@ -105,9 +207,10 @@ def parse_json_body(body_text: str) -> object | None:
         return None
 
     try:
-        return json.loads(body_text)
+        parsed_json = json.loads(body_text)
     except json.JSONDecodeError:
         return None
+    return fix_mojibake_in_json(parsed_json)
 
 
 def scroll_page(page, steps: int = 6, delay_ms: int = 1500) -> None:
@@ -188,7 +291,12 @@ def extract_reviews(page) -> list[dict]:
                 continue
 
             seen_texts.add(normalized_text)
-            reviews.append({"content": normalized_text[:2_000]})
+            fixed_text = fix_korean_mojibake(normalized_text)
+            if fixed_text != normalized_text:
+                print(
+                    "[INFO] Fixed Korean mojibake text in review content."
+                )
+            reviews.append({"content": fixed_text[:2_000]})
             if len(reviews) >= MAX_REVIEWS:
                 return reviews
 
@@ -269,7 +377,10 @@ def crawl_with_playwright(
                     return
 
                 try:
-                    body_text = response.text()
+                    body_bytes = response.body()
+                    body_text = body_bytes.decode(
+                        "utf-8", errors="replace"
+                    )
                 except Exception as error:
                     if review_api:
                         review_api_bodies.append(
