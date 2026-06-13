@@ -9,6 +9,8 @@ OUTPUT_DIR = Path("data/raw")
 DEBUG_DIR = Path("data/debug")
 GOTO_TIMEOUT_MS = 60_000
 JSON_BODY_PREVIEW_LIMIT = 50_000
+REVIEW_API_BODY_PREVIEW_LIMIT = 5_000
+REVIEW_API_PARSED_JSON_LIMIT = 1_000_000
 MAX_REVIEWS = 20
 PAGE_KEYWORDS = (
     "review",
@@ -29,6 +31,13 @@ NETWORK_KEYWORDS = (
     "comment",
     "evaluation",
     "summary",
+)
+REVIEW_API_KEYWORDS = (
+    "contents/reviews",
+    "product-summary",
+    "store_pick",
+    "review-events",
+    "exceptional-storepick-review-ids",
 )
 REVIEW_TAB_LABELS = ("리뷰", "구매평", "상품평")
 
@@ -84,6 +93,21 @@ def print_keyword_check(html: str, stage: str) -> None:
 def is_network_candidate(url: str) -> bool:
     lowered_url = url.lower()
     return any(keyword in lowered_url for keyword in NETWORK_KEYWORDS)
+
+
+def is_review_api(url: str) -> bool:
+    lowered_url = url.lower()
+    return any(keyword in lowered_url for keyword in REVIEW_API_KEYWORDS)
+
+
+def parse_json_body(body_text: str) -> object | None:
+    if len(body_text) > REVIEW_API_PARSED_JSON_LIMIT:
+        return None
+
+    try:
+        return json.loads(body_text)
+    except json.JSONDecodeError:
+        return None
 
 
 def scroll_page(page, steps: int = 6, delay_ms: int = 1500) -> None:
@@ -189,11 +213,15 @@ def crawl_with_playwright(
     json_path = (
         DEBUG_DIR / f"naver_product_{product_id}_json_candidates.json"
     )
+    review_api_bodies_path = (
+        DEBUG_DIR / f"naver_product_{product_id}_review_api_bodies.json"
+    )
 
     DEBUG_DIR.mkdir(parents=True, exist_ok=True)
-    candidate_responses = []
     network_candidates = []
     json_candidates = []
+    review_api_bodies = []
+    review_api_bodies_saved = False
     reviews = []
 
     try:
@@ -204,7 +232,10 @@ def crawl_with_playwright(
             page = browser.new_page()
 
             def handle_response(response) -> None:
-                if not is_network_candidate(response.url):
+                response_url = response.url
+                network_candidate = is_network_candidate(response_url)
+                review_api = is_review_api(response_url)
+                if not network_candidate and not review_api:
                     return
 
                 content_type = response.headers.get(
@@ -214,16 +245,79 @@ def crawl_with_playwright(
                     method = response.request.method
                 except Exception:
                     method = "unknown"
-                network_candidates.append(
+                metadata = {
+                    "url": response_url,
+                    "status": response.status,
+                    "content_type": content_type,
+                    "method": method,
+                }
+                if network_candidate:
+                    network_candidates.append(metadata)
+
+                is_json = "application/json" in content_type.lower()
+                if not is_json:
+                    if review_api:
+                        review_api_bodies.append(
+                            {
+                                "url": response_url,
+                                "status": response.status,
+                                "content_type": content_type,
+                                "body_preview": "",
+                                "json": None,
+                            }
+                        )
+                    return
+
+                try:
+                    body_text = response.text()
+                except Exception as error:
+                    if review_api:
+                        review_api_bodies.append(
+                            {
+                                "url": response_url,
+                                "status": response.status,
+                                "content_type": content_type,
+                                "body_preview": "",
+                                "json": None,
+                            }
+                        )
+                        print(
+                            "[WARN] Failed to capture review API body: "
+                            f"{response_url} - {error}"
+                        )
+                    else:
+                        print(
+                            "[WARN] Failed to read JSON response body "
+                            f"({response_url}): {error}"
+                        )
+                    return
+
+                json_candidates.append(
                     {
-                        "url": response.url,
+                        "url": response_url,
                         "status": response.status,
                         "content_type": content_type,
-                        "method": method,
+                        "body_preview": body_text[
+                            :JSON_BODY_PREVIEW_LIMIT
+                        ],
                     }
                 )
-                if "application/json" in content_type.lower():
-                    candidate_responses.append((response, content_type))
+
+                if review_api:
+                    review_api_bodies.append(
+                        {
+                            "url": response_url,
+                            "status": response.status,
+                            "content_type": content_type,
+                            "body_preview": body_text[
+                                :REVIEW_API_BODY_PREVIEW_LIMIT
+                            ],
+                            "json": parse_json_body(body_text),
+                        }
+                    )
+                    print(
+                        f"[INFO] Review API body captured: {response_url}"
+                    )
 
             page.on("response", handle_response)
 
@@ -265,27 +359,31 @@ def crawl_with_playwright(
 
             reviews = extract_reviews(page)
 
-            for response, content_type in candidate_responses:
-                try:
-                    body_preview = response.body()[
-                        :JSON_BODY_PREVIEW_LIMIT
-                    ].decode("utf-8", errors="replace")
-                    json_candidates.append(
-                        {
-                            "url": response.url,
-                            "status": response.status,
-                            "content_type": content_type,
-                            "body_preview": body_preview,
-                        }
-                    )
-                except Exception as error:
-                    print(
-                        "[WARN] Failed to read JSON response body "
-                        f"({response.url}): {error}"
-                    )
+            try:
+                save_json(review_api_bodies, review_api_bodies_path)
+                review_api_bodies_saved = True
+                print(
+                    f"[INFO] Review API bodies: {len(review_api_bodies)} "
+                    f"(saved to {review_api_bodies_path.as_posix()})"
+                )
+            except OSError as error:
+                print(
+                    "[ERROR] Failed to save review API bodies before "
+                    f"browser close: {error}"
+                )
     except Exception as error:
         print(f"[ERROR] Playwright crawl failed: {error}")
     finally:
+        if not review_api_bodies_saved:
+            try:
+                save_json(review_api_bodies, review_api_bodies_path)
+                print(
+                    f"[INFO] Review API bodies: {len(review_api_bodies)} "
+                    f"(saved to {review_api_bodies_path.as_posix()})"
+                )
+            except OSError as error:
+                print(f"[ERROR] Failed to save review API bodies: {error}")
+
         try:
             save_json(network_candidates, network_path)
             print(
