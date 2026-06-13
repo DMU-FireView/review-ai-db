@@ -162,7 +162,10 @@ def fix_review_content_fields(review: dict) -> dict:
 
 
 def build_raw_result(
-    product_url: str, product_id: str, reviews: list[dict]
+    product_url: str,
+    product_id: str,
+    reviews: list[dict],
+    crawl_status: dict,
 ) -> dict:
     crawled_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
     fixed_reviews = [
@@ -180,6 +183,7 @@ def build_raw_result(
             "category": "unknown",
         },
         "reviews": fixed_reviews,
+        "crawl_status": crawl_status,
     }
 
 
@@ -200,6 +204,25 @@ def is_network_candidate(url: str) -> bool:
 def is_review_api(url: str) -> bool:
     lowered_url = url.lower()
     return any(keyword in lowered_url for keyword in REVIEW_API_KEYWORDS)
+
+
+def is_browser_closed_error(error: Exception) -> bool:
+    message = str(error).lower()
+    return (
+        "target page, context or browser has been closed" in message
+        or "target closed" in message
+        or "page has been closed" in message
+    )
+
+
+def log_browser_error(error: Exception, fallback_message: str) -> None:
+    if is_browser_closed_error(error):
+        print(
+            "[WARN] Browser page was closed before review extraction "
+            "completed."
+        )
+    else:
+        print(f"{fallback_message}: {error}")
 
 
 def parse_json_body(body_text: str) -> object | None:
@@ -279,6 +302,9 @@ def extract_reviews(page) -> list[dict]:
         try:
             texts = page.locator(selector).all_inner_texts()
         except Exception as error:
+            if is_browser_closed_error(error):
+                log_browser_error(error, "")
+                return reviews
             print(f"[WARN] Review selector failed ({selector}): {error}")
             continue
 
@@ -308,7 +334,7 @@ def crawl_with_playwright(
     product_url: str,
     product_id: str,
     headless: bool,
-) -> list[dict]:
+) -> dict:
     html_path = (
         DEBUG_DIR / f"naver_product_{product_id}_playwright.html"
     )
@@ -440,7 +466,9 @@ def crawl_with_playwright(
                 )
                 print("[INFO] Page loaded")
             except Exception as error:
-                print(f"[WARN] Page load failed or timed out: {error}")
+                log_browser_error(
+                    error, "[WARN] Page load failed or timed out"
+                )
 
             try:
                 initial_html = page.content()
@@ -483,7 +511,7 @@ def crawl_with_playwright(
                     f"browser close: {error}"
                 )
     except Exception as error:
-        print(f"[ERROR] Playwright crawl failed: {error}")
+        log_browser_error(error, "[ERROR] Playwright crawl failed")
     finally:
         if not review_api_bodies_saved:
             try:
@@ -515,7 +543,84 @@ def crawl_with_playwright(
         except OSError as error:
             print(f"[ERROR] Failed to save JSON candidates: {error}")
 
-    return reviews
+    return {
+        "reviews": reviews,
+        "review_api_body_count": len(review_api_bodies),
+        "network_candidate_count": len(network_candidates),
+        "json_candidate_count": len(json_candidates),
+        "review_json_candidate_count": sum(
+            is_review_api(candidate["url"])
+            for candidate in json_candidates
+        ),
+    }
+
+
+def build_crawl_status(crawl_result: dict) -> dict:
+    review_count = len(crawl_result["reviews"])
+    review_api_body_count = crawl_result["review_api_body_count"]
+    network_candidate_count = crawl_result["network_candidate_count"]
+    review_json_candidate_count = crawl_result[
+        "review_json_candidate_count"
+    ]
+    meaningful_success = (
+        review_count > 0
+        or review_api_body_count > 0
+        or review_json_candidate_count > 0
+    )
+
+    if review_count > 0:
+        message = "reviews extracted"
+    elif meaningful_success:
+        message = "review API responses captured; no reviews extracted"
+    else:
+        message = "no reviews extracted"
+
+    return {
+        "success": meaningful_success,
+        "review_count": review_count,
+        "review_api_body_count": review_api_body_count,
+        "network_candidate_count": network_candidate_count,
+        "message": message,
+    }
+
+
+def save_raw_result(
+    product_url: str,
+    product_id: str,
+    crawl_result: dict,
+    output_path: Path,
+    empty_output_path: Path,
+) -> Path:
+    reviews = crawl_result["reviews"]
+    crawl_status = build_crawl_status(crawl_result)
+    raw_result = build_raw_result(
+        product_url,
+        product_id,
+        reviews,
+        crawl_status,
+    )
+
+    if reviews:
+        save_json(raw_result, output_path)
+        print(f"[INFO] Saved raw JSON: {output_path.as_posix()}")
+        return output_path
+
+    if output_path.exists():
+        print(
+            "[WARN] Review count is 0. Existing successful raw JSON "
+            "will not be overwritten."
+        )
+    else:
+        print(
+            "[WARN] Review count is 0. Successful raw JSON will not "
+            "be created."
+        )
+
+    save_json(raw_result, empty_output_path)
+    print(
+        f"[INFO] Saved empty raw JSON: {empty_output_path.as_posix()}"
+    )
+    return empty_output_path
 
 
 def import_playwright():
@@ -561,33 +666,54 @@ def main() -> None:
     output_path = (
         OUTPUT_DIR / f"naver_reviews_{product_id}_playwright.json"
     )
+    empty_output_path = (
+        OUTPUT_DIR / f"naver_reviews_{product_id}_playwright_empty.json"
+    )
+    empty_crawl_result = {
+        "reviews": reviews,
+        "review_api_body_count": 0,
+        "network_candidate_count": 0,
+        "json_candidate_count": 0,
+        "review_json_candidate_count": 0,
+    }
     sync_playwright = import_playwright()
     if sync_playwright is None:
-        raw_result = build_raw_result(product_url, product_id, reviews)
         try:
-            save_json(raw_result, output_path)
             print("[INFO] Review count: 0")
-            print(f"[INFO] Saved raw JSON: {output_path.as_posix()}")
+            save_raw_result(
+                product_url,
+                product_id,
+                empty_crawl_result,
+                output_path,
+                empty_output_path,
+            )
         except OSError as error:
             print(f"[ERROR] Failed to save raw JSON: {error}")
         raise SystemExit(1)
 
     try:
-        reviews = crawl_with_playwright(
+        crawl_result = crawl_with_playwright(
             sync_playwright,
             product_url,
             product_id,
             headless=headless,
         )
-    finally:
-        raw_result = build_raw_result(product_url, product_id, reviews)
-        try:
-            save_json(raw_result, output_path)
-            print(f"[INFO] Review count: {len(reviews)}")
-            print(f"[INFO] Saved raw JSON: {output_path.as_posix()}")
-        except OSError as error:
-            print(f"[ERROR] Failed to save raw JSON: {error}")
-            raise SystemExit(1) from error
+    except Exception as error:
+        log_browser_error(error, "[ERROR] Playwright crawl failed")
+        crawl_result = empty_crawl_result
+
+    try:
+        print(f"[INFO] Review count: {len(crawl_result['reviews'])}")
+        save_raw_result(
+            product_url,
+            product_id,
+            crawl_result,
+            output_path,
+            empty_output_path,
+        )
+    except OSError as error:
+        print(f"[ERROR] Failed to save raw JSON: {error}")
+        raise SystemExit(1) from error
 
 
 if __name__ == "__main__":
