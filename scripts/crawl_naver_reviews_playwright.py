@@ -57,6 +57,44 @@ REVIEW_CONTENT_FIELDS = {
     "content",
     "body",
 }
+REVIEW_TEXT_FIELDS = ("reviewContent", "content", "body", "text")
+REVIEW_RATING_FIELDS = (
+    "rating",
+    "score",
+    "starScore",
+    "reviewScore",
+    "averageScore",
+)
+REVIEW_USER_FIELDS = (
+    "userId",
+    "memberId",
+    "writer",
+    "nickname",
+    "maskedUserId",
+    "writerMemberId",
+    "maskedWriterId",
+)
+REVIEW_ID_FIELDS = (
+    "id",
+    "reviewId",
+    "reviewNo",
+    "reviewSeq",
+    "mallReviewId",
+)
+REVIEW_DATE_FIELDS = (
+    "reviewDate",
+    "createdAt",
+    "createDate",
+    "registerDate",
+    "writtenDate",
+)
+REVIEW_IMAGE_FIELDS = (
+    "images",
+    "imageUrls",
+    "media",
+    "attachments",
+    "reviewImages",
+)
 
 
 def extract_product_id(product_url: str) -> str:
@@ -159,6 +197,196 @@ def fix_review_content_fields(review: dict) -> dict:
     if content_fixed:
         print("[INFO] Fixed Korean mojibake text in review content.")
     return fixed_review
+
+
+def first_present_value(data: dict, field_names: tuple[str, ...]):
+    for field_name in field_names:
+        value = data.get(field_name)
+        if value is not None and value != "":
+            return value
+    return None
+
+
+def review_item_score(item: dict) -> tuple[int, int, int, int]:
+    keys = set(item)
+    return (
+        int("reviewContent" in keys),
+        int(any(field in keys for field in REVIEW_TEXT_FIELDS[1:])),
+        int(any(field in keys for field in REVIEW_RATING_FIELDS)),
+        int(any(field in keys for field in REVIEW_USER_FIELDS)),
+    )
+
+
+def is_review_like_item(item: dict) -> bool:
+    return any(review_item_score(item))
+
+
+def find_review_like_items(data, path: str = "$") -> list[dict]:
+    candidates = []
+
+    if isinstance(data, dict):
+        for key, value in data.items():
+            candidates.extend(
+                find_review_like_items(value, f"{path}.{key}")
+            )
+    elif isinstance(data, list):
+        dict_items = [item for item in data if isinstance(item, dict)]
+        review_items = [
+            item for item in dict_items if is_review_like_item(item)
+        ]
+        if review_items:
+            sample_keys = sorted(
+                {
+                    key
+                    for item in review_items[:5]
+                    for key in item.keys()
+                }
+            )
+            item_scores = [
+                review_item_score(item) for item in review_items
+            ]
+            candidates.append(
+                {
+                    "path": path,
+                    "count": len(review_items),
+                    "sample_keys": sample_keys,
+                    "items": review_items,
+                    "score": tuple(
+                        sum(score[index] for score in item_scores)
+                        for index in range(4)
+                    ),
+                }
+            )
+
+        for index, item in enumerate(data):
+            candidates.extend(
+                find_review_like_items(item, f"{path}[{index}]")
+            )
+
+    return candidates
+
+
+def collect_image_urls(value) -> list[str]:
+    urls = []
+
+    if isinstance(value, str):
+        if value.startswith(("http://", "https://")):
+            urls.append(value)
+    elif isinstance(value, list):
+        for item in value:
+            urls.extend(collect_image_urls(item))
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            lowered_key = key.lower()
+            if (
+                "image" in lowered_key
+                or "attach" in lowered_key
+                or lowered_key in {"url", "path"}
+            ):
+                urls.extend(collect_image_urls(item))
+
+    return list(dict.fromkeys(urls))
+
+
+def extract_review_images(review: dict) -> list[str]:
+    images = []
+    for field_name in REVIEW_IMAGE_FIELDS:
+        if field_name in review:
+            images.extend(collect_image_urls(review[field_name]))
+
+    for field_name in ("reviewAttach", "repThumbnailAttach"):
+        if field_name in review:
+            images.extend(collect_image_urls(review[field_name]))
+
+    return list(dict.fromkeys(images))
+
+
+def normalize_rating(value) -> int | float:
+    if isinstance(value, (int, float)):
+        return value
+    if isinstance(value, str):
+        try:
+            number = float(value)
+            return int(number) if number.is_integer() else number
+        except ValueError:
+            pass
+    return 0
+
+
+def map_review_items(items: list[dict], product_id: str) -> list[dict]:
+    reviews = []
+
+    for index, item in enumerate(items, start=1):
+        review_id = first_present_value(item, REVIEW_ID_FIELDS)
+        user_id = first_present_value(item, REVIEW_USER_FIELDS)
+        rating = first_present_value(item, REVIEW_RATING_FIELDS)
+        content = first_present_value(item, REVIEW_TEXT_FIELDS)
+        review_date = first_present_value(item, REVIEW_DATE_FIELDS)
+        images = extract_review_images(item)
+
+        content_text = content if isinstance(content, str) else ""
+        fixed_content = fix_korean_mojibake(content_text)
+        if fixed_content != content_text:
+            print("[INFO] Fixed Korean mojibake text in review content.")
+
+        reviews.append(
+            {
+                "review_id": (
+                    str(review_id)
+                    if review_id is not None
+                    else f"naver_{product_id}_{index}"
+                ),
+                "user_id": (
+                    str(user_id) if user_id is not None else "unknown"
+                ),
+                "rating": normalize_rating(rating),
+                "content": fixed_content,
+                "review_date": (
+                    str(review_date)
+                    if review_date is not None
+                    else "unknown"
+                ),
+                "image_count": len(images),
+                "images": images,
+            }
+        )
+
+    return reviews
+
+
+def analyze_review_api_bodies(
+    review_api_bodies: list[dict], product_id: str
+) -> tuple[list[dict], list[dict]]:
+    debug_candidates = []
+    selectable_candidates = []
+
+    for body in review_api_bodies:
+        source_url = body.get("url", "unknown")
+        for candidate in find_review_like_items(body):
+            debug_candidates.append(
+                {
+                    "source_url": source_url,
+                    "path": candidate["path"],
+                    "count": candidate["count"],
+                    "sample_keys": candidate["sample_keys"],
+                }
+            )
+            selectable_candidates.append(candidate)
+
+    if not selectable_candidates:
+        return [], debug_candidates
+
+    best_candidate = max(
+        selectable_candidates,
+        key=lambda candidate: (
+            candidate["score"],
+            candidate["count"],
+        ),
+    )
+    return (
+        map_review_items(best_candidate["items"], product_id),
+        debug_candidates,
+    )
 
 
 def build_raw_result(
@@ -350,6 +578,10 @@ def crawl_with_playwright(
     review_api_bodies_path = (
         DEBUG_DIR / f"naver_product_{product_id}_review_api_bodies.json"
     )
+    review_item_candidates_path = (
+        DEBUG_DIR
+        / f"naver_product_{product_id}_review_item_candidates.json"
+    )
 
     DEBUG_DIR.mkdir(parents=True, exist_ok=True)
     network_candidates = []
@@ -513,6 +745,12 @@ def crawl_with_playwright(
     except Exception as error:
         log_browser_error(error, "[ERROR] Playwright crawl failed")
     finally:
+        api_reviews, review_item_candidates = analyze_review_api_bodies(
+            review_api_bodies, product_id
+        )
+        if api_reviews:
+            reviews = api_reviews
+
         if not review_api_bodies_saved:
             try:
                 save_json(review_api_bodies, review_api_bodies_path)
@@ -522,6 +760,19 @@ def crawl_with_playwright(
                 )
             except OSError as error:
                 print(f"[ERROR] Failed to save review API bodies: {error}")
+
+        try:
+            save_json(
+                review_item_candidates,
+                review_item_candidates_path,
+            )
+            print(
+                "[INFO] Review item candidates: "
+                f"{len(review_item_candidates)} "
+                f"(saved to {review_item_candidates_path.as_posix()})"
+            )
+        except OSError as error:
+            print(f"[ERROR] Failed to save review item candidates: {error}")
 
         try:
             save_json(network_candidates, network_path)
@@ -559,24 +810,17 @@ def build_crawl_status(crawl_result: dict) -> dict:
     review_count = len(crawl_result["reviews"])
     review_api_body_count = crawl_result["review_api_body_count"]
     network_candidate_count = crawl_result["network_candidate_count"]
-    review_json_candidate_count = crawl_result[
-        "review_json_candidate_count"
-    ]
-    meaningful_success = (
-        review_count > 0
-        or review_api_body_count > 0
-        or review_json_candidate_count > 0
-    )
+    success = review_count > 0
 
-    if review_count > 0:
+    if success:
         message = "reviews extracted"
-    elif meaningful_success:
+    elif review_api_body_count > 0:
         message = "review API responses captured; no reviews extracted"
     else:
-        message = "no reviews extracted"
+        message = "no review API responses captured"
 
     return {
-        "success": meaningful_success,
+        "success": success,
         "review_count": review_count,
         "review_api_body_count": review_api_body_count,
         "network_candidate_count": network_candidate_count,
