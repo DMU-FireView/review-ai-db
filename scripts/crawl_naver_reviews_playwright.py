@@ -1,5 +1,5 @@
+import argparse
 import json
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -10,12 +10,27 @@ DEBUG_DIR = Path("data/debug")
 GOTO_TIMEOUT_MS = 60_000
 JSON_BODY_PREVIEW_LIMIT = 50_000
 MAX_REVIEWS = 20
-PAGE_KEYWORDS = ("review", "reviews", "구매평", "리뷰", "평점")
-NETWORK_KEYWORDS = ("review", "reviews", "contents", "score", "product")
-USAGE = (
-    "Usage: python scripts/crawl_naver_reviews_playwright.py "
-    '"<NAVER_PRODUCT_URL>"'
+PAGE_KEYWORDS = (
+    "review",
+    "reviews",
+    "contents",
+    "구매평",
+    "리뷰",
+    "평점",
+    "별점",
+    "상품평",
 )
+NETWORK_KEYWORDS = (
+    "review",
+    "reviews",
+    "contents",
+    "score",
+    "product",
+    "comment",
+    "evaluation",
+    "summary",
+)
+REVIEW_TAB_LABELS = ("리뷰", "구매평", "상품평")
 
 
 def extract_product_id(product_url: str) -> str:
@@ -57,18 +72,71 @@ def build_raw_result(
     }
 
 
-def print_keyword_check(html: str) -> None:
+def print_keyword_check(html: str, stage: str) -> None:
     lowered_html = html.lower()
     results = [
         f"{keyword}={keyword.lower() in lowered_html}"
         for keyword in PAGE_KEYWORDS
     ]
-    print(f"[INFO] Keyword check: {', '.join(results)}")
+    print(f"[INFO] Keyword check {stage}: {', '.join(results)}")
 
 
 def is_network_candidate(url: str) -> bool:
     lowered_url = url.lower()
     return any(keyword in lowered_url for keyword in NETWORK_KEYWORDS)
+
+
+def scroll_page(page, steps: int = 6, delay_ms: int = 1500) -> None:
+    print("[INFO] Scrolling page...")
+    for step in range(1, steps + 1):
+        try:
+            position = page.evaluate(
+                """
+                () => {
+                    const distance = Math.max(window.innerHeight * 0.8, 600);
+                    window.scrollBy(0, distance);
+                    return {
+                        scrollY: Math.round(window.scrollY),
+                        scrollHeight: document.body.scrollHeight,
+                    };
+                }
+                """
+            )
+            print(
+                f"[INFO] Scroll step {step}/{steps}: "
+                f"scrollY={position['scrollY']}, "
+                f"scrollHeight={position['scrollHeight']}"
+            )
+            page.wait_for_timeout(delay_ms)
+        except Exception as error:
+            print(f"[WARN] Scroll step {step}/{steps} failed: {error}")
+
+
+def try_click_review_tab(page, wait_ms: int = 2500) -> bool:
+    print("[INFO] Trying to click review tab...")
+
+    for label in REVIEW_TAB_LABELS:
+        for exact in (True, False):
+            try:
+                locator = page.get_by_text(label, exact=exact)
+                visible_count = min(locator.count(), 10)
+                for index in range(visible_count):
+                    candidate = locator.nth(index)
+                    if not candidate.is_visible():
+                        continue
+
+                    candidate.click(timeout=3000)
+                    print(f"[INFO] Clicked review tab: {label}")
+                    page.wait_for_timeout(wait_ms)
+                    return True
+            except Exception as error:
+                print(
+                    f"[WARN] Review tab click failed "
+                    f"({label}, exact={exact}): {error}"
+                )
+
+    print("[WARN] No visible review tab was found.")
+    return False
 
 
 def extract_reviews(page) -> list[dict]:
@@ -104,7 +172,10 @@ def extract_reviews(page) -> list[dict]:
 
 
 def crawl_with_playwright(
-    sync_playwright, product_url: str, product_id: str
+    sync_playwright,
+    product_url: str,
+    product_id: str,
+    headless: bool,
 ) -> list[dict]:
     html_path = (
         DEBUG_DIR / f"naver_product_{product_id}_playwright.html"
@@ -128,8 +199,8 @@ def crawl_with_playwright(
     try:
         with sync_playwright() as playwright:
             print("[INFO] Opening browser...")
-            # Change headless to False when interactive browser debugging is needed.
-            browser = playwright.chromium.launch(headless=True)
+            print(f"[INFO] Headless: {headless}")
+            browser = playwright.chromium.launch(headless=headless)
             page = browser.new_page()
 
             def handle_response(response) -> None:
@@ -139,11 +210,16 @@ def crawl_with_playwright(
                 content_type = response.headers.get(
                     "content-type", "unknown"
                 )
+                try:
+                    method = response.request.method
+                except Exception:
+                    method = "unknown"
                 network_candidates.append(
                     {
                         "url": response.url,
                         "status": response.status,
                         "content_type": content_type,
+                        "method": method,
                     }
                 )
                 if "application/json" in content_type.lower():
@@ -162,12 +238,21 @@ def crawl_with_playwright(
                 print(f"[WARN] Page load failed or timed out: {error}")
 
             try:
-                html = page.content()
-                html_path.write_text(html, encoding="utf-8")
-                print_keyword_check(html)
+                initial_html = page.content()
+                print_keyword_check(initial_html, "before scroll")
+            except Exception as error:
+                print(f"[WARN] Failed to inspect initial HTML: {error}")
+
+            scroll_page(page)
+            try_click_review_tab(page)
+
+            try:
+                final_html = page.content()
+                print_keyword_check(final_html, "after scroll")
+                html_path.write_text(final_html, encoding="utf-8")
                 print(f"[INFO] Saved debug HTML: {html_path.as_posix()}")
             except Exception as error:
-                print(f"[WARN] Failed to save debug HTML: {error}")
+                print(f"[WARN] Failed to save final debug HTML: {error}")
 
             try:
                 page.screenshot(path=str(screenshot_path), full_page=True)
@@ -237,12 +322,23 @@ def import_playwright():
     return sync_playwright
 
 
-def main() -> None:
-    if len(sys.argv) != 2:
-        print(f"[ERROR] {USAGE}")
-        raise SystemExit(1)
+def parse_args(argv=None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Inspect a NAVER product page with Playwright."
+    )
+    parser.add_argument("product_url", help="NAVER product URL")
+    parser.add_argument(
+        "--headed",
+        action="store_true",
+        help="Show the Chromium browser window.",
+    )
+    return parser.parse_args(argv)
 
-    product_url = sys.argv[1]
+
+def main() -> None:
+    args = parse_args()
+    product_url = args.product_url
+    headless = not args.headed
     print(f"[INFO] Product URL: {product_url}")
 
     try:
@@ -269,7 +365,10 @@ def main() -> None:
 
     try:
         reviews = crawl_with_playwright(
-            sync_playwright, product_url, product_id
+            sync_playwright,
+            product_url,
+            product_id,
+            headless=headless,
         )
     finally:
         raw_result = build_raw_result(product_url, product_id, reviews)
