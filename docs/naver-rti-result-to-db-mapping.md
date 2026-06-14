@@ -102,7 +102,7 @@ RTI 분석 결과 JSON의 예시는 다음과 같다.
 - RTI 점수는 개별 `review_id` 기준으로 저장하는 것이 자연스럽다.
 - `reviews` 테이블에 해당 `review_id`가 먼저 저장되어 있어야 `review_trust_scores`가 이를 참조할 수 있다.
 - 같은 `review_id`에 대한 RTI 결과의 중복 저장은 피해야 한다.
-- 이미 저장된 `review_id`라면 기존 결과를 update할지, 새 저장을 skip할지 정책이 필요하다.
+- MVP에서는 이미 저장된 `review_id`의 리뷰와 RTI 결과를 skip하고, DB에 없는 신규 `review_id`만 저장 및 분석한다.
 
 기본 관계는 다음과 같이 예상할 수 있다.
 
@@ -113,50 +113,63 @@ reviews.review_id
 
 실제 외래 키 사용 여부와 1:1 또는 이력 관리를 포함한 관계 형태는 최종 DB 스키마에서 확정한다.
 
-## 6. 중복 저장 정책 초안
+## 6. 중복 저장 정책 확정안
 
-### A안: 이미 review_id가 있으면 skip
+MVP의 중복 저장 여부는 상품 단위가 아니라 크롤링 결과에 포함된 각 `review_id` 단위로 판단한다.
 
-- 기존 RTI 결과를 유지하고 동일한 `review_id`의 새 결과를 저장하지 않는다.
-- 크롤러를 재실행해도 같은 리뷰의 RTI 결과가 중복 저장되는 것을 방지할 수 있다.
-- RTI 결과가 자주 바뀌지 않는 v0/v1 단계에 적합하다.
-- 조회 후 insert 여부만 결정하면 되므로 구현이 단순하다.
+```text
+각 리뷰의 review_id 기준으로 기존 저장 여부 확인
+├─ DB에 없는 review_id
+│  → reviews insert
+│  → RTI 분석
+│  → review_trust_scores insert
+└─ DB에 이미 있는 review_id
+   → 중복 저장 방지를 위해 skip
+```
 
-### B안: 이미 review_id가 있으면 update
+상품에 저장된 리뷰가 하나라도 있다는 이유로 해당 상품의 크롤링 결과 전체를 skip하지 않는다. 기존 리뷰와 신규 리뷰를 구분하여 신규 `review_id`만 저장 및 분석한다.
 
-- 동일한 `review_id`의 RTI 결과를 최신 분석 결과로 갱신한다.
-- 분석 로직, 가중치 또는 입력 리뷰가 변경되었을 때 최신 값을 반영할 수 있다.
-- 갱신 조건, `updated_at`, 분석 버전 및 재분석 기준을 함께 정의해야 한다.
+### 정책 이유
 
-### MVP 추천
+- 상품 단위로 전체 skip하면 이후 해당 상품에 새로 추가된 리뷰를 놓칠 수 있다.
+- `review_id` 단위로 판단하면 기존 리뷰는 중복 저장하지 않으면서 신규 리뷰는 추가 수집할 수 있다.
+- 신규 여부를 기준으로 insert와 분석을 결정하므로 MVP 단계에서 구현이 단순하고 안정적이다.
+- 리뷰별 RTI 결과를 조회하고 재사용하는 Saved RTI 구조와도 잘 맞는다.
 
-MVP 단계에서는 **A안인 skip 정책**을 추천한다.
+### MVP 이후 확장 고려사항
 
-추천 이유는 크롤러 재실행 시 동일 리뷰의 중복 저장을 막을 수 있고, RTI 결과가 자주 바뀌지 않는 v0/v1 단계에 적합하며, 구현이 단순하기 때문이다. 다만 분석 로직 변경 후 재분석이 필요해지는 시점에는 update 또는 versioning 정책을 다시 검토해야 한다.
+MVP에서는 기존 `review_id`의 리뷰 내용이 수정된 경우까지 즉시 감지하고 반영하는 기능은 제외한다. 리뷰 수정 반영이 필요해지면 다음 방식을 검토한다.
+
+- `content_hash`를 기준으로 기존 리뷰 내용의 변경 여부 확인
+- `review_updated_at`을 기준으로 변경 여부 확인
+- 변경된 리뷰만 RTI 재분석
+- 변경 이력 관리가 필요하면 `review_trust_scores_history` 같은 별도 테이블 고려
 
 ## 7. 저장 타이밍
 
-FastAPI Worker 기준으로 예상하는 흐름은 다음과 같다.
+FastAPI Worker 기준으로 예상하는 MVP 저장 흐름은 다음과 같다.
 
 1. Queue job 수신
-2. 상품 URL 크롤링
-3. raw reviews 저장
-4. `reviews` 테이블 insert
-5. RTI 분석 실행
-6. `review_trust_scores` 저장
-7. `product_analysis_job`을 `DONE`으로 처리
+2. `productUrl` 기준 크롤링
+3. raw reviews 생성
+4. 각 `review_id` 기준으로 기존 저장 여부 확인
+5. 신규 `review_id`만 `reviews` insert
+6. 신규 `review_id`만 RTI 분석
+7. 신규 `review_id`만 `review_trust_scores` insert
+8. 모든 신규 리뷰 처리 후 `product_analysis_job`을 `DONE`으로 처리
 
 ```text
 Queue job
-→ 상품 URL 크롤링
-→ raw reviews 저장
-→ reviews insert
-→ RTI 분석
-→ review_trust_scores 저장
+→ productUrl 기준 크롤링
+→ raw reviews 생성
+→ review_id별 기존 저장 여부 확인
+→ 신규 리뷰만 reviews insert
+→ 신규 리뷰만 RTI 분석
+→ 신규 리뷰만 review_trust_scores insert
 → product_analysis_job DONE
 ```
 
-이 흐름은 현재 구현된 동작이 아니라 이후 팀 협의를 위한 예상 흐름이다. 저장 주체, 트랜잭션 범위, 실패 처리 및 Spring과 FastAPI 사이의 책임 분리는 별도로 확정해야 한다.
+이 흐름은 구현이 확정되거나 완료된 동작이 아니라 MVP 기준 협의안이다. 저장 주체, 트랜잭션 범위, 실패 처리 및 Spring과 FastAPI 사이의 책임 분리는 별도로 확정해야 한다.
 
 ## 8. 아직 협의 필요한 항목
 
@@ -165,12 +178,13 @@ Queue job
 - [ ] `level` 값 정의: `safe` / `warning` / `danger` 등
 - [ ] `reasons` 저장 방식: JSON / TEXT / 별도 테이블
 - [ ] `signals` 저장 방식: JSON / TEXT
-- [ ] 중복 `review_id` 처리 정책: skip / update
-- [ ] 저장 주체: FastAPI 직접 DB 저장 / Spring 경유
+- [x] `review_id` 기준 중복 체크 방식은 MVP 기준으로 합의
+- [x] 리뷰 수정 반영은 MVP 이후 `content_hash` / `review_updated_at` 기준으로 확장 검토
+- [ ] FastAPI가 DB에 직접 insert/update할지, Spring을 경유할지
 - [ ] 실패 시 부분 저장 허용 여부
 
 ## 9. 현재 단계 결론
 
 현재는 네이버 상품 URL 1개 기준으로 크롤링된 리뷰 30개를 RTI 분석 결과 JSON으로 변환하는 것까지 검증되었다.
 
-다음 단계는 이 결과 JSON을 DB 저장 구조와 연결하기 전에 팀과 `review_trust_scores` 컬럼 및 저장 정책을 확정하는 것이다.
+MVP의 중복 저장 정책은 상품 단위 전체 skip이 아니라 `review_id` 단위 확인 후 신규 리뷰만 저장 및 분석하는 방식으로 합의되었다. 다음 단계는 이 결과 JSON을 DB 저장 구조와 연결하기 전에 팀과 `review_trust_scores`의 실제 컬럼명, 저장 주체 및 실패 처리 정책을 확정하는 것이다.
