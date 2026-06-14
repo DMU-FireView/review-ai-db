@@ -32,7 +32,6 @@ CREATE TABLE review_trust_scores (
     FOREIGN KEY (review_id) REFERENCES reviews(review_id)
 );
 
-
 CREATE TABLE product_analysis_job (
     job_id VARCHAR(36) PRIMARY KEY COMMENT '작업 고유 ID (UUID 사용 권장)',
     mall VARCHAR(50) NOT NULL COMMENT '쇼핑몰 구분 (예: NAVER, OLIVEYOUNG)',
