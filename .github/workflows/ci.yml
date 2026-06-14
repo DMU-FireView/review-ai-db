@@ -23,5 +23,11 @@ jobs:
           # 2. 깃허브에서 최신 코드 당겨오기
           git pull origin main
           
-          # 3. 도커 컴포즈로 서버 백그라운드 재시작
+          # 3. 💡 깃허브 금고(Secrets)에서 꺼내어 애저 서버 전용 .env 파일 조립!
+          echo "DB_PORT=${{ secrets.DB_PORT }}" > .env
+          echo "DB_HOST_PORT=${{ secrets.DB_HOST_PORT }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> .env
+          
+          # 4. 도커 컴포즈로 서버 백그라운드 재시작 (.env를 빨아들여서 실행됨!)
           sudo docker-compose up -d --build
