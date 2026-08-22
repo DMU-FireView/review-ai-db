@@ -1,3 +1,5 @@
+"""크롤링한 네이버 리뷰를 정규화하고 RTI 분석 결과로 변환한다."""
+
 import argparse
 import json
 import os

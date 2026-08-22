@@ -1,3 +1,4 @@
+﻿# Azure/로컬 환경에서 MySQL과 Redis 인프라 컨테이너를 실행한다.
 version: '3.8'
 services:
   ai-db:

@@ -1,4 +1,6 @@
-﻿CREATE TABLE products (
+-- 로컬 SQLite 개발 환경의 전체 리뷰 분석 스키마를 정의한다.
+
+CREATE TABLE products (
     product_id VARCHAR(50) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(100),

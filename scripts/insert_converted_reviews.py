@@ -1,3 +1,5 @@
+"""변환된 리뷰 JSON을 로컬 SQLite 리뷰 테이블에 적재한다."""
+
 import json
 from pathlib import Path
 

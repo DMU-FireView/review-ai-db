@@ -1,3 +1,4 @@
+# main 브랜치 변경을 Azure VM에 원격 배포하는 GitHub Actions workflow이다.
 name: Azure VM Deploy
 
 on:

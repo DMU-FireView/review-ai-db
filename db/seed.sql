@@ -1,4 +1,6 @@
-﻿INSERT OR REPLACE INTO products (
+-- 로컬 SQLite 개발·검증용 상품과 리뷰 시드 데이터를 적재한다.
+
+INSERT OR REPLACE INTO products (
     product_id,
     name,
     product_url,

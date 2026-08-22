@@ -1,3 +1,5 @@
+"""RTI 판단 사유에서 표시 태그와 대표 신호를 추출한다."""
+
 from collections import Counter
 from typing import Any
 

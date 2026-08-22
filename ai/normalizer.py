@@ -1,3 +1,5 @@
+"""서로 다른 원본 리뷰 형식을 공통 분석 입력 형식으로 정규화한다."""
+
 import json
 import re
 from pathlib import Path

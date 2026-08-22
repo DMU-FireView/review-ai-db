@@ -1,3 +1,5 @@
+"""전체 RTI 결과에서 백엔드 연동 확인용 샘플 JSON을 생성한다."""
+
 import json
 from pathlib import Path
 

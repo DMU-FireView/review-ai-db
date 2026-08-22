@@ -1,3 +1,5 @@
+"""HTTP 요청으로 네이버 상품 리뷰 데이터를 수집하는 보조 크롤러이다."""
+
 import json
 import sys
 from datetime import datetime, timezone

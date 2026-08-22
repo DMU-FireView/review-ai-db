@@ -1,3 +1,5 @@
+"""네이버 크롤링 네트워크 후보 응답에서 리뷰 API 가능성을 분석한다."""
+
 import json
 import re
 import sys

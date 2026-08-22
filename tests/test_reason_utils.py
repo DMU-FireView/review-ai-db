@@ -1,3 +1,5 @@
+"""RTI 사유 태그와 대표 신호 추출 로직을 간단히 검증한다."""
+
 import sys
 from pathlib import Path
 

@@ -1,3 +1,4 @@
+# Python 서비스에서 생성되는 비밀값·캐시·로컬 산출물의 추적을 제외한다.
 # Python cache
 __pycache__/
 *.pyc
@@ -13,6 +14,11 @@ data/raw/*.txt
 
 # Converted / generated review outputs
 data/converted/
+
+# Local databases and generated analysis results
+*.db
+output/*.json
+!output/*_sample.json
 
 # Temporary / broken files
 *broken*

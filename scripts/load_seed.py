@@ -1,3 +1,5 @@
+"""DB 시드 SQL을 로컬 SQLite 데이터베이스에 적용한다."""
+
 import sqlite3
 from pathlib import Path
 

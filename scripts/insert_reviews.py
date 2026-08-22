@@ -1,3 +1,5 @@
+"""리뷰 JSON 레코드를 SQLite에 배치 적재하는 공통 도구이다."""
+
 import json
 import sqlite3
 from pathlib import Path
