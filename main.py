@@ -1,7 +1,7 @@
 """ASGI entry point kept stable for the backend and deployment scripts."""
 
 from app.factory import create_app
-from app.analyzers.heuristic import analyze_review as analyze_single_review
+from ai.analysis import analyze_review as analyze_single_review
 from app.api.schemas import (
     AnalysisResult,
     IncomingReview,
@@ -19,4 +19,4 @@ app = create_app()
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000)

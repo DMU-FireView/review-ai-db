@@ -1,34 +1,44 @@
-# main 브랜치 변경을 Azure VM에 원격 배포하는 GitHub Actions workflow이다.
-name: Azure VM Deploy
-
+# main의 테스트 통과 후 새 Azure Ubuntu VM에 독립 AI 서비스를 배포한다.
+name: Azure AI Deploy
 on:
   push:
-    branches: [ "main", "feature/ci-cd-setup" ]
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: azure-ai-production
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: 애저 서버 원격 접속 및 배포
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.AZURE_HOST }}
-        username: ${{ secrets.AZURE_USER }}
-        password: ${{ secrets.AZURE_PASSWORD }}
-        port: 22
-        script: |
-          # 1. 방금 찾아낸 정확한 절대 경로로 이동!
-          cd /home/reviewadmin/review-ai-db
-          
-          # 2. 깃허브에서 최신 코드 당겨오기
-          git pull origin main
-          
-          # 3. 💡 깃허브 금고(Secrets)에서 꺼내어 애저 서버 전용 .env 파일 조립!
-          echo "DB_PORT=${{ secrets.DB_PORT }}" > .env
-          echo "DB_HOST_PORT=${{ secrets.DB_HOST_PORT }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> .env
-          
-          # 4. 도커 컴포즈로 서버 백그라운드 재시작 (.env를 빨아들여서 실행됨!)
-          sudo docker-compose up -d --build
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest -q
+      - run: docker compose config --quiet
+      - run: docker compose build
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.AZURE_HOST }}
+          username: ${{ secrets.AZURE_USER }}
+          password: ${{ secrets.AZURE_PASSWORD }}
+          port: 22
+          script: |
+            set -eu
+            cd /home/reviewadmin/review-ai-db
+            test "$(git branch --show-current)" = main
+            git pull --ff-only origin main
+            sudo docker compose up -d --build
+            curl --fail --silent --show-error --retry 12 --retry-delay 5 --retry-connrefused http://localhost:8000/health

@@ -1,0 +1,10 @@
+# 선택적 Google 인증: 기본 compose와 함께 명시적으로 사용한다.
+services:
+  ai:
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/google-credentials.json
+    volumes:
+      - type: bind
+        source: ${GOOGLE_CREDENTIALS_FILE:?Set the absolute host credential file path}
+        target: /run/secrets/google-credentials.json
+        read_only: true

@@ -1,6 +1,6 @@
 """분석 입력 변환과 여러 리뷰의 RTI 분석 실행을 담당한다."""
 
-from app.analyzers.heuristic import analyze_review
+from ai.analysis import analyze_review
 from app.api.schemas import AnalysisResult, IncomingReview, ReviewInput
 
 

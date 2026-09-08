@@ -1,62 +1,27 @@
-"""Spring Boot 백엔드가 호출하는 내부 AI API 엔드포인트를 제공한다."""
-
+"""Data 서버가 전달한 리뷰만 분석하는 HTTP API."""
 from fastapi import APIRouter
+from ai.analysis import analyze_review
+from app.api.schemas import AnalyzeRequest, AnalyzeResponse, ReviewInput
 
-from app.api.schemas import (
-    BatchResponse,
-    ProductRiskReportResponse,
-    ReviewReportResponse,
-    SummaryResponse,
-    TrendResponse,
-    TriggerRequest,
-)
-from app.repositories.products import get_product_name, resolve_product_id
-from app.repositories.reviews import find_by_product_id
-from app.services.analysis import analyze_reviews
-from app.services.product import (
-    build_review_report,
-    build_risk_report,
-    build_summary,
-    build_trend,
-)
+router = APIRouter()
 
 
-router = APIRouter(prefix="/api/internal/ai")
+@router.get("/health", tags=["Health"])
+def health() -> dict[str, str]:
+    return {"status": "ok"}
 
 
-def load_product_analysis(payload: TriggerRequest):
-    product_id = resolve_product_id(payload)
-    reviews = find_by_product_id(product_id)
-    return product_id, reviews, analyze_reviews(reviews)
-
-
-@router.post("/products/product-list", response_model=SummaryResponse, tags=["AI Analysis"])
-async def analyze_rti_summary(payload: TriggerRequest):
-    product_id, _, results = load_product_analysis(payload)
-    summary = build_summary(product_id, results)
-    return SummaryResponse(products=[summary] if summary else [])
-
-
-@router.post("/reviews/product-detail", response_model=BatchResponse, tags=["AI Analysis"])
-async def analyze_reviews_detail(payload: TriggerRequest):
-    _, _, results = load_product_analysis(payload)
-    return BatchResponse(results=results)
-
-
-@router.post("/products/rti-trend", response_model=TrendResponse, tags=["AI Analysis"])
-async def get_rti_trend(payload: TriggerRequest):
-    _, reviews, results = load_product_analysis(payload)
-    return TrendResponse(trend=build_trend(results, reviews))
-
-
-@router.post("/reviews/report", response_model=ReviewReportResponse, tags=["AI Reporting"])
-async def get_review_detail_report(payload: TriggerRequest):
-    _, _, results = load_product_analysis(payload)
-    return build_review_report(results)
-
-
-@router.post("/products/risk-report", response_model=ProductRiskReportResponse, tags=["AI Reporting"])
-async def get_product_risk_report(payload: TriggerRequest):
-    product_id, reviews, results = load_product_analysis(payload)
-    product_name = get_product_name(product_id) or f"알 수 없는 상품 ({product_id})"
-    return build_risk_report(product_id, product_name, reviews, results)
+@router.post("/api/v1/analyze", response_model=AnalyzeResponse, tags=["AI Analysis"])
+def analyze(payload: AnalyzeRequest) -> AnalyzeResponse:
+    # 동기 분석/선택적 Google 호출은 FastAPI의 thread pool에서 실행한다.
+    reviews = [
+        ReviewInput(
+            product_id=payload.product_id,
+            **review.model_dump(exclude={"account_age_days"}),
+        )
+        for review in payload.reviews
+    ]
+    return AnalyzeResponse(
+        product_id=payload.product_id,
+        results=[analyze_review(review) for review in reviews],
+    )

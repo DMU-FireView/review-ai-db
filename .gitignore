@@ -26,3 +26,9 @@ output/*.json
 
 # 환경 변수 (비밀번호 등 중요 정보)
 .env
+.env.*
+!.env.example
+.venv/
+.pytest_cache/
+secrets/
+docker-compose.override.yml

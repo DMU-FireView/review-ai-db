@@ -1,8 +1,33 @@
 """내부 AI API와 분석 서비스가 공유하는 요청·응답 DTO를 정의한다."""
 
-from typing import Any
+from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
+
+
+class AnalysisReview(BaseModel):
+    """Data 서버가 제공하는 리뷰; 파생 행동·유사성 신호는 그대로 사용한다."""
+
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    review_id: str = Field(min_length=1)
+    content: str = Field(min_length=1)
+    user_id: str = Field(min_length=1)
+    review_date: str = Field(min_length=1)
+    rating: int = Field(5, ge=1, le=5, strict=True)
+    image_count: int = Field(0, ge=0, strict=True)
+    quality_score: float | None = None
+    verified_purchase: bool | Literal["unknown"] = "unknown"
+    repurchase: bool | Literal["unknown"] = "unknown"
+    free_trial: bool | Literal["unknown"] = "unknown"
+    account_age_days: int | None = Field(None, ge=0, strict=True)
+    reviews_written_today: int = Field(1, ge=0, strict=True)
+    similar_review_count: int = Field(0, ge=0, strict=True)
+
+
+class AnalyzeRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    product_id: str = Field(min_length=1)
+    reviews: list[AnalysisReview] = Field(min_length=1)
 
 
 class TriggerRequest(BaseModel):
@@ -104,6 +129,11 @@ class AnalysisResult(BaseModel):
 
 
 class BatchResponse(BaseModel):
+    results: list[AnalysisResult]
+
+
+class AnalyzeResponse(BaseModel):
+    product_id: str
     results: list[AnalysisResult]
 
 
