@@ -8,6 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt \
 COPY main.py .
 COPY ai ./ai
 COPY app ./app
+RUN mkdir -p /service/data && chown aiuser:aiuser /service/data
 USER aiuser
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \

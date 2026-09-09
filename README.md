@@ -1,8 +1,9 @@
-# Re:view AI 독립 분석 서비스
+# Re:view AI 분석·저장 서비스 (수집/SSE 통합 준비)
 
 Data 서버가 HTTP로 전달한 리뷰를 분석해 JSON을 반환합니다.
-크롤링·작업 오케스트레이션·PostgreSQL 저장은 Data 서버의 책임입니다.
-AI 서버는 DB와 Redis 없이 시작합니다.
+분석 결과는 AI 자체 SQLite DB에 먼저 저장합니다. Redis는 사용하지 않습니다.
+팀원 저장소의 크롤러 SSE 수신 계약을 통합했으며 새 공개 계약은 아직 미확정입니다.
+수집/SSE 실험 경로는 기본 비활성화입니다. [통합 상태·미확정 사항](docs/integration-preparation.md)을 먼저 확인하세요.
 
 ## API
 
@@ -60,7 +61,9 @@ rating은 기본 5(1~5), 개수 필드는 음수가 아닌 정수입니다.
 verified_purchase/repurchase/free_trial은 boolean 또는 "unknown"입니다.
 review_date는 기존 문자열 계약을 유지합니다.
 account_age_days는 허용하지만 현재 점수에 사용하지 않습니다.
-입력 순서를 유지하며 리뷰를 자동 수집·중복 제거하거나 DB에 저장하지 않습니다.
+기존 분석 API는 입력 순서를 유지하며 리뷰를 자동 수집·중복 제거하지 않습니다.
+작업·입력·분석 결과를 DB에 저장하고, 성공 응답에 X-Analysis-Job-ID 헤더를 추가합니다.
+계산 또는 저장 실패 시 성공 결과 대신 503을 반환합니다.
 
 RTI = Python round(text × 0.4 + behavior × 0.35 + network × 0.25).
 50 미만 danger, 50 이상 80 미만 warn, 80 이상 safe입니다.
@@ -91,12 +94,15 @@ production에서는 reload를 사용하지 않습니다.
 
 - main.py: 기존 ASGI 진입점과 분석 import 호환
 - app/api/: HTTP 요청·응답 DTO와 라우팅
-- app/factory.py: DB 초기화 없는 앱 생성
+- app/factory.py: 전용 결과 저장소 초기화와 선택적 크롤러 client 수명 관리
+- app/repositories/analysis_jobs.py: 독립 SQLite 작업/결과 저장소
+- app/contracts/, app/integrations/: 크롤러 SSE 계약과 수신 어댑터
+- app/services/collection_stream.py: 수집 진행, 분석 중 heartbeat, 저장 후 result
 - ai/analysis.py: 기존 RTI 통합 공식
 - ai/text_analyzer.py, behavior_analyzer.py, network_analyzer.py: 변경 없는 분석 알고리즘
 - ai/sentiment_client.py: 기존 선택적 Google Cloud 감성 분석
 - tests/: HTTP·입력 검증·점수 회귀 검사
-- scripts/, db/, 기존 repository/crawler/product 서비스: 과거 개발 참고용 보존
+- scripts/, db/, 기존 repository/crawler/product 서비스: 과거 개발 참고용 보존 (새 결과 DB와 별개)
 - app/core/database.py, app/worker/consumer.py, worker/redis_consumer.py: deprecated 안내만 제공
 
 과거 DB 조회 API 5개(/api/internal/ai/...)는 등록을 해제했으며 404입니다.

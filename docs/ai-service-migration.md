@@ -1,6 +1,9 @@
 <!-- 독립 AI 서비스 전환의 분석·변경·보존 범위를 기록한다. -->
 # 독립 AI 서비스 전환
 
+> 과거 전환 기록입니다. 2026-09-09 회의 반영으로 AI 자체 결과 DB를 추가하고
+> 수집/SSE 통합을 준비 중입니다. 현재 기준은 [통합 준비 상태](integration-preparation.md)입니다.
+
 ## 기존 구조 분석
 
 - main.py → app/factory.py → 시작 시 MySQL DDL → app/api/routes.py의 DB 조회 API.

@@ -17,6 +17,9 @@ data/converted/
 
 # Local databases and generated analysis results
 *.db
+*.db-journal
+*.db-wal
+*.db-shm
 output/*.json
 !output/*_sample.json
 

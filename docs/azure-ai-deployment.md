@@ -1,6 +1,11 @@
 <!-- 새 Azure Ubuntu VM의 AI 서비스 최초 설치와 자동 배포 절차. -->
 # Azure for Students 배포
 
+> 2026-09-09: 현재 코드는 전용 SQLite 결과 저장 볼륨(ai-results)을 사용합니다.
+> DB 파일 백업/보존 정책을 확정해야 하며 실험 수집/SSE API는 운영에서 OFF로 유지하세요.
+> 이번 변경의 Docker 빌드는 Linux 엔진 미실행으로 재검증하지 못했습니다.
+> 이전 검증 기록과 구분하고 [통합 준비 상태](integration-preparation.md)를 먼저 확인하세요.
+
 대상: Ubuntu Server 24.04 LTS x64, reviewadmin, /home/reviewadmin/review-ai-db.
 VM 생성과 GitHub Secrets 변경은 사용자가 수행한다.
 NSG 포트는 SSH 22와 AI HTTP 8000이며, 8000은 가능한 Data 서버 출발지만

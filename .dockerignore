@@ -11,7 +11,9 @@
 **/*.pyc
 app/core/database.py
 app/core/config.py
-app/repositories/
+app/repositories/products.py
+app/repositories/reviews.py
+app/repositories/scores.py
 app/worker/
 app/crawlers/
 ai/rti_score_repository.py

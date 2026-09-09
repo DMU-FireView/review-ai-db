@@ -1,4 +1,4 @@
-# AI HTTP 서비스만 실행한다. DB와 큐는 Data 서버에서 관리한다.
+# AI 자체 결과 DB를 전용 볼륨에 보존한다. 미확정 수집 API는 기본 OFF.
 services:
   ai:
     build: .
@@ -7,3 +7,12 @@ services:
       - "8000:8000"
     restart: unless-stopped
     init: true
+    environment:
+      AI_RESULT_DB_PATH: /service/data/ai-results.db
+      ENABLE_EXPERIMENTAL_COLLECTION: ${ENABLE_EXPERIMENTAL_COLLECTION:-0}
+      ALLOW_LEGACY_CRAWLER_DEFAULTS: ${ALLOW_LEGACY_CRAWLER_DEFAULTS:-0}
+      CRAWLER_BASE_URL: ${CRAWLER_BASE_URL:-}
+    volumes:
+      - ai-results:/service/data
+volumes:
+  ai-results:

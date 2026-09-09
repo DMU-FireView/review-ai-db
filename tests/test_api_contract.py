@@ -19,7 +19,9 @@ REVIEW = {
 
 
 @pytest.fixture
-def client(monkeypatch):
+def client(monkeypatch, tmp_path):
+    monkeypatch.setenv("AI_RESULT_DB_PATH", str(tmp_path / "results.db"))
+    monkeypatch.setenv("ENABLE_EXPERIMENTAL_COLLECTION", "0")
     monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
     monkeypatch.delenv("GOOGLE_APPLICATION_CREDENTIALS", raising=False)
     # Invalid DB settings must not affect startup or requests.

@@ -9,7 +9,9 @@ import uvicorn
 from app.factory import create_app
 
 
-def test_live_http(monkeypatch):
+def test_live_http(monkeypatch, tmp_path):
+    monkeypatch.setenv("AI_RESULT_DB_PATH", str(tmp_path / "results.db"))
+    monkeypatch.setenv("ENABLE_EXPERIMENTAL_COLLECTION", "0")
     monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
     monkeypatch.delenv("GOOGLE_APPLICATION_CREDENTIALS", raising=False)
     sock = socket.socket()
