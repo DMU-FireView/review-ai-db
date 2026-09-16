@@ -44,6 +44,7 @@ Spring → Redis → FastAPI Worker 구조와 `product_analysis_job` / `review_t
 
 | 문서 | 협의에 활용할 내용 |
 | --- | --- |
+| [Data/AI v0.4 계약 차이·질문·샘플 점검표](data-ai-contract-v04-review.md) | 2026-09-16 PDF 검토본과 현재 코드 비교. 실제 정규화 입력을 받기 전 질문·점검 항목; 최종 승인 계약이 아님 |
 | [비동기 분석 Job/Queue 논의](async-analysis-job-discussion.md) | 역할 분담, Job 생성·완료 알림, 기존 API 전환 안건. Queue 도입은 현재 구현이 아님 |
 | [비동기 분석 API 계약 질문](async-analysis-api-contract-questions.md) | 요청·상태·결과 조회, 식별자, 오류 응답을 정하기 위한 질문 |
 | [팀 연동 체크리스트](team-integration-checklist.md) | 파트별 책임과 연동 전 확인 항목. 이전 Redis 흐름은 재검토 필요 |
