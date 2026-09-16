@@ -138,7 +138,8 @@ API 키·쿠키·토큰은 제외하고, 개인 식별정보는 익명화한 샘
 | 필드·식별자·null 상태의 계약 테스트 설계 | RTI 재가중치·가용성 판정·network 알고리즘 변경 |
 | 입력·출력 어댑터의 책임 경계 설계 | AI 자체 DB 삭제·SSE 이동·운영 배포 |
 
-위 DTO·fixture·테스트는 앞으로 가능한 작업이며, 이 문서 작성으로 구현된 것은 아니다.
+2026-09-16 문서 작성 당시 위 DTO·fixture·테스트는 미구현이었다.
+2026-09-17에는 아래 10절의 식별자·결과 매핑 준비만 추가했다. 전체 요청 스키마와 분석기 연동은 여전히 미구현이다.
 
 ## 9. 답변 기록
 
@@ -150,3 +151,54 @@ API 키·쿠키·토큰은 제외하고, 개인 식별정보는 익명화한 샘
 
 관련 문서: [현재 통합 준비 상태](integration-preparation.md), [기존 API 협의 질문](async-analysis-api-contract-questions.md),
 [문서 목차](README.md). 기존 협의 문서의 Redis/Worker 전제를 새 계약에 자동 적용하지 않는다.
+
+## 10. 식별자·결과 매핑 준비 (2026-09-17)
+
+- [검토용 결과 모델](../app/contracts/data_ai_result.py): 원본 식별자, 신호 가용성,
+  RTI·등급·사유 source, v0.4 목표 응답을 표현한다.
+- [순수 결과 매퍼](../app/integrations/data_ai_result_mapping.py): 원본 복합 식별자로 결과를
+  찾아 요청 순서로 응답을 조립한다. DB·HTTP·크롤러·분석기를 호출하지 않는다.
+- [매핑 테스트](../tests/test_data_ai_result_mapping.py): ID 보존, 결과 순서, null,
+  잘못된 연결/중복/누락/비정상 점수 거절을 합성 결과로 확인한다.
+
+사용 경계:
+
+1. Data 입력의 각 리뷰에서 `ReviewIdentity(platform, product_id, review_id)`를 보관한다.
+2. 분석 단계가 각 원본 식별자와 `ReviewEvaluation`을 연결한 `IdentifiedEvaluation`을 제공한다.
+3. `map_data_ai_result(requested, evaluated)`를 호출해 `DataAIResult`를 얻는다.
+4. 합의된 전송 계층에서 `response.model_dump(mode="json")`을 직렬화할 수 있다.
+   현재 API/SSE에는 아직 연결하지 않았다.
+
+```python
+from app.contracts.data_ai_result import IdentifiedEvaluation, ReviewIdentity
+from app.integrations.data_ai_result_mapping import map_data_ai_result
+
+source = ReviewIdentity(platform="kurly", product_id="0007", review_id="001")
+# evaluation은 분석 단계가 명시적으로 제공한 ReviewEvaluation 객체다.
+# 기존 AnalysisResult를 그대로 넣거나 available/source를 추측해 채우지 않는다.
+response = map_data_ai_result(
+    requested=[source],
+    evaluated=[IdentifiedEvaluation(identity=source, evaluation=evaluation)],
+)
+```
+
+원본 ID는 숫자로 변환하거나 trim/소문자화/접두사 추가/콜론 분해하지 않는다.
+결과 순서가 달라도 세 식별자가 모두 일치하는 항목으로 매칭한다.
+준비용 매퍼는 한 플랫폼·한 상품의 비어 있지 않은 완전 배치만 허용하고,
+중복 ID·누락 결과·추가 결과·다른 상품 결과는 ValueError로 거절한다.
+이는 오매칭 방지를 위한 내부 경계이며 최종 HTTP 오류·부분 결과 정책의 확정은 아니다.
+
+점수는 유한한 0~100 값인지, 가용성/null 조합이 모순되지 않는지만 검증한다.
+점수 재계산·반올림·등급 재판정·가중치 조정은 하지 않는다.
+unavailable 사유 코드의 어휘·최소 개수는 추가 정책을 만들지 않으며,
+알 수 없는 새 reason code도 문자열 그대로 허용하되 source는 명시적으로 요구한다.
+모든 신호가 unavailable이면 available RTI는 거절하지만, 일부 신호가 있다고 해서
+RTI를 반드시 계산 가능으로 바꾸지는 않는다.
+
+**현재 분석기는 이 새 모델을 아직 생성하지 않는다.** 특히 기존 정수 signals에
+임의로 available=true를 붙이는 자동 변환은 제공하지 않는다.
+v0.4 가용성·점수 정책과 실제 입력 계약이 합의된 뒤 분석기 어댑터를 연결해야 한다.
+기존 API 응답·AI 자체 DB·실험 SSE·기존 RTI 공식은 변경하지 않았다.
+
+검증: 전체 pytest 82개 통과(매핑 테스트 40개 + 기존 테스트 42개).
+이는 로컬 합성 데이터/회귀 검증이며 실제 Data 서버·모델과의 연동 성공을 뜻하지 않는다.
