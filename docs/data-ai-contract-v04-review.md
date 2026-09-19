@@ -139,7 +139,8 @@ API 키·쿠키·토큰은 제외하고, 개인 식별정보는 익명화한 샘
 | 입력·출력 어댑터의 책임 경계 설계 | AI 자체 DB 삭제·SSE 이동·운영 배포 |
 
 2026-09-16 문서 작성 당시 위 DTO·fixture·테스트는 미구현이었다.
-2026-09-17에는 아래 10절의 식별자·결과 매핑 준비만 추가했다. 전체 요청 스키마와 분석기 연동은 여전히 미구현이다.
+2026-09-17에는 아래 10절의 식별자·결과 매핑 준비를 추가했고, 2026-09-19에는 12절의
+검토용 요청·응답 모델을 추가했다. 운영 API와 분석기 연동은 여전히 미구현이다.
 
 ## 9. 답변 기록
 
@@ -218,3 +219,59 @@ null을 0/100으로 바꾸거나 다른 상품·리뷰 결과를 연결하는 �
 전체 pytest 107개 통과(기존 82개 + 파일 기반 계약 테스트 25개).
 합성 점수는 RTI 계산 정책의 정답이나 모델 품질 검증 자료가 아니며,
 실제 크롤링 샘플·최종 계약·분석기 어댑터 연동은 여전히 별도 작업이다.
+
+## 12. 검토용 요청·응답 DTO (2026-09-19)
+
+- [DataAIRequest / DataAIReview](../app/contracts/data_ai_request.py): PDF 3쪽의
+  platform/product_id/reviews 및 review_id/content, 선택 rating/written_at을 표현한다.
+- [DataAIResponse](../app/contracts/data_ai_response.py): 기존 ReviewResult·신호·사유 모델을
+  재사용하고 review_count 생략을 허용한다. 매퍼의 DataAIResult는 기존대로 개수를 포함한다.
+- [모델 테스트](../tests/test_data_ai_review_models.py): PDF 요청 예시, 최소 입력,
+  선택값 누락/null, 기존 샘플 응답, ID 연결, 기존 OpenAPI 분리를 검증한다.
+
+### 준비 단계의 명시적 가정
+
+아래는 최종 계약 결정이 아니다. 실제 샘플과 팀 합의 후 변경 가능하다.
+
+- ID는 비어 있지 않은 문자열이며 변환하지 않는다. reviews는 1건 이상,
+  content는 길이 1 이상으로 제한한다. 공백 제거·HTML 정제·최대 크기 정책은 아직 넣지 않았다.
+- rating은 생략/null 또는 유한한 숫자를 허용하고 문자열·boolean은 거절한다.
+  기본 별점 5를 넣지 않으며, 최소/최대 별점 범위는 PDF에 확정돼 있지 않아 강제하지 않는다.
+- written_at은 생략/null 또는 원본 문자열로 보존한다. ISO 형식·시간대 검증이나 변환은 미구현이다.
+- review_count는 생략/null을 우선 허용한다. 명시적 null 허용은 검토용 가정이며,
+  숫자로 제공되면 results 길이와 같아야 한다.
+- 알 수 없는 필드는 forbid로 처리해 미합의 입력을 조용히 버리지 않는다.
+  행동 근거의 확장 필드는 아직 정의하지 않는다.
+- 중복 요청 review_id는 DTO가 제거하지 않는다. 기존 순수 매퍼에 전달하면 모호한 배치로 거절된다.
+  결과 ID 중복은 응답 모델에서도 거절한다.
+
+### 사용 예시 (네트워크 호출 없음)
+
+```python
+from app.contracts.data_ai_request import DataAIRequest
+from app.contracts.data_ai_response import DataAIResponse
+
+request = DataAIRequest.model_validate({
+    "platform": "kurly",
+    "product_id": "0007",
+    "reviews": [{"review_id": "001", "content": "검토용 합성 리뷰"}],
+})
+identities = request.review_identities()
+# identities는 map_data_ai_result의 requested에 연결할 수 있다.
+# 분석 실행/근거 가용성 판단/RTI 계산은 이 DTO에서 수행하지 않는다.
+
+# response_json은 별도로 확보한 목표 응답 JSON 문자열이다.
+# response = DataAIResponse.model_validate_json(response_json)
+# response.model_dump(mode="json", exclude_unset=True)
+```
+
+생략된 선택 필드를 그대로 생략해 다시 내보내려면 exclude_unset=True를 사용한다.
+명시적으로 들어온 null은 보존된다. 신호 score와 RTI의 null도 의미가 있으므로
+모든 null을 제거하는 exclude_none=True를 무조건 사용하지 않는다.
+
+새 DTO를 기본 API의 response_model이나 입력 모델에 연결하지 않았다.
+기존 API는 여전히 기존 AnalyzeRequest/AnalyzeResponse 계약이며 PDF 요청을 바로 수용하지 않는다.
+점수 공식·DB 저장·실험 SSE·기존 매퍼는 변경하지 않았다.
+
+검증: 전체 pytest 139개 통과(기존 107개 + 검토용 DTO 테스트 32개).
+외부 연동 성공이나 미정 정책 승인으로 해석하지 않는다.
