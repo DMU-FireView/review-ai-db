@@ -22,7 +22,11 @@ jobs:
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m pytest -q
       - run: docker compose config --quiet
+        env:
+          DB_PASSWORD: ci-config-only-not-for-deployment
       - run: docker compose build
+        env:
+          DB_PASSWORD: ci-config-only-not-for-deployment
 
   deploy:
     needs: test

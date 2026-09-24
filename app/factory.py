@@ -2,7 +2,7 @@
 
 import os
 from contextlib import asynccontextmanager
-from app.repositories.analysis_jobs import SQLiteJobStore
+from app.repositories.mysql_jobs import MySQLJobStore
 
 from dotenv import load_dotenv
 
@@ -14,11 +14,11 @@ from app.api.routes import router
 
 def create_app(*, job_store=None) -> FastAPI:
     load_dotenv()
-    store = job_store or SQLiteJobStore(os.getenv("AI_RESULT_DB_PATH", "data/ai-results.db"))
     experimental = os.getenv("ENABLE_EXPERIMENTAL_COLLECTION", "0") == "1"
 
     @asynccontextmanager
     async def lifespan(app):
+        store = job_store if job_store is not None else MySQLJobStore.from_env()
         store.initialize()
         app.state.job_store = store
         app.state.allow_legacy_defaults = os.getenv("ALLOW_LEGACY_CRAWLER_DEFAULTS", "0") == "1"

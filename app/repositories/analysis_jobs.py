@@ -1,4 +1,4 @@
-"""분석 작업·원본 입력·최종 결과를 전용 SQLite 파일에 원자적으로 보관한다."""
+"""저장소 인터페이스와 격리 테스트·과거 파일 조회용 SQLite 구현을 제공한다."""
 import json
 import sqlite3
 from contextlib import closing

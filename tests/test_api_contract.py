@@ -5,6 +5,7 @@ from unittest.mock import patch
 import pytest
 from fastapi.testclient import TestClient
 from app.factory import create_app
+from app.repositories.analysis_jobs import SQLiteJobStore
 from ai import analysis
 from ai.text_analyzer import calculate_text_score
 from ai.behavior_analyzer import calculate_behavior_score
@@ -20,20 +21,19 @@ REVIEW = {
 
 @pytest.fixture
 def client(monkeypatch, tmp_path):
-    monkeypatch.setenv("AI_RESULT_DB_PATH", str(tmp_path / "results.db"))
     monkeypatch.setenv("ENABLE_EXPERIMENTAL_COLLECTION", "0")
     monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
     monkeypatch.delenv("GOOGLE_APPLICATION_CREDENTIALS", raising=False)
-    # Invalid DB settings must not affect startup or requests.
+    # Explicit test store injection must not require a live MySQL server.
     monkeypatch.setenv("DB_PORT", "not-a-number")
     monkeypatch.setenv("REDIS_PORT", "not-a-number")
-    with TestClient(create_app()) as value:
+    with TestClient(create_app(job_store=SQLiteJobStore(str(tmp_path / "results.db")))) as value:
         yield value
 
 
-def test_health_without_database(client):
+def test_health_with_injected_store(client):
     assert client.get("/health").json() == {"status": "ok"}
-    assert not {"pymysql", "redis", "app.core.database", "app.repositories.products"} & sys.modules.keys()
+    assert not {"redis", "app.core.database", "app.repositories.products"} & sys.modules.keys()
 
 
 def test_single_review(client):

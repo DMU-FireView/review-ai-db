@@ -1,15 +1,15 @@
 <!-- 새 Azure Ubuntu VM의 AI 서비스 최초 설치와 자동 배포 절차. -->
 # Azure for Students 배포
 
-> 2026-09-09: 현재 코드는 전용 SQLite 결과 저장 볼륨(ai-results)을 사용합니다.
-> DB 파일 백업/보존 정책을 확정해야 하며 실험 수집/SSE API는 운영에서 OFF로 유지하세요.
-> 이번 변경의 Docker 빌드는 Linux 엔진 미실행으로 재검증하지 못했습니다.
+> 현재 코드는 MySQL 8.0과 기존 ai-db-data 볼륨을 사용합니다.
+> 배포 전에 VM의 .env에 유효한 DB 계정을 설정해야 합니다. 기존 볼륨은 초기 비밀번호 설정으로 재설정되지 않습니다.
+> DB 백업/보존 정책을 확정해야 하며 실험 수집/SSE API는 운영에서 OFF로 유지하세요.
 > 이전 검증 기록과 구분하고 [통합 준비 상태](integration-preparation.md)를 먼저 확인하세요.
 
 대상: Ubuntu Server 24.04 LTS x64, reviewadmin, /home/reviewadmin/review-ai-db.
 VM 생성과 GitHub Secrets 변경은 사용자가 수행한다.
 NSG 포트는 SSH 22와 AI HTTP 8000이며, 8000은 가능한 Data 서버 출발지만
-허용한다. DB 3306/5432와 Redis 6379는 AI 서버에 필요 없다.
+허용한다. MySQL은 Compose 내부에서 통신하므로 DB 포트를 NSG에 공개하지 않는다.
 현재 API에는 인증이 없으므로 접근 허용 범위를 팀에서 확정한다.
 
 ## 최초 한 번: 새 VM에서 reviewadmin으로 실행
@@ -53,14 +53,17 @@ AZURE_PASSWORD는 SSH 인증용이며 sudo 프롬프트에는 자동 전달되�
 - AZURE_USER: reviewadmin
 - AZURE_PASSWORD: 새 VM SSH 비밀번호
 
-DB_PORT, DB_HOST_PORT, DB_PASSWORD, REDIS_PASSWORD는 더 이상 사용하지 않는다.
+VM의 .env에 DB_PASSWORD를 반드시 설정한다. DB_USER/DB_NAME은 기본 root/review_system이며
+운영에서는 별도 최소 권한 계정을 사전에 생성해 사용한다. DB_HOST_PORT는 로컬 공개 포트다.
+Compose의 AI 컨테이너는 DB_HOST=ai-db, DB_PORT=3306으로 고정한다. Redis는 사용하지 않는다.
 GitHub에 저장된 기존 secret 값 자체는 이번 작업에서 삭제하지 않았다.
 
 main push → Python 3.12 pytest → Compose 설정·빌드 검증 → SSH →
 main 브랜치 확인 → git pull --ff-only origin main →
 sudo docker compose up -d --build → health 재시도 검사.
 
-workflow는 .env를 생성하거나 덮어쓰지 않는다.
+workflow는 .env를 생성하거나 덮어쓰지 않는다. 최초 실행 전 .env.example을 참고하여
+VM에 DB 접속 설정을 직접 준비한다. CI 빌드의 임시 비밀번호는 배포에 사용되지 않는다.
 선택적 Google 인증은 README의 읽기 전용 마운트를 사용한다.
 VM의 docker-compose.override.yml에 설정하면 자동 배포 명령에도 적용된다.
 컨테이너 교체 시 짧은 중단이 있을 수 있다.

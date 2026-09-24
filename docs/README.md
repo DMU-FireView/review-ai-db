@@ -22,7 +22,7 @@ API 계약 확정을 의미하지 않습니다. 세부 동작은 같은 브랜�
 | 문서 | 읽을 내용 / 주의점 |
 | --- | --- |
 | [프로젝트 README](../README.md) | 기본 분석 API, 로컬 실행, 기능별 상태, 결과 DB 보관 주의사항 |
-| [AI 통합 준비 상태](integration-preparation.md) | 자체 SQLite 결과 저장, 팀원 코드와의 차이, 실험 SSE, 미구현 복구 기능. 검증·커밋 관련 기록은 작성 시점 기준 |
+| [AI 통합 준비 상태](integration-preparation.md) | 자체 MySQL 결과 저장, 팀원 코드와의 차이, 실험 SSE, 미구현 복구 기능. 검증·커밋 관련 기록은 작성 시점 기준 |
 | [Azure 배포 안내](azure-ai-deployment.md) | VM·Secrets·배포 절차 참고. 새 통합 이미지의 Docker 재검증이 남아 있다는 상단 안내를 우선 확인 |
 
 현재 브랜치의 핵심 구분:

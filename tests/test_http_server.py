@@ -7,17 +7,18 @@ from urllib.request import Request, urlopen
 
 import uvicorn
 from app.factory import create_app
+from app.repositories.analysis_jobs import SQLiteJobStore
 
 
 def test_live_http(monkeypatch, tmp_path):
-    monkeypatch.setenv("AI_RESULT_DB_PATH", str(tmp_path / "results.db"))
     monkeypatch.setenv("ENABLE_EXPERIMENTAL_COLLECTION", "0")
     monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
     monkeypatch.delenv("GOOGLE_APPLICATION_CREDENTIALS", raising=False)
     sock = socket.socket()
     sock.bind(("127.0.0.1", 0))
     port = sock.getsockname()[1]
-    server = uvicorn.Server(uvicorn.Config(create_app(), log_level="error"))
+    app = create_app(job_store=SQLiteJobStore(str(tmp_path / "results.db")))
+    server = uvicorn.Server(uvicorn.Config(app, log_level="error"))
     thread = threading.Thread(target=server.run, kwargs={"sockets": [sock]}, daemon=True)
     thread.start()
     try:
