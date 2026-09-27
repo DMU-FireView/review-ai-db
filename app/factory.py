@@ -10,6 +10,8 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
 from app.api.routes import router
+from app.api.data_analysis import router as data_router
+from app.core.internal_auth import load_internal_token
 
 
 def create_app(*, job_store=None) -> FastAPI:
@@ -18,10 +20,10 @@ def create_app(*, job_store=None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app):
+        app.state.internal_token = load_internal_token()
         store = job_store if job_store is not None else MySQLJobStore.from_env()
         store.initialize()
         app.state.job_store = store
-        app.state.allow_legacy_defaults = os.getenv("ALLOW_LEGACY_CRAWLER_DEFAULTS", "0") == "1"
         crawler = None
         if experimental:
             from app.integrations.crawler_stream import CrawlerStreamClient
@@ -39,6 +41,7 @@ def create_app(*, job_store=None) -> FastAPI:
         lifespan=lifespan,
     )
     application.include_router(router)
+    application.include_router(data_router)
     if experimental:
         from app.api.collection import router as collection_router
         application.include_router(collection_router)

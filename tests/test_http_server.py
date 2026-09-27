@@ -40,6 +40,18 @@ def test_live_http(monkeypatch, tmp_path):
         with urlopen(request, timeout=5) as response:
             assert response.status == 200
             assert json.load(response)["results"][0]["rti"] == 88
+        data_payload = {"platform": "mall", "product_id": "0007", "reviews": [{
+            "review_id": "00:01", "content": "배송 빠르고 제품도 좋아요",
+        }]}
+        data_request = Request(base + "/api/v1/data/analyze",
+                               data=json.dumps(data_payload).encode(),
+                               headers={"Content-Type": "application/json"})
+        with urlopen(data_request, timeout=5) as response:
+            assert response.status == 200
+            result = json.load(response)
+            assert result["results"][0]["rti"] == 75.0
+            assert result["results"][0]["behavior_score"] is None
+            assert app.state.job_store.get(response.headers["X-Analysis-Job-ID"])["result"] == result
     finally:
         server.should_exit = True
         thread.join(timeout=10)

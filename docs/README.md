@@ -22,6 +22,7 @@ API 계약 확정을 의미하지 않습니다. 세부 동작은 같은 브랜�
 | 문서 | 읽을 내용 / 주의점 |
 | --- | --- |
 | [프로젝트 README](../README.md) | 기본 분석 API, 로컬 실행, 기능별 상태, 결과 DB 보관 주의사항 |
+| [Data AI v0.5 연동](data-ai-v05-integration.md) | 새 Data API, 평면 응답, 팀원 분석기 전환, 공유 토큰·HTTPS, SSE와 검증 한계 |
 | [AI 통합 준비 상태](integration-preparation.md) | 자체 MySQL 결과 저장, 팀원 코드와의 차이, 실험 SSE, 미구현 복구 기능. 검증·커밋 관련 기록은 작성 시점 기준 |
 | [Azure 배포 안내](azure-ai-deployment.md) | VM·Secrets·배포 절차 참고. 새 통합 이미지의 Docker 재검증이 남아 있다는 상단 안내를 우선 확인 |
 
@@ -31,7 +32,7 @@ API 계약 확정을 의미하지 않습니다. 세부 동작은 같은 브랜�
 - 수집/SSE와 결과 조회는 실험 경로이며 기본 비활성화입니다.
 - Redis 기반 Worker는 현재 실행 경로가 아닙니다.
 - 자동 작업 재개·멱등 요청·자동 재전송은 아직 구현되지 않았습니다.
-- 공개 API·인증·최종 분석기·운영 DB 정책은 팀 합의가 필요합니다.
+- 새 API는 승인된 팀원 분석기와 공유 토큰 인증을 지원합니다. 최종 경로·운영 계정·실제 연결 검증은 남아 있습니다.
 
 ## 협의 중
 
@@ -77,7 +78,7 @@ Spring → Redis → FastAPI Worker 구조와 `product_analysis_job` / `review_t
 | --- | --- |
 | [독립 AI 서비스 전환 기록](ai-service-migration.md) | DB·Redis 제거 당시 분석과 변경 이력. 이후 AI 자체 결과 DB를 추가했으므로 DB 제거 설명은 과거 기록 |
 | [프로젝트 파일 역할 안내](project-file-guide.md) | 모듈 정리 당시 파일 위치·역할. MySQL 초기화·Redis consumer 설명은 현재 실행 구조와 다름 |
-| [RTI 계산 로직 문서](rti-logic.md) | v0 정규화·규칙 기반 scoring 설명. 현재 계산 확인은 README와 `ai/analysis.py` 기준 |
+| [RTI 계산 로직 문서](rti-logic.md) | 과거 v0 scoring 설명. 기존 API는 ai/analysis.py, 새 Data API는 app/scoring/meta_scorer.py와 v0.5 연동 문서 기준 |
 | [Crawler MVP 전략](crawler-mvp-strategy.md) | 파일 기반 raw → converter → DB → RTI 검증 전략의 배경 |
 | [NAVER Worker 로컬 시뮬레이션 결과](naver-worker-local-simulation-result.md) | 당시 네이버 상품 1개·리뷰 30개 검증 기록. 현재 실서비스 통합 성공을 뜻하지 않음 |
 | [Crawler raw JSON 예제](examples/crawler_raw_sample.json) | 이전 raw 스키마의 샘플 데이터. 현재 분석 API나 SSE에 그대로 보내는 요청 본문이 아님 |

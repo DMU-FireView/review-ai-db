@@ -1,4 +1,4 @@
-# AI 통합 준비 상태 — MySQL 전환 반영
+# AI 통합 준비 상태 — v0.5 연동 반영
 
 이 문서는 이전 AI-only/DB 제거 계획보다 우선한다. 같은
 codex/modular-project-cleanup 브랜치에서 작업 중이며 공개 API 계약은 미확정이다.
@@ -6,6 +6,8 @@ codex/modular-project-cleanup 브랜치에서 작업 중이며 공개 API 계약
 ## 현재 구현
 
 - 기존 POST /api/v1/analyze 본문과 점수/사유는 유지한다.
+- POST /api/v1/data/analyze와 SSE는 승인된 팀원 분석기 및 v0.5 평면 결과를 사용한다.
+  최신 계약·인증 설명은 [Data AI v0.5 연동](data-ai-v05-integration.md)을 우선한다.
 - 요청과 결과를 MySQL ai_analysis_jobs 테이블에 저장한다.
 - DB 커밋 성공 후에만 최종 JSON 또는 SSE result를 반환한다.
 - X-Analysis-Job-ID는 AI 저장 작업 ID다. 크롤러의 job_id와 별개이며 멱등 키가 아니다.
@@ -14,7 +16,7 @@ codex/modular-project-cleanup 브랜치에서 작업 중이며 공개 API 계약
 - Docker의 기존 ai-db-data 볼륨을 재사용한다. 과거 ai-results 볼륨도 삭제하지 않는다.
   docker compose down -v는 결과를 삭제하므로 사용하지 않는다.
 
-## MySQL 전환 검증 상태
+## 이전 MySQL 전환 검증 상태
 
 - 로컬 테스트 146개 통과, 실제 MySQL 통합 테스트 1개는 접속 환경 미확정으로 건너뜀.
 - Docker Compose 설정 검사와 AI 이미지 빌드 통과. AI 점수 공식·분석 알고리즘은 변경하지 않음.
@@ -24,38 +26,30 @@ codex/modular-project-cleanup 브랜치에서 작업 중이며 공개 API 계약
 
 ## 실험 API (기본 OFF)
 
-ENABLE_EXPERIMENTAL_COLLECTION=1과 명시적 CRAWLER_BASE_URL로 활성화한다.
-인증/호출 주체/최종 경로가 정해질 때까지 운영 공개 금지. 로컬 테스트용이다.
+ENABLE_EXPERIMENTAL_COLLECTION=1과 명시적 DATA_SERVER_BASE_URL로 활성화한다.
+인증 토큰은 X-Internal-Token으로 전송하며 HTTPS가 필요하다. 실제 이벤트 샘플 확인 전 운영 공개 금지.
 
 - POST /experimental/analysis/collect/stream
-  - 임시 요청: platform, product_id, limit(1~500), 선택 product_key/job_id.
+  - 임시 요청: platform, product_id, limit(1~500), 선택 job_id. product_key 지정은 422다.
   - 서버 발급 작업 ID는 응답 헤더 X-Analysis-Job-ID와 progress/error에 실린다.
   - progress / heartbeat / result / error 이벤트를 사용한다.
-  - result는 현재 AnalyzeResponse(product_id, results)이다.
-    팀원 ProductAnalysisResponse와 다르며 호환 완료를 뜻하지 않는다.
+  - result는 v0.5의 platform/product_id/review_count/results와 평면 점수·사유 코드 배열이다.
 - GET /experimental/analysis/jobs/{job_id}
   - 저장된 상태·결과 조회용 임시 경로. 원본 입력은 반환하지 않는다.
 
-크롤러 입력에는 구매 여부, 일일 작성 수, 유사 리뷰 수 등 기존 점수 입력이 없다.
-따라서 ALLOW_LEGACY_CRAWLER_DEFAULTS=1을 추가하지 않으면 수집 요청은 503으로 차단한다.
-이 플래그는 실험 승인일 뿐 운영 점수 계약 확정이 아니다.
-
-승인한 실험에서는 이미지 개수와 원본 표시 필드를 매핑하고, 나머지는 기존 ReviewInput의
-기본값을 그대로 사용한다(구매 unknown, 일일 1건, 유사 0건, quality None).
-rating은 현재 점수 계산에 쓰이지 않아 기존 기본값을 유지하며 원본 rating은 DB 입력에 보관한다.
-작성자/날짜 누락은 표시용 빈 문자열이다. 원본에는 없는 관측값을 새로 추론하지 않는다.
-이 기본값은 실제 관측 근거가 아니므로 운영 사용 전에 반드시 합의한다.
+ALLOW_LEGACY_CRAWLER_DEFAULTS 플래그와 과거 기본값 매핑은 더 이상 실행 경로에서 사용하지 않는다.
+정규화 리뷰의 ID·본문·rating·written_at을 새 계약에 전달한다. 원본 수집 데이터는 DB에 보존한다.
+본문 외 행동 근거를 생성하지 않는다. 부족한 행동·비교 근거의 점수는 null이다.
 
 ## 팀원 코드와의 차이
 
 출처: DMU-FireView/review-ai-new 커밋 bb2dd83b1ecd63947971363af3dd81271b566cf2.
 contracts/crawler.py, contracts/stream.py, integrations/crawler_stream.py는 해당
 스키마·SSE 디코더/수신기에서 가져와 import 경로와 URL 인코딩을 조정했다.
-점수 service, NormalizedTextSimilarityAdapter, RTI 계산기는 가져오지 않았다.
-
-팀원 코드는 묶음 유사도와 사용 가능 신호를 계산한다.
-현재 저장소는 전달받은 similar_review_count와 고정 가중치 .4/.35/.25를 사용한다.
-둘은 동등하지 않으며 임의로 혼합하지 않는다. 기존 ai/*.py 평가 파일은 변경하지 않았다.
+이후 사용자 승인으로 c48b7e566bf8e5d4c832c2fcad64da4406af707e의 분석기·점수 service·
+NormalizedTextSimilarityAdapter·RTI 계산기를 새 Data API와 SSE에 연결했다.
+기본 가중치는 .5/.3/.2이며 가용 신호만 재정규화한다. 80 이상 safe를 유지한다.
+기존 ai/*.py 평가는 호환 API 전용으로 남기며 서로 다른 계산 경로를 혼합하지 않는다.
 
 ## 연결 종료·복구 범위
 
@@ -72,7 +66,7 @@ contracts/crawler.py, contracts/stream.py, integrations/crawler_stream.py는 해
 
 ## 합의 후 해야 할 일
 
-1. 최종 분석기/누락 신호 정책, 공개 API 경로·필드·오류·인증 확정.
+1. Data 측에 새 API 경로·평면 필드·오류·헤더를 전달하고 실제 샘플·HTTPS 주소로 연동 검증.
 2. MySQL 계정·백업, 결과 보존/삭제, 중복 요청·재시작 복구 정책 확정.
 3. 실크롤러·Spring 연동 및 긴 분석 timeout 검증.
 4. main 충돌 해결과 PR 설명 갱신. 기존 PR의 DB 제거 설명은 현재 상태와 다르다.

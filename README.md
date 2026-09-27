@@ -2,7 +2,8 @@
 
 Data 서버가 HTTP로 전달한 리뷰를 분석해 JSON을 반환합니다.
 분석 결과는 AI 자체 MySQL DB에 먼저 저장합니다. Redis는 사용하지 않습니다.
-팀원 저장소의 크롤러 SSE 수신 계약을 통합했으며 새 공개 계약은 아직 미확정입니다.
+v0.5 Data 분석 API와 팀원 분석기를 통합했습니다. 최종 공개 경로와 실제 Data 연동은 검증 전입니다.
+새 연동은 [v0.5 API·인증·계산 정책](docs/data-ai-v05-integration.md)을 먼저 확인하세요.
 수집/SSE 실험 경로는 기본 비활성화입니다. [통합 상태·미확정 사항](docs/integration-preparation.md)을 먼저 확인하세요.
 
 ## 현재 상태와 역할
@@ -12,15 +13,16 @@ Data 서버가 HTTP로 전달한 리뷰를 분석해 JSON을 반환합니다.
 | 기본 기능 | 리뷰 배치 분석, AI 자체 DB에 입력·결과 저장, 저장 성공 후 JSON 응답 |
 | 실험 기능 (기본 OFF) | 외부 크롤러 SSE 수신, 수집 진행 알림, 분석 중 heartbeat, 저장 결과 조회 |
 | 미구현 | 프로세스 재시작 후 작업 자동 재개, 멱등 요청, 결과 자동 재전송 |
-| 팀 합의 필요 | 최종 API·인증, 크롤러 누락 신호 처리, 최종 분석기, 운영 DB·백업·보존 정책 |
+| 팀 합의 필요 | 최종 공개 API 경로·HTTPS·실제 이벤트 샘플, 운영 계정·DB 백업·보존 정책 |
 
 기본 API 처리 순서는 **요청 → 입력 저장 → 점수 계산 → 결과 저장 → HTTP 응답**입니다.
 현재는 `202`로 접수만 알리는 작업 큐가 아니라, 계산·저장을 마친 최종 결과를 반환합니다.
 크롤링 자체는 외부 크롤러가 담당하며, 이 저장소의 실험 기능은 그 스트림을 받아 분석에 연결합니다.
-팀원 `review-ai-new`의 수신 계약은 가져왔지만, 다른 점수 알고리즘을 덮어쓰지는 않았습니다.
+새 Data API와 SSE는 승인된 팀원 분석기(.5/.3/.2)를 사용합니다.
+기존 `/api/v1/analyze`는 호환용 기존 점수(.4/.35/.25)를 유지합니다.
 
-> 현재 API에는 인증이 없습니다. 로컬 검증을 먼저 진행하고, 운영 공개 전에 접근 제어와
-> 팀 연동 계약을 확정하세요. DB 저장은 클라이언트의 결과 수신까지 보장하지 않습니다.
+> 운영에서는 `REQUIRE_INTERNAL_TOKEN=1`과 `INTERNAL_TOKEN`을 설정하고 HTTPS로 공개하세요.
+> 토큰 미설정·REQUIRE=0은 로컬 호환 모드입니다. DB 저장은 클라이언트의 결과 수신까지 보장하지 않습니다.
 
 ## 빠른 시작
 
@@ -40,7 +42,6 @@ if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 # DB_HOST=127.0.0.1, DB_PORT=3307 (Compose 내부에서는 ai-db:3306)
 docker compose up -d ai-db
 $env:ENABLE_EXPERIMENTAL_COLLECTION = "0"
-$env:ALLOW_LEGACY_CRAWLER_DEFAULTS = "0"
 $env:GOOGLE_APPLICATION_CREDENTIALS = ""
 .\.venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8000
 ```
@@ -52,7 +53,7 @@ macOS/Linux에서는 가상환경 생성·설치·실행 명령을 다음처럼 
 if [ ! -d .venv ]; then python3.12 -m venv .venv; fi
 .venv/bin/python -m pip install -r requirements-dev.txt
 docker compose up -d ai-db
-ENABLE_EXPERIMENTAL_COLLECTION=0 ALLOW_LEGACY_CRAWLER_DEFAULTS=0 GOOGLE_APPLICATION_CREDENTIALS="" \
+ENABLE_EXPERIMENTAL_COLLECTION=0 GOOGLE_APPLICATION_CREDENTIALS="" \
   .venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -61,7 +62,7 @@ ENABLE_EXPERIMENTAL_COLLECTION=0 ALLOW_LEGACY_CRAWLER_DEFAULTS=0 GOOGLE_APPLICAT
 위 예시는 `.env`에서 DB 접속 정보를 읽습니다. 기존 터미널에
 `PYTHON_DOTENV_DISABLED=1`이 설정되어 있다면 해제하거나 새 터미널에서 실행하세요.
 
-### 2. 첫 분석 요청
+### 2. 기존 호환 API 분석 요청
 
 서버는 켜둔 채 **새 PowerShell 터미널**에서 실행합니다.
 
@@ -105,8 +106,13 @@ macOS/Linux에서는 Swagger UI의 `POST /api/v1/analyze` → **Try it out**에
 
 ## API
 
+새 연동 경로는 `POST /api/v1/data/analyze`입니다. v0.5 요청·응답 예시는
+[연동 문서](docs/data-ai-v05-integration.md)를 사용하세요. 토큰을 설정한 경우 분석/실험 API에
+`X-Internal-Token` 헤더가 필요합니다. 아래 기존 예시는 토큰이 없는 로컬 호환 모드 기준입니다.
+
 - `GET /health`: `{"status":"ok"}`
-- `POST /api/v1/analyze`: 리뷰 배치 분석
+- `POST /api/v1/data/analyze`: v0.5 리뷰 배치 분석 (팀원 분석기)
+- `POST /api/v1/analyze`: 기존 호환 리뷰 배치 분석
 - `GET /docs`, `GET /redoc`, `GET /openapi.json`: API 문서
 - `GET /`: /docs로 이동
 
@@ -163,7 +169,7 @@ account_age_days는 허용하지만 현재 점수에 사용하지 않습니다.
 작업·입력·분석 결과를 DB에 저장하고, 성공 응답에 X-Analysis-Job-ID 헤더를 추가합니다.
 계산 또는 저장 실패 시 성공 결과 대신 503을 반환합니다.
 
-RTI = Python round(text × 0.4 + behavior × 0.35 + network × 0.25).
+기존 호환 API에만 적용: RTI = Python round(text × 0.4 + behavior × 0.35 + network × 0.25).
 50 미만 danger, 50 이상 80 미만 warn, 80 이상 safe입니다.
 기존 사유 순서(text → behavior → network)와 input_features 문자열 변환도 유지합니다.
 
@@ -212,10 +218,10 @@ MySQL 호스트 포트는 기본 `127.0.0.1:3307`이며 외부 네트워크에 �
 - `POST /experimental/analysis/collect/stream`
 - `GET /experimental/analysis/jobs/{job_id}`
 
-실험 경로 등록에는 `ENABLE_EXPERIMENTAL_COLLECTION=1`과 명시적 `CRAWLER_BASE_URL`이 필요합니다.
-크롤러 입력에는 기존 분석기에 필요한 일부 신호가 없으므로,
-수집 분석은 `ALLOW_LEGACY_CRAWLER_DEFAULTS=1`까지 승인하지 않으면 503으로 차단합니다.
-팀 합의 없이 이 설정을 운영에서 켜지 마세요.
+실험 경로 등록에는 `ENABLE_EXPERIMENTAL_COLLECTION=1`과 명시적 `DATA_SERVER_BASE_URL`이 필요합니다.
+새 SSE는 팀원 분석기를 사용하고 v0.5 결과를 반환합니다. 누락 근거는 null로 처리하며
+`ALLOW_LEGACY_CRAWLER_DEFAULTS`는 더 이상 사용하지 않습니다. 토큰 전송은 HTTPS만 허용합니다.
+실제 이벤트 계약 확인 전 운영에서 켜지 마세요.
 세부 입력 매핑·이벤트·연결 중단 한계는 [통합 준비 문서](docs/integration-preparation.md)에 정리돼 있습니다.
 
 ## 구조와 기존 파일

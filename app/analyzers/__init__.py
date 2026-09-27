@@ -1,1 +1,1 @@
-"""Review analyzer implementations."""
+"""리뷰 신호별 분석기 패키지."""

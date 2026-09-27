@@ -10,7 +10,8 @@
 VM 생성과 GitHub Secrets 변경은 사용자가 수행한다.
 NSG 포트는 SSH 22와 AI HTTP 8000이며, 8000은 가능한 Data 서버 출발지만
 허용한다. MySQL은 Compose 내부에서 통신하므로 DB 포트를 NSG에 공개하지 않는다.
-현재 API에는 인증이 없으므로 접근 허용 범위를 팀에서 확정한다.
+분석 API에 REQUIRE_INTERNAL_TOKEN=1 및 INTERNAL_TOKEN을 설정하고 TLS termination을 구성한다.
+접근 허용 범위는 팀에서 확정한다. /health는 인증 없는 프로세스 상태 확인용이다.
 
 ## 최초 한 번: 새 VM에서 reviewadmin으로 실행
 

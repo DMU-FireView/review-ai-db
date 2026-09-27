@@ -5,8 +5,8 @@ import json
 import logging
 from fastapi.concurrency import run_in_threadpool
 from app.contracts.stream import ReviewEvent, DoneEvent, ProgressEvent, HeartbeatEvent
-from app.integrations.crawler_mapping import to_legacy_inputs, MappingNotApproved
-from app.services.persisted_analysis import evaluate_and_store
+from app.contracts.data_ai_v05 import DataAnalyzeRequestV05
+from app.services.data_analysis import evaluate_data_and_store
 
 LOGGER = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ def sse(name: str, data: dict) -> bytes:
 
 
 async def collection_events(client, store, job_id, request, *,
-                            allow_legacy_defaults=False, heartbeat_seconds=15):
+                            heartbeat_seconds=15):
     reviews = {}
     events = client.stream_reviews(request.platform, request.product_id, limit=request.limit)
     analysis_task = None
@@ -58,11 +58,15 @@ async def collection_events(client, store, job_id, request, *,
             elif isinstance(event, DoneEvent):
                 if not reviews or event.collected != len(reviews):
                     raise ValueError("Incomplete or empty collection")
-                product_id = request.product_key or f"{request.platform}:{request.product_id}"
-                inputs = to_legacy_inputs(list(reviews.values()), product_id,
-                                          allow_legacy_defaults=allow_legacy_defaults)
+                payload = DataAnalyzeRequestV05(
+                    platform=request.platform, product_id=request.product_id,
+                    reviews=[{"review_id": r.review_id, "content": r.content,
+                              "rating": r.rating,
+                              "written_at": r.written_at.isoformat() if r.written_at else None}
+                             for r in reviews.values()],
+                )
                 analysis_task = asyncio.create_task(run_in_threadpool(
-                    evaluate_and_store, store, job_id, product_id, inputs))
+                    evaluate_data_and_store, store, job_id, payload))
                 while not analysis_task.done():
                     ready, _ = await asyncio.wait({analysis_task}, timeout=heartbeat_seconds)
                     if not ready:
@@ -75,7 +79,7 @@ async def collection_events(client, store, job_id, request, *,
         raise
     except Exception as exc:
         LOGGER.exception("Collection/analysis failed for %s", job_id)
-        code = "MAPPING_NOT_APPROVED" if isinstance(exc, MappingNotApproved) else "COLLECTION_OR_ANALYSIS_FAILED"
+        code = "COLLECTION_OR_ANALYSIS_FAILED"
         with contextlib.suppress(Exception):
             await run_in_threadpool(store.fail, job_id, code)
         terminal = True

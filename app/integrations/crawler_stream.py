@@ -29,7 +29,7 @@ import json
 from collections.abc import AsyncIterator, Iterable, Iterator
 from dataclasses import dataclass
 from types import TracebackType
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 
 import httpx
 from pydantic import ValidationError
@@ -234,7 +234,9 @@ class CrawlerStreamClient:
     ) -> None:
         self.settings = settings if settings is not None else load_crawler_settings()
         resolved = base_url if base_url is not None else self.settings.base_url
-        self.base_url = resolved.rstrip("/")
+        # base_url override에도 같은 TLS/비밀 정보 검사를 적용한다.
+        checked = CrawlerSettings(base_url=resolved, internal_token=self.settings.internal_token)
+        self.base_url = checked.base_url
         self.stream_timeout = (
             stream_timeout if stream_timeout is not None else self.settings.stream_timeout
         )
@@ -353,6 +355,11 @@ class CrawlerStreamClient:
         """한 번의 연결에서 나오는 SSE 프레임을 내보낸다."""
 
         headers = {"Accept": "text/event-stream", "Cache-Control": "no-store"}
+        parsed = urlsplit(path)
+        if parsed.scheme or parsed.netloc or not path.startswith("/") or path.startswith("//") or "\\" in path:
+            raise CrawlerRequestError("Only same-server relative paths are allowed", status_code=502)
+        if self.settings.internal_token is not None:
+            headers["X-Internal-Token"] = self.settings.internal_token.get_secret_value()
         if last_event_id is not None:
             headers["Last-Event-ID"] = last_event_id
 
@@ -362,15 +369,18 @@ class CrawlerStreamClient:
 
         async with self._ensure_client().stream(
             "GET",
-            path,
+            str(httpx.URL(self.base_url).join(path)),
             params=params,
             headers=headers,
             timeout=timeout,
+            follow_redirects=False,
         ) as response:
+            if response.is_redirect:
+                raise CrawlerRequestError("Data server redirects are not followed", status_code=502)
             if response.is_error:
                 await response.aread()
                 raise CrawlerRequestError(
-                    _error_detail(response),
+                    f"Data server returned HTTP {response.status_code}",
                     status_code=response.status_code,
                 )
 
