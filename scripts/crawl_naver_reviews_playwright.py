@@ -1,3 +1,5 @@
+"""Playwright 브라우저로 네이버 리뷰와 네트워크 응답을 수집한다."""
+
 import argparse
 import json
 from datetime import datetime, timezone

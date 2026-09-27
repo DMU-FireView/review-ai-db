@@ -1,4 +1,6 @@
-﻿from ai.sentiment_client import analyze_sentiment
+"""리뷰 문장과 품질·감성 신호를 규칙으로 평가해 텍스트 점수를 계산한다."""
+
+from ai.sentiment_client import analyze_sentiment
 
 REPETITIVE_KEYWORDS = [
     "최고",

@@ -1,3 +1,5 @@
+-- MySQL 서비스 구동에 필요한 핵심 테이블을 안전하게 초기화한다.
+
 CREATE TABLE IF NOT EXISTS products (
     product_id VARCHAR(50) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

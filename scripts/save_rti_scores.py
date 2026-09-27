@@ -1,3 +1,5 @@
+"""SQLite 리뷰를 분석하고 계산된 RTI 점수를 저장한다."""
+
 import json
 import sqlite3
 import sys

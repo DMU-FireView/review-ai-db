@@ -1,3 +1,5 @@
+"""팀원별 원본 리뷰 데이터를 공통 입력 형식으로 변환한다."""
+
 import json
 from collections import defaultdict
 from pathlib import Path

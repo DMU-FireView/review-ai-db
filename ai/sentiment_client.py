@@ -1,4 +1,6 @@
-﻿import os
+"""Google Cloud 감성 분석을 선택적으로 호출하고 안전한 fallback을 제공한다."""
+
+import os
 from typing import Dict
 
 

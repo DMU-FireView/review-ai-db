@@ -1,4 +1,6 @@
-﻿def make_reason(code, message):
+"""리뷰 작성 행동 신호를 규칙으로 평가해 행동 신뢰 점수를 계산한다."""
+
+def make_reason(code, message):
     return {
         "code": code,
         "message": message

@@ -1,4 +1,4 @@
-﻿# ai/rti_scoring.py
+"""정규화된 리뷰를 일괄 분석해 RTI 결과 JSON을 생성한다."""
 import json
 from pathlib import Path
 

@@ -1,0 +1,61 @@
+{
+  "platform": "synthetic-mall",
+  "product_id": "0007",
+  "review_count": 2,
+  "results": [
+    {
+      "review_id": "00:01",
+      "rti_available": true,
+      "rti": 88,
+      "level": "safe",
+      "signals": {
+        "text": {
+          "available": true,
+          "score": 85,
+          "unavailable_reasons": []
+        },
+        "behavior": {
+          "available": true,
+          "score": 90,
+          "unavailable_reasons": []
+        },
+        "network": {
+          "available": true,
+          "score": 90,
+          "unavailable_reasons": []
+        }
+      },
+      "reasons": []
+    },
+    {
+      "review_id": "0002",
+      "rti_available": true,
+      "rti": 60,
+      "level": "warn",
+      "signals": {
+        "text": {
+          "available": true,
+          "score": 60,
+          "unavailable_reasons": []
+        },
+        "behavior": {
+          "available": true,
+          "score": 60,
+          "unavailable_reasons": []
+        },
+        "network": {
+          "available": true,
+          "score": 60,
+          "unavailable_reasons": []
+        }
+      },
+      "reasons": [
+        {
+          "source": "network",
+          "code": "SYNTHETIC_SIMILAR_PATTERN",
+          "message": "합성 테스트용 유사 패턴 근거"
+        }
+      ]
+    }
+  ]
+}

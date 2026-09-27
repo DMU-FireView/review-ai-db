@@ -1,4 +1,6 @@
-﻿def make_reason(code, message):
+"""리뷰 간 유사성과 네트워크 신호를 평가해 신뢰 점수를 계산한다."""
+
+def make_reason(code, message):
     return {
         "code": code,
         "message": message

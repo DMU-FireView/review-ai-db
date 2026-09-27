@@ -1,3 +1,5 @@
+"""SQLite에 저장된 RTI 점수 조회 동작을 검증한다."""
+
 import json
 import sqlite3
 import sys

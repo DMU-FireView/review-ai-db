@@ -1,3 +1,5 @@
+"""SQLite에 저장된 RTI 점수를 조회하는 레거시 로컬 저장소이다."""
+
 import json
 
 

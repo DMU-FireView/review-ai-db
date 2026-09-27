@@ -1,0 +1,47 @@
+{
+  "requested": [
+    {
+      "platform": "synthetic-mall",
+      "product_id": "0007",
+      "review_id": "00:01"
+    }
+  ],
+  "evaluated": [
+    {
+      "identity": {
+        "platform": "synthetic-mall",
+        "product_id": "0007",
+        "review_id": "00:01"
+      },
+      "evaluation": {
+        "rti_available": false,
+        "rti": null,
+        "level": null,
+        "signals": {
+          "text": {
+            "available": false,
+            "score": null,
+            "unavailable_reasons": [
+              "insufficient_text_evidence"
+            ]
+          },
+          "behavior": {
+            "available": false,
+            "score": null,
+            "unavailable_reasons": [
+              "insufficient_behavior_evidence"
+            ]
+          },
+          "network": {
+            "available": false,
+            "score": null,
+            "unavailable_reasons": [
+              "insufficient_comparison_reviews"
+            ]
+          }
+        },
+        "reasons": []
+      }
+    }
+  ]
+}

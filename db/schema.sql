@@ -1,4 +1,6 @@
-﻿CREATE TABLE products (
+-- 기존 팀 MySQL 리뷰·작업 스키마를 보존한다. 현재 AI 결과 저장은 별도 ai_analysis_jobs 테이블을 사용한다.
+
+CREATE TABLE products (
     product_id VARCHAR(50) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(100),
@@ -31,8 +33,6 @@ CREATE TABLE review_trust_scores (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (review_id) REFERENCES reviews(review_id)
 );
-
-
 
 CREATE TABLE product_analysis_job (
     job_id VARCHAR(36) PRIMARY KEY COMMENT '작업 고유 ID (UUID 사용 권장)',
