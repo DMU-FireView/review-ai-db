@@ -106,13 +106,12 @@ def test_live_mysql_lifecycle_and_http(monkeypatch):
         assert store.get(failed)["status"] == "FAILED"
         assert store.get("missing") is None
         with TestClient(create_app(job_store=store)) as client:
-            response = client.post("/api/v1/analyze", json={"product_id": "mysql-check", "reviews": [{
+            response = client.post("/api/v1/data/analyze", json={"platform": "test", "product_id": "mysql-check", "reviews": [{
                 "review_id": "1001", "content": "배송 빠르고 제품도 좋아요",
-                "user_id": "user1", "review_date": "2026-09-08", "verified_purchase": True,
             }]})
             assert response.status_code == 200
             ids.append(response.headers["X-Analysis-Job-ID"])
-            assert response.json()["results"][0]["rti"] == 88
+            assert response.json()["results"][0]["rti"] == 75
             assert store.get(ids[-1])["result"] == response.json()
     finally:
         for job_id in ids:

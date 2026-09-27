@@ -2,7 +2,7 @@
 
 Data 서버가 HTTP로 전달한 리뷰를 분석해 JSON을 반환합니다.
 분석 결과는 AI 자체 MySQL DB에 먼저 저장합니다. Redis는 사용하지 않습니다.
-v0.5 Data 분석 API와 팀원 분석기를 통합했습니다. 최종 공개 경로와 실제 Data 연동은 검증 전입니다.
+v0.5 Data 분석 API와 팀원 분석기를 통합했습니다. 공식 분석 경로는 `POST /api/v1/data/analyze`입니다.
 새 연동은 [v0.5 API·인증·계산 정책](docs/data-ai-v05-integration.md)을 먼저 확인하세요.
 수집/SSE 실험 경로는 기본 비활성화입니다. [통합 상태·미확정 사항](docs/integration-preparation.md)을 먼저 확인하세요.
 
@@ -13,13 +13,13 @@ v0.5 Data 분석 API와 팀원 분석기를 통합했습니다. 최종 공개 �
 | 기본 기능 | 리뷰 배치 분석, AI 자체 DB에 입력·결과 저장, 저장 성공 후 JSON 응답 |
 | 실험 기능 (기본 OFF) | 외부 크롤러 SSE 수신, 수집 진행 알림, 분석 중 heartbeat, 저장 결과 조회 |
 | 미구현 | 프로세스 재시작 후 작업 자동 재개, 멱등 요청, 결과 자동 재전송 |
-| 팀 합의 필요 | 최종 공개 API 경로·HTTPS·실제 이벤트 샘플, 운영 계정·DB 백업·보존 정책 |
+| 팀 합의 필요 | HTTPS·실제 이벤트 샘플, 운영 계정·DB 백업·보존 정책 |
 
 기본 API 처리 순서는 **요청 → 입력 저장 → 점수 계산 → 결과 저장 → HTTP 응답**입니다.
 현재는 `202`로 접수만 알리는 작업 큐가 아니라, 계산·저장을 마친 최종 결과를 반환합니다.
 크롤링 자체는 외부 크롤러가 담당하며, 이 저장소의 실험 기능은 그 스트림을 받아 분석에 연결합니다.
 새 Data API와 SSE는 승인된 팀원 분석기(.5/.3/.2)를 사용합니다.
-기존 `/api/v1/analyze`는 호환용 기존 점수(.4/.35/.25)를 유지합니다.
+과거 호환 분석 라우트는 운영 API에서 제거했습니다.
 
 > 운영에서는 `REQUIRE_INTERNAL_TOKEN=1`과 `INTERNAL_TOKEN`을 설정하고 HTTPS로 공개하세요.
 > 토큰 미설정·REQUIRE=0은 로컬 호환 모드입니다. DB 저장은 클라이언트의 결과 수신까지 보장하지 않습니다.
@@ -32,7 +32,7 @@ Python 3.12와 Git이 필요합니다. 이미 저장소가 있다면 복제 단�
 ### 1. 설치와 서버 실행 (Windows PowerShell)
 
 ```powershell
-git clone --branch codex/modular-project-cleanup https://github.com/DMU-FireView/review-ai-db.git
+git clone --branch main https://github.com/DMU-FireView/review-ai-db.git
 cd review-ai-db
 if (-not (Test-Path .venv)) { py -3.12 -m venv .venv }
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
@@ -62,28 +62,28 @@ ENABLE_EXPERIMENTAL_COLLECTION=0 GOOGLE_APPLICATION_CREDENTIALS="" \
 위 예시는 `.env`에서 DB 접속 정보를 읽습니다. 기존 터미널에
 `PYTHON_DOTENV_DISABLED=1`이 설정되어 있다면 해제하거나 새 터미널에서 실행하세요.
 
-### 2. 기존 호환 API 분석 요청
+### 2. 공식 Data API 분석 요청
 
-서버는 켜둔 채 **새 PowerShell 터미널**에서 실행합니다.
+서버는 켜둔 채 **새 PowerShell 터미널**에서 실행합니다. 아래 예시는 로컬 토큰 미설정 기준이며,
+인증 사용 시 `-Headers @{"X-Internal-Token"=$env:INTERNAL_TOKEN}`을 추가하세요.
 
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8000/health"
 
 $analysisBody = @{
+    platform = "mall"
     product_id = "A001"
     reviews = @(
         @{
             review_id = "1001"
             content = "배송 빠르고 제품도 좋아요"
-            user_id = "user1"
-            review_date = "2026-09-08"
-            verified_purchase = $true
+            written_at = "2026-09-08T00:00:00"
         }
     )
 } | ConvertTo-Json -Depth 5
 
 $analysisResponse = Invoke-WebRequest -Method Post `
-    -Uri "http://localhost:8000/api/v1/analyze" `
+    -Uri "http://localhost:8000/api/v1/data/analyze" `
     -ContentType "application/json; charset=utf-8" `
     -Body ([System.Text.Encoding]::UTF8.GetBytes($analysisBody))
 
@@ -92,9 +92,9 @@ $analysisResponse.Headers["X-Analysis-Job-ID"]
 $analysisResponse.Content | ConvertFrom-Json | ConvertTo-Json -Depth 10
 ```
 
-기대 결과는 health의 `status: ok`, 분석 HTTP `200`, RTI `88`, 등급 `safe`입니다.
-이 점수는 위 예제와 Google 감성 API 비활성화 조건 기준입니다.
-macOS/Linux에서는 Swagger UI의 `POST /api/v1/analyze` → **Try it out**에
+기대 결과는 health의 `status: ok`, 분석 HTTP `200`, RTI `75`, 등급 `warn`입니다.
+이 예시는 비교 리뷰와 행동 근거가 없어 텍스트 점수만 RTI에 반영합니다.
+macOS/Linux에서는 Swagger UI의 `POST /api/v1/data/analyze` → **Try it out**에
 아래 API 절의 JSON을 넣어 동일하게 확인할 수 있습니다.
 
 기본 저장소는 MySQL의 `review_system.ai_analysis_jobs`입니다.
@@ -106,72 +106,57 @@ macOS/Linux에서는 Swagger UI의 `POST /api/v1/analyze` → **Try it out**에
 
 ## API
 
-새 연동 경로는 `POST /api/v1/data/analyze`입니다. v0.5 요청·응답 예시는
-[연동 문서](docs/data-ai-v05-integration.md)를 사용하세요. 토큰을 설정한 경우 분석/실험 API에
-`X-Internal-Token` 헤더가 필요합니다. 아래 기존 예시는 토큰이 없는 로컬 호환 모드 기준입니다.
+운영 Swagger에는 다음 두 경로만 표시됩니다 (`ENABLE_EXPERIMENTAL_COLLECTION=0`).
 
 - `GET /health`: `{"status":"ok"}`
-- `POST /api/v1/data/analyze`: v0.5 리뷰 배치 분석 (팀원 분석기)
-- `POST /api/v1/analyze`: 기존 호환 리뷰 배치 분석
-- `GET /docs`, `GET /redoc`, `GET /openapi.json`: API 문서
-- `GET /`: /docs로 이동
+- `POST /api/v1/data/analyze`: Data/AI v0.5 공식 리뷰 배치 분석
+
+`/docs`, `/redoc`, `/openapi.json`은 API 문서이며 `/`는 문서 화면으로 이동합니다.
+토큰을 설정한 경우 분석 요청에 `X-Internal-Token` 헤더가 필요합니다.
+
+요청 예시:
 
 ```json
 {
+  "platform": "mall",
   "product_id": "A001",
   "reviews": [{
     "review_id": "1001",
     "content": "배송 빠르고 제품도 좋아요",
     "rating": 5,
-    "user_id": "user1",
-    "review_date": "2026-09-08",
-    "verified_purchase": true,
-    "account_age_days": 500,
-    "reviews_written_today": 1,
-    "similar_review_count": 0
+    "written_at": "2026-09-08T00:00:00"
   }]
 }
 ```
 
-Google 인증 미설정 시 위 입력의 실제 응답:
+응답 예시:
 
 ```json
 {
+  "platform": "mall",
   "product_id": "A001",
+  "review_count": 1,
   "results": [{
     "review_id": "1001",
-    "content": "배송 빠르고 제품도 좋아요",
-    "author": "user1",
-    "date": "2026-09-08",
-    "rti": 88,
-    "level": "safe",
-    "signals": {"text": 75, "behavior": 95, "network": 100},
-    "input_features": {
-      "image_count": 0, "quality_score": null,
-      "verified_purchase": "True", "repurchase": "unknown", "free_trial": "unknown",
-      "reviews_written_today": 1, "similar_review_count": 0
-    },
-    "reasons": [
-      {"code": "SHORT_REVIEW", "message": "리뷰 내용이 지나치게 짧음"},
-      {"code": "NO_IMAGE_ATTACHED", "message": "이미지 첨부 없음"}
-    ]
+    "rti": 75.0,
+    "level": "warn",
+    "text_score": 75.0,
+    "behavior_score": null,
+    "network_score": null,
+    "reasons": ["SHORT_REVIEW"]
   }]
 }
 ```
 
-필수 필드: product_id, reviews(1개 이상), 각 리뷰의 review_id/content/user_id/review_date.
-누락·빈 배열·잘못된 타입·범위·알 수 없는 입력 필드는 422입니다.
-rating은 기본 5(1~5), 개수 필드는 음수가 아닌 정수입니다.
-verified_purchase/repurchase/free_trial은 boolean 또는 "unknown"입니다.
-review_date는 기존 문자열 계약을 유지합니다.
-account_age_days는 허용하지만 현재 점수에 사용하지 않습니다.
-기존 분석 API는 입력 순서를 유지하며 리뷰를 자동 수집·중복 제거하지 않습니다.
-작업·입력·분석 결과를 DB에 저장하고, 성공 응답에 X-Analysis-Job-ID 헤더를 추가합니다.
-계산 또는 저장 실패 시 성공 결과 대신 503을 반환합니다.
+필수 필드는 platform/product_id/reviews와 각 리뷰의 review_id/content입니다.
+rating/written_at은 선택입니다. 리뷰 1~500개, 단일 상품 배치이며 ID와 요청 순서를 보존합니다.
+누락·중복 리뷰 ID·잘못된 타입·알 수 없는 입력 필드는 422입니다.
+기본 가중치는 text/behavior/network = 50/30/20이며 사용 가능한 신호만 재정규화합니다.
+근거가 부족한 점수는 null입니다. 80 이상 safe, 50 이상 warn, 50 미만 danger입니다.
+작업·입력·결과를 MySQL에 저장하고, 커밋 성공 후 X-Analysis-Job-ID와 최종 결과를 반환합니다.
+분석·저장 실패는 503입니다. 자세한 내용은 [v0.5 연동 문서](docs/data-ai-v05-integration.md)를 참고하세요.
 
-기존 호환 API에만 적용: RTI = Python round(text × 0.4 + behavior × 0.35 + network × 0.25).
-50 미만 danger, 50 이상 80 미만 warn, 80 이상 safe입니다.
-기존 사유 순서(text → behavior → network)와 input_features 문자열 변환도 유지합니다.
+`POST /api/v1/analyze`는 **retired legacy endpoint**이며 라우트와 Swagger에서 제거되어 404를 반환합니다.
 
 ## 테스트와 Docker 실행
 
@@ -233,8 +218,10 @@ MySQL 호스트 포트는 기본 `127.0.0.1:3307`이며 외부 네트워크에 �
 - app/repositories/analysis_jobs.py: 저장소 인터페이스와 테스트·과거 파일 조회용 SQLite 구현
 - app/contracts/, app/integrations/: 크롤러 SSE 계약과 수신 어댑터
 - app/services/collection_stream.py: 수집 진행, 분석 중 heartbeat, 저장 후 result
-- ai/analysis.py: 기존 RTI 통합 공식
-- ai/text_analyzer.py, behavior_analyzer.py, network_analyzer.py: 변경 없는 분석 알고리즘
+- app/services/data_analysis.py, app/scoring/meta_scorer.py: 공식 v0.5 분석·저장과 RTI 계산
+- ai/analysis.py: 과거 스크립트 호환용 비운영 분석 모듈
+- app/analyzers/: 공식 v0.5 분석 알고리즘 (이번 제거 작업에서 변경 없음)
+- ai/text_analyzer.py, behavior_analyzer.py, network_analyzer.py: 과거 스크립트 참고용 비운영 분석기
 - ai/sentiment_client.py: 기존 선택적 Google Cloud 감성 분석
 - tests/: HTTP·입력 검증·점수 회귀 검사
 - scripts/, db/, 기존 repository/crawler/product 서비스: 과거 개발 참고용 보존 (새 결과 DB와 별개)
@@ -245,10 +232,10 @@ Data 서버는 상품 ID만 보내던 방식에서 실제 reviews를 보내는 �
 크롤링 참고 도구가 필요하면 requirements-legacy.txt를 별도로 설치합니다.
 SQLite 검증 스크립트는 production API 테스트와 별개입니다.
 
-## Google Cloud 선택 기능
+## 과거 Google Cloud 감성 분석 설정
 
-GOOGLE_APPLICATION_CREDENTIALS가 설정되면 기존 감성 API를 사용합니다.
-미설정 또는 호출 실패 시 기존 fallback을 유지합니다.
+아래 설정은 과거 비운영 분석 모듈의 참고용입니다. 공식 v0.5 API에는 Google 감성 adapter를
+자동 연결하지 않으므로 GOOGLE_APPLICATION_CREDENTIALS를 설정해도 공식 분석 점수는 바뀌지 않습니다.
 ENABLE_CLOUD_NLP는 기존 코드에서도 읽지 않았으므로 새 설정으로 사용하지 않습니다.
 인증 JSON을 코드나 이미지에 넣지 마세요.
 

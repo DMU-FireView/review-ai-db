@@ -24,7 +24,7 @@ PDF는 목표 계약(Target Contract) 검토본이라고 명시한다(2·10쪽).
 
 | 항목 | 현재 브랜치 | PDF 제안 / 미확정 사항 |
 | --- | --- | --- |
-| 기본 분석 | `POST /api/v1/analyze`가 리뷰를 받아 저장·분석·결과 저장 후 JSON 응답 | 정규화 리뷰를 AI에 전달하고 결과 반환. URL·인증·timeout은 미명시 |
+| 기본 분석 | 당시 `POST /api/v1/analyze`가 저장·분석 후 JSON 응답 (현재 retired legacy endpoint) | 정규화 리뷰를 AI에 전달하고 결과 반환. URL·인증·timeout은 미명시 |
 | 수집 | 기본 API는 수집하지 않음. 실험 경로는 외부 크롤러 SSE를 직접 구독 | Data가 쇼핑몰 API 호출·수집·정규화 담당 (2쪽) |
 | 저장 | AI 자체 SQLite `ai_analysis_jobs`에 요청·결과 저장 | Data가 reviews/result/jobs 저장. AI 자체 백업 허용 여부는 확인 필요 |
 | 완료 통지 | 기본 API는 최종 결과 응답. 실험 SSE는 저장 후 `result` 이벤트 | SSE·202 접수·콜백·polling 여부는 이 PDF만으로 확정할 수 없음 |

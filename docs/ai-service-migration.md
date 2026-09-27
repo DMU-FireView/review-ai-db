@@ -33,7 +33,7 @@ app/core/database.py와 두 Worker 진입점은 이관 안내 오류를 내는 d
 크롤러 모듈을 제외한다. requests/playwright는 requirements-legacy.txt로 분리했다.
 
 기존 5개 /api/internal/ai/... 경로는 상품 ID만으로 DB 조회하는 계약이므로
-등록 해제(404)했다. Data 서버는 /api/v1/analyze에 reviews를 전달해야 한다.
+등록 해제(404)했다. 당시 /api/v1/analyze로 reviews를 전달하도록 했으나 현재는 retired legacy endpoint다. 공식 경로는 /api/v1/data/analyze다.
 기존 DTO와 main의 분석 import는 로컬 도구 호환 목적으로 보존한다.
 파일을 통째로 삭제하지 않았으며 새 역할에 맞게 진입점/설정만 변경했다.
 

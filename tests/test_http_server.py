@@ -30,16 +30,6 @@ def test_live_http(monkeypatch, tmp_path):
         with urlopen(base + "/health", timeout=5) as response:
             assert response.status == 200
             assert json.load(response) == {"status": "ok"}
-        payload = {"product_id": "A001", "reviews": [{
-            "review_id": "1001", "content": "배송 빠르고 제품도 좋아요",
-            "user_id": "user1", "review_date": "2026-09-08", "verified_purchase": True,
-        }]}
-        request = Request(base + "/api/v1/analyze",
-                          data=json.dumps(payload).encode(),
-                          headers={"Content-Type": "application/json"})
-        with urlopen(request, timeout=5) as response:
-            assert response.status == 200
-            assert json.load(response)["results"][0]["rti"] == 88
         data_payload = {"platform": "mall", "product_id": "0007", "reviews": [{
             "review_id": "00:01", "content": "배송 빠르고 제품도 좋아요",
         }]}

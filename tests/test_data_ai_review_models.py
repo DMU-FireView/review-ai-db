@@ -9,7 +9,6 @@ from app.contracts.data_ai_request import DataAIRequest
 from app.contracts.data_ai_response import DataAIResponse
 from app.contracts.data_ai_result import IdentifiedEvaluation
 from app.integrations.data_ai_result_mapping import map_data_ai_result
-from app.api.schemas import AnalyzeRequest
 from app.factory import create_app
 
 FIXTURES = Path(__file__).parent / "fixtures" / "data_ai_v04"
@@ -156,11 +155,10 @@ def test_request_schema_required_fields():
     assert "review_count" not in DataAIResponse.model_json_schema()["required"]
 
 
-def test_existing_api_contract_is_not_replaced(monkeypatch):
+def test_v04_review_models_are_not_exposed_as_production_contract(monkeypatch):
     monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
     monkeypatch.setenv("ENABLE_EXPERIMENTAL_COLLECTION", "0")
     schema = create_app().openapi()
     assert "DataAIRequest" not in schema["components"]["schemas"]
     assert "DataAIResponse" not in schema["components"]["schemas"]
-    with pytest.raises(ValidationError):
-        AnalyzeRequest.model_validate(request_payload())
+    assert "DataAnalyzeRequestV05" in schema["components"]["schemas"]

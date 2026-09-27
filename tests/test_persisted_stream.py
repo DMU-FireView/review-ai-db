@@ -14,7 +14,7 @@ from app.contracts.stream import ReviewEvent, DoneEvent
 from app.core.crawler_settings import CrawlerSettings
 from app.integrations.crawler_stream import CrawlerStreamClient, iter_sse_frames
 from app.services.collection_stream import collection_events
-from tests.test_api_contract import REVIEW
+from tests.test_data_ai_v05 import payload
 
 
 @pytest.fixture
@@ -28,12 +28,12 @@ def test_http_result_is_durable(store, monkeypatch):
     monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "1")
     monkeypatch.setenv("ENABLE_EXPERIMENTAL_COLLECTION", "0")
     with TestClient(create_app(job_store=store)) as client:
-        r = client.post("/api/v1/analyze", json={"product_id": "p", "reviews": [REVIEW]})
+        r = client.post("/api/v1/data/analyze", json=payload())
         assert r.status_code == 200
         saved = SQLiteJobStore(store.path).get(r.headers["X-Analysis-Job-ID"])
         assert saved["status"] == "DONE"
         assert saved["result"] == r.json()
-        assert saved["result"]["results"][0]["rti"] == 88
+        assert saved["result"]["results"][0]["rti"] == 75
         assert client.post("/experimental/analysis/collect/stream").status_code == 404
 
 
@@ -41,7 +41,7 @@ def test_storage_failure_never_returns_success(store, monkeypatch):
     monkeypatch.setenv("ENABLE_EXPERIMENTAL_COLLECTION", "0")
     with TestClient(create_app(job_store=store)) as client:
         with patch.object(store, "complete", side_effect=OSError("disk full")):
-            r = client.post("/api/v1/analyze", json={"product_id": "p", "reviews": [REVIEW]})
+            r = client.post("/api/v1/data/analyze", json=payload())
         assert r.status_code == 503
 
 

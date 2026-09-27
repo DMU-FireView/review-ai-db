@@ -30,7 +30,7 @@ def secured(tmp_path, monkeypatch):
 
 
 @pytest.mark.parametrize("path,method", [
-    ("/api/v1/analyze", "post"), ("/api/v1/data/analyze", "post"),
+    ("/api/v1/data/analyze", "post"),
     ("/experimental/analysis/collect/stream", "post"),
     ("/experimental/analysis/jobs/job", "get"),
 ])

@@ -2,7 +2,7 @@
 
 
 def start_worker():
-    raise RuntimeError("Redis worker retired. Start uvicorn main:app and use POST /api/v1/analyze.")
+    raise RuntimeError("Redis worker retired. Start uvicorn main:app and use POST /api/v1/data/analyze.")
 
 
 def get_redis_client():

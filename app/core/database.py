@@ -2,7 +2,7 @@
 
 
 def get_db_connection():
-    raise RuntimeError("DB access retired: Data server owns review storage. Use POST /api/v1/analyze.")
+    raise RuntimeError("Legacy DB access retired. Use POST /api/v1/data/analyze; AI job storage is managed by MySQLJobStore.")
 
 
 def db_connection():

@@ -78,7 +78,7 @@ Spring → Redis → FastAPI Worker 구조와 `product_analysis_job` / `review_t
 | --- | --- |
 | [독립 AI 서비스 전환 기록](ai-service-migration.md) | DB·Redis 제거 당시 분석과 변경 이력. 이후 AI 자체 결과 DB를 추가했으므로 DB 제거 설명은 과거 기록 |
 | [프로젝트 파일 역할 안내](project-file-guide.md) | 모듈 정리 당시 파일 위치·역할. MySQL 초기화·Redis consumer 설명은 현재 실행 구조와 다름 |
-| [RTI 계산 로직 문서](rti-logic.md) | 과거 v0 scoring 설명. 기존 API는 ai/analysis.py, 새 Data API는 app/scoring/meta_scorer.py와 v0.5 연동 문서 기준 |
+| [RTI 계산 로직 문서](rti-logic.md) | 과거 v0 scoring 설명. 공식 API는 app/scoring/meta_scorer.py와 v0.5 연동 문서 기준. ai/analysis.py는 비운영 과거 참고용 |
 | [Crawler MVP 전략](crawler-mvp-strategy.md) | 파일 기반 raw → converter → DB → RTI 검증 전략의 배경 |
 | [NAVER Worker 로컬 시뮬레이션 결과](naver-worker-local-simulation-result.md) | 당시 네이버 상품 1개·리뷰 30개 검증 기록. 현재 실서비스 통합 성공을 뜻하지 않음 |
 | [Crawler raw JSON 예제](examples/crawler_raw_sample.json) | 이전 raw 스키마의 샘플 데이터. 현재 분석 API나 SSE에 그대로 보내는 요청 본문이 아님 |

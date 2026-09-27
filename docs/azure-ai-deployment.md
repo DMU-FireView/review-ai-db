@@ -36,7 +36,8 @@ cd /home/reviewadmin/review-ai-db
 sudo docker compose config --quiet
 sudo docker compose up -d --build
 curl --fail http://localhost:8000/health
-curl --fail http://localhost:8000/api/v1/analyze -H 'Content-Type: application/json' -d '{"product_id":"A001","reviews":[{"review_id":"1001","content":"배송 빠르고 제품도 좋아요","user_id":"user1","review_date":"2026-09-08","verified_purchase":true}]}'
+# 인증 설정 시 INTERNAL_TOKEN을 안전하게 환경에 준비한 뒤 실행한다. 토큰을 출력하지 않는다.
+curl --fail http://localhost:8000/api/v1/data/analyze -H "X-Internal-Token: $INTERNAL_TOKEN" -H 'Content-Type: application/json' -d '{"platform":"mall","product_id":"A001","reviews":[{"review_id":"1001","content":"배송 빠르고 제품도 좋아요"}]}'
 ```
 
 먼저 리팩터링을 main에 반영해야 위 main clone으로 새 서비스가 실행된다.

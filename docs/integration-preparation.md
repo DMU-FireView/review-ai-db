@@ -5,7 +5,7 @@ codex/modular-project-cleanup 브랜치에서 작업 중이며 공개 API 계약
 
 ## 현재 구현
 
-- 기존 POST /api/v1/analyze 본문과 점수/사유는 유지한다.
+- POST /api/v1/analyze는 retired legacy endpoint로 제거했으며 404다. 공식 분석 API는 POST /api/v1/data/analyze다.
 - POST /api/v1/data/analyze와 SSE는 승인된 팀원 분석기 및 v0.5 평면 결과를 사용한다.
   최신 계약·인증 설명은 [Data AI v0.5 연동](data-ai-v05-integration.md)을 우선한다.
 - 요청과 결과를 MySQL ai_analysis_jobs 테이블에 저장한다.
@@ -49,7 +49,7 @@ contracts/crawler.py, contracts/stream.py, integrations/crawler_stream.py는 해
 이후 사용자 승인으로 c48b7e566bf8e5d4c832c2fcad64da4406af707e의 분석기·점수 service·
 NormalizedTextSimilarityAdapter·RTI 계산기를 새 Data API와 SSE에 연결했다.
 기본 가중치는 .5/.3/.2이며 가용 신호만 재정규화한다. 80 이상 safe를 유지한다.
-기존 ai/*.py 평가는 호환 API 전용으로 남기며 서로 다른 계산 경로를 혼합하지 않는다.
+기존 ai/*.py 평가는 과거 스크립트 참고용으로 남기며 운영 API에서 호출하지 않는다.
 
 ## 연결 종료·복구 범위
 

@@ -16,7 +16,7 @@
 - `*.mapping-input.json`은 **내부 매퍼의 입력**입니다. `requested`는 원본 식별자 목록,
   `evaluated`는 명시적으로 주어진 분석 결과입니다. Data → AI HTTP 요청 본문이 아닙니다.
 - `*.response.json`은 v0.4 검토용 모델의 목표 응답 예시입니다. 현재
-  `POST /api/v1/analyze` 응답이 이 형식으로 바뀐 것은 아닙니다.
+  당시 `POST /api/v1/analyze` 응답과는 별도였습니다. 해당 경로는 현재 retired legacy endpoint입니다.
 - 0이 포함된 ID와 콜론을 그대로 보존합니다. 없는 신호의 null을 0 또는 100으로 대체하지 않습니다.
 - reason/unavailable reason 코드는 합성 사례용이며 최종 코드 목록을 확정하지 않습니다.
 - 모든 신호 unavailable 사례는 이미 판정된 결과를 표현합니다. 빈 본문 수용이나 모델 장애를

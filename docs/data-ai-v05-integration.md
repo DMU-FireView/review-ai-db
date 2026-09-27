@@ -5,15 +5,14 @@
 
 2026-09-27의 `[Update1]ReView_Data_AI_Result.docx` 검토본과 Data 서버 OpenAPI를 참고했다.
 사용자가 팀원 분석기 전환(50/30/20, 가용 신호 재정규화), 80 이상 safe, AI 자체 DB 유지를 승인했다.
-문서의 76/safe 예시는 따르지 않는다. API 경로와 운영 배치는 Data 담당자의 최종 확인이 필요하다.
+문서의 76/safe 예시는 따르지 않는다. 공식 분석 API는 POST /api/v1/data/analyze 하나로 정리했다.
 
 | 경로 | 입력·응답 | 계산 |
 | --- | --- | --- |
 | POST /api/v1/data/analyze | v0.5 정규화 리뷰 → 평면 결과 | 팀원 분석기, 기본 가중치 .5/.3/.2, 가용 신호로 재정규화 |
-| POST /api/v1/analyze | 기존 필수 user_id/review_date와 기존 응답 유지 | 호환용 .4/.35/.25, Python round |
 | POST /experimental/analysis/collect/stream | 수집 진행 SSE → 최종 v0.5 result | 새 Data 분석과 같은 분석기, 기본 OFF |
 
-세 경로 모두 입력·결과를 AI 자체 MySQL에 저장한다. DB 커밋 후에만 성공 결과를 반환한다.
+공식 분석 및 실험 SSE 경로 모두 입력·결과를 AI 자체 MySQL에 저장한다. DB 커밋 후에만 성공 결과를 반환한다.
 새 경로는 계산 완료 응답 방식이며 202 접수·백그라운드 큐·콜백 방식이 아니다.
 Data의 결과 DB에 직접 쓰지 않고 결과 JSON을 응답한다. 별도 결과 수신 URL은 추측해 만들지 않았다.
 
@@ -107,7 +106,24 @@ services/analysis는 이름 충돌을 피해 services/team_analysis로 두고 �
 KoELECTRA 학습·진단 코드는 가져오지 않았으며 이 API에 학습 모델이나 Google 감성 서비스를 자동 연결하지 않는다.
 
 테스트는 격리 SQLite 저장소와 모의 Data SSE로 실행한다. 실제 MySQL·GCP HTTPS·Data 왕복 연결 검증을 대신하지 않는다.
-이번 검증은 전체 pytest 237개 통과·실제 MySQL 테스트 1개 보류, 실제 로컬 TCP HTTP와 Compose 설정 검사 통과다.
-기존 호환 API 점수 88과 새 Data API 점수 75(동일 짧은 본문·비교 근거 없음)를 각각 회귀 검증했다.
-DB 작업 중단 상태는 유지한다. 새 클라우드 계정, 확정 HTTPS 주소, 실제 입력/SSE 샘플을 받은 뒤 배포 검증해야 한다.
+이전 통합 단계 검증은 전체 pytest 237개 통과·실제 MySQL 테스트 1개 보류, 실제 로컬 TCP HTTP와 Compose 설정 검사 통과다.
+당시 호환 API 점수 88과 Data API 점수 75(동일 짧은 본문·비교 근거 없음)를 각각 회귀 검증했다.
+위 기록은 최초 통합 당시 기준이다. 실제 클라우드 계정·확정 HTTPS 주소·입력/SSE 샘플을 이용한 운영 검증과 구분한다.
 v0.4 검토용 모델·문서·샘플은 과거 비교용으로 보존하며 새 API 응답으로 사용하지 않는다.
+
+## Legacy API 폐기
+
+POST /api/v1/analyze는 **retired legacy endpoint**다. 라우트·Legacy AI Analysis 태그·전용 저장 서비스를 제거했다.
+공식 v0.5 분석기·50/30/20 가중치·null 처리·등급·MySQLJobStore는 변경하지 않았다.
+실험 경로는 삭제하지 않았으며 ENABLE_EXPERIMENTAL_COLLECTION=0이면 라우트와 Swagger 모두에서 빠진다.
+플래그를 켜면 Swagger에 표시된다. include_in_schema=False로 문서에서만 숨길 수도 있으나
+보안·접근 차단이 아니므로 이번에는 임의로 적용하지 않았다.
+
+### 제거 후 검증 2026-09-28
+
+- pytest 220개 통과: 격리된 임시 MySQL을 사용하여 선택적 실제 DB 테스트도 실행했다.
+- Docker Compose 이미지 빌드 성공, 임시 AI 컨테이너 health=healthy 및 GET /health 200.
+- 토큰 인증 POST /api/v1/data/analyze 200, RTI 75, MySQL에 저장된 결과와 HTTP 응답 일치.
+- POST /api/v1/analyze는 retired legacy endpoint로 404, Legacy AI Analysis 태그 없음.
+- OpenAPI paths는 GET /health와 POST /api/v1/data/analyze 두 개뿐이다 (실험 기능 OFF).
+- 기존 서버·DB 컨테이너는 교체하지 않고 임시 자원으로 검증했다. 이 기록은 Azure 자동 배포 성공의 증거는 아니다.
