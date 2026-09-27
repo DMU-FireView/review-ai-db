@@ -1,4 +1,4 @@
--- 로컬 SQLite 개발 환경의 전체 리뷰 분석 스키마를 정의한다.
+-- 기존 팀 MySQL 리뷰·작업 스키마를 보존한다. 현재 AI 결과 저장은 별도 ai_analysis_jobs 테이블을 사용한다.
 
 CREATE TABLE products (
     product_id VARCHAR(50) PRIMARY KEY,
