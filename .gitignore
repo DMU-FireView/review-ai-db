@@ -35,3 +35,8 @@ output/*.json
 .pytest_cache/
 secrets/
 docker-compose.override.yml
+
+# KoELECTRA 모델은 외부 볼륨으로 관리한다. 가중치/토크나이저는 Git에 넣지 않는다.
+*.safetensors
+models/
+**/ptext-koelectra*/

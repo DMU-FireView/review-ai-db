@@ -1,0 +1,438 @@
+{
+  "date": "2026-10-02",
+  "source_commits": {
+    "review_ai_db": "eaa9f8776f6ce195576257ec923f6b9f200b25ee",
+    "review_ai_new": "ff3c149697370e3891a75c11be74efb9ba735196"
+  },
+  "scope": {
+    "azure_deployed": false,
+    "git_commit_push_merge": false,
+    "real_data_server_called": false,
+    "model_in_git_or_image": false
+  },
+  "cleanup": {
+    "validation_containers_and_network_removed": true,
+    "temporary_mysql_data_removed": true,
+    "existing_api_and_mysql_untouched": true,
+    "validation_image_retained_for_local_reuse": true
+  },
+  "validation_limits": {
+    "ai_container_cpus": 2,
+    "ai_container_memory_bytes": 4294967296,
+    "uvicorn_workers": 1,
+    "mysql_container_memory_limit": "not limited; separate disposable container"
+  },
+  "pytest": {
+    "windows": {
+      "passed": 327,
+      "warnings": 2,
+      "seconds": 3.7,
+      "real_mysql": true
+    },
+    "docker_linux": {
+      "passed": 327,
+      "warnings": 1,
+      "seconds": 7.05,
+      "real_mysql": true
+    }
+  },
+  "model_sha256": "e7677366e93afef3f26890c81fffa62e7a1db96f24cba55a19cdeaf9efb5f354",
+  "default_openapi_paths": [
+    "/health",
+    "/api/v1/data/analyze"
+  ],
+  "docker": {
+    "compose_config": true,
+    "build": true,
+    "startup": true,
+    "healthy": true,
+    "oom_killed": false,
+    "cpu_torch": "2.8.0+cpu",
+    "cuda_packages": [],
+    "model_mount_readonly": true,
+    "model_in_image": false
+  },
+  "cpu_smoke": {
+    "environment": {
+      "platform": "linux",
+      "cpu_threads": 2,
+      "worker_count": 1,
+      "external_network_used": false,
+      "torch_version": "2.8.0+cpu"
+    },
+    "memory": {
+      "before_runtime_import": {
+        "VmSize_mib": 21.21,
+        "VmHWM_mib": 17.08,
+        "VmRSS_mib": 17.08,
+        "peak_rss_mib": 17.2
+      },
+      "before_model_load": {
+        "VmSize_mib": 637.97,
+        "VmHWM_mib": 225.8,
+        "VmRSS_mib": 225.73,
+        "peak_rss_mib": 225.8
+      },
+      "after_model_load": {
+        "VmSize_mib": 1336.16,
+        "VmHWM_mib": 349.05,
+        "VmRSS_mib": 349.05,
+        "peak_rss_mib": 349.05
+      },
+      "after_single_inference": {
+        "VmSize_mib": 1409.38,
+        "VmHWM_mib": 678.42,
+        "VmRSS_mib": 678.42,
+        "peak_rss_mib": 678.42
+      },
+      "after_3_reviews": {
+        "VmSize_mib": 1415.66,
+        "VmHWM_mib": 680.92,
+        "VmRSS_mib": 680.92,
+        "peak_rss_mib": 680.92
+      },
+      "after_10_reviews": {
+        "VmSize_mib": 1421.41,
+        "VmHWM_mib": 681.92,
+        "VmRSS_mib": 681.92,
+        "peak_rss_mib": 681.92
+      },
+      "after_100_reviews": {
+        "VmSize_mib": 1422.41,
+        "VmHWM_mib": 686.92,
+        "VmRSS_mib": 686.92,
+        "peak_rss_mib": 686.92
+      },
+      "final": {
+        "VmSize_mib": 1494.42,
+        "VmHWM_mib": 690.67,
+        "VmRSS_mib": 690.67,
+        "peak_rss_mib": 690.67
+      }
+    },
+    "checks": {
+      "startup_and_health_do_not_load_model": true,
+      "authentication_precedes_inference": true,
+      "retired_legacy_endpoint_404": true,
+      "real_single_review_missing_behavior_network": true,
+      "single_cached_model_across_service_api_sse": true,
+      "all_passed": true
+    },
+    "model_loading": {
+      "seconds": 1.5481,
+      "device": "cpu",
+      "threshold": 0.5,
+      "max_length": 256
+    },
+    "single_inference": {
+      "seconds": 0.7861,
+      "prediction": {
+        "text_score": 100,
+        "suspicious_probability": 0.002175384433940053,
+        "predicted_label": "NORMAL"
+      }
+    },
+    "single_analysis": {
+      "review_id": "00:01",
+      "rti": 100,
+      "level": "safe",
+      "text_score": 100,
+      "behavior_score": -1,
+      "network_score": -1,
+      "reasons": []
+    },
+    "analysis_3": {
+      "seconds": 0.1245,
+      "result": {
+        "platform": "mall",
+        "product_id": "0007",
+        "review_count": 3,
+        "results": [
+          {
+            "review_id": "00:01",
+            "rti": 100,
+            "level": "safe",
+            "text_score": 100,
+            "behavior_score": -1,
+            "network_score": 100,
+            "reasons": []
+          },
+          {
+            "review_id": "00:02",
+            "rti": 100,
+            "level": "safe",
+            "text_score": 100,
+            "behavior_score": -1,
+            "network_score": 100,
+            "reasons": []
+          },
+          {
+            "review_id": "00:03",
+            "rti": 100,
+            "level": "safe",
+            "text_score": 100,
+            "behavior_score": -1,
+            "network_score": 100,
+            "reasons": []
+          }
+        ]
+      }
+    },
+    "analysis_10": {
+      "seconds": 0.4155,
+      "review_count": 10
+    },
+    "analysis_100": {
+      "seconds": 4.4714,
+      "review_count": 100
+    },
+    "normal_api": {
+      "seconds": 0.1476,
+      "status_code": 200,
+      "mysql_result_matches": true
+    },
+    "sse": {
+      "seconds": 0.169,
+      "status_code": 200,
+      "events": [
+        "progress",
+        "progress",
+        "progress",
+        "result"
+      ],
+      "api_result_identical": true,
+      "mysql_result_matches": true,
+      "authenticated_lookup_matches": true
+    },
+    "model_cache": {
+      "hits": 121,
+      "misses": 1,
+      "maxsize": 1,
+      "currsize": 1
+    },
+    "cleanup": {
+      "own_jobs_removed": 2
+    }
+  },
+  "cpu_smoke_with_max_length": {
+    "environment": {
+      "platform": "linux",
+      "cpu_threads": 2,
+      "worker_count": 1,
+      "external_network_used": false,
+      "torch_version": "2.8.0+cpu"
+    },
+    "memory": {
+      "before_runtime_import": {
+        "VmSize_mib": 21.29,
+        "VmHWM_mib": 17.06,
+        "VmRSS_mib": 17.06,
+        "peak_rss_mib": 17.18
+      },
+      "before_model_load": {
+        "VmSize_mib": 638.04,
+        "VmHWM_mib": 226.05,
+        "VmRSS_mib": 226.05,
+        "peak_rss_mib": 226.05
+      },
+      "after_model_load": {
+        "VmSize_mib": 1336.23,
+        "VmHWM_mib": 349.31,
+        "VmRSS_mib": 349.31,
+        "peak_rss_mib": 349.31
+      },
+      "after_single_inference": {
+        "VmSize_mib": 1409.7,
+        "VmHWM_mib": 678.56,
+        "VmRSS_mib": 678.56,
+        "peak_rss_mib": 678.56
+      },
+      "after_3_reviews": {
+        "VmSize_mib": 1415.45,
+        "VmHWM_mib": 681.06,
+        "VmRSS_mib": 681.06,
+        "peak_rss_mib": 681.06
+      },
+      "after_10_reviews": {
+        "VmSize_mib": 1421.54,
+        "VmHWM_mib": 682.06,
+        "VmRSS_mib": 682.06,
+        "peak_rss_mib": 682.06
+      },
+      "after_100_reviews": {
+        "VmSize_mib": 1422.54,
+        "VmHWM_mib": 687.31,
+        "VmRSS_mib": 687.31,
+        "peak_rss_mib": 687.31
+      },
+      "after_max_length_reviews": {
+        "VmSize_mib": 1453.69,
+        "VmHWM_mib": 718.06,
+        "VmRSS_mib": 718.06,
+        "peak_rss_mib": 718.06
+      },
+      "final": {
+        "VmSize_mib": 1525.69,
+        "VmHWM_mib": 721.56,
+        "VmRSS_mib": 721.56,
+        "peak_rss_mib": 721.56
+      }
+    },
+    "checks": {
+      "startup_and_health_do_not_load_model": true,
+      "authentication_precedes_inference": true,
+      "retired_legacy_endpoint_404": true,
+      "real_single_review_missing_behavior_network": true,
+      "single_cached_model_across_service_api_sse": true,
+      "all_passed": true
+    },
+    "model_loading": {
+      "seconds": 1.5302,
+      "device": "cpu",
+      "threshold": 0.5,
+      "max_length": 256
+    },
+    "single_inference": {
+      "seconds": 0.0596,
+      "prediction": {
+        "text_score": 100,
+        "suspicious_probability": 0.002175384433940053,
+        "predicted_label": "NORMAL"
+      }
+    },
+    "single_analysis": {
+      "review_id": "00:01",
+      "rti": 100,
+      "level": "safe",
+      "text_score": 100,
+      "behavior_score": -1,
+      "network_score": -1,
+      "reasons": []
+    },
+    "analysis_3": {
+      "seconds": 0.1356,
+      "result": {
+        "platform": "mall",
+        "product_id": "0007",
+        "review_count": 3,
+        "results": [
+          {
+            "review_id": "00:01",
+            "rti": 100,
+            "level": "safe",
+            "text_score": 100,
+            "behavior_score": -1,
+            "network_score": 100,
+            "reasons": []
+          },
+          {
+            "review_id": "00:02",
+            "rti": 100,
+            "level": "safe",
+            "text_score": 100,
+            "behavior_score": -1,
+            "network_score": 100,
+            "reasons": []
+          },
+          {
+            "review_id": "00:03",
+            "rti": 100,
+            "level": "safe",
+            "text_score": 100,
+            "behavior_score": -1,
+            "network_score": 100,
+            "reasons": []
+          }
+        ]
+      }
+    },
+    "analysis_10": {
+      "seconds": 0.4342,
+      "review_count": 10
+    },
+    "analysis_100": {
+      "seconds": 4.4343,
+      "review_count": 100
+    },
+    "analysis_max_length": {
+      "seconds": 29.2896,
+      "review_count": 100,
+      "source_token_count_without_index_suffix": 1962,
+      "truncated_token_count": 256,
+      "max_length": 256
+    },
+    "normal_api": {
+      "seconds": 0.2123,
+      "status_code": 200,
+      "mysql_result_matches": true
+    },
+    "sse": {
+      "seconds": 0.1775,
+      "status_code": 200,
+      "events": [
+        "progress",
+        "progress",
+        "progress",
+        "result"
+      ],
+      "api_result_identical": true,
+      "mysql_result_matches": true,
+      "authenticated_lookup_matches": true
+    },
+    "model_cache": {
+      "hits": 221,
+      "misses": 1,
+      "maxsize": 1,
+      "currsize": 1
+    },
+    "cleanup": {
+      "own_jobs_removed": 2
+    }
+  },
+  "missing_model_smoke": {
+    "health_before_model_load": 200,
+    "analysis_status": 200,
+    "all_missing_real_model_path": {
+      "review_id": "1",
+      "rti": -1,
+      "level": null,
+      "text_score": -1,
+      "behavior_score": -1,
+      "network_score": -1,
+      "reasons": [
+        "TEXT_SHORT_REVIEW"
+      ]
+    },
+    "mysql_result_matches": true
+  },
+  "live_http": {
+    "health_status": 200,
+    "unauthorized_status": 401,
+    "analysis_status": 200,
+    "lookup_status": 200,
+    "saved_result_equals_http": true,
+    "retired_status": 404,
+    "swagger_paths": [
+      "/health",
+      "/api/v1/data/analyze",
+      "/experimental/analysis/collect/stream",
+      "/experimental/analysis/jobs/{job_id}"
+    ],
+    "result": {
+      "platform": "mall",
+      "product_id": "live-0007",
+      "review_count": 1,
+      "results": [
+        {
+          "review_id": "00:01",
+          "rti": 100,
+          "level": "safe",
+          "text_score": 100,
+          "behavior_score": -1,
+          "network_score": -1,
+          "reasons": []
+        }
+      ]
+    }
+  }
+}

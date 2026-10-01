@@ -1,11 +1,11 @@
-"""Data/AI v0.5의 원본 식별자, 평면 점수, null과 사유 코드 계약을 정의한다."""
+"""운영 요청을 유지하고 검증된 v0.5의 평면 -1 결과 계약을 공유한다."""
 from typing import Self
 
 from pydantic import Field, field_validator, model_validator
 
 from app.contracts.data_ai_request import DataAIReview
-from app.contracts.data_ai_result import ContractModel, Identifier, Level, Score
-from app.scoring.meta_scorer import classify_rti
+from app.contracts.data_ai_result import ContractModel, Identifier
+from app.schemas.analysis import ProductAnalysisResponse, ReviewAnalysisResponse
 
 
 class DataReviewV05(DataAIReview):
@@ -38,39 +38,19 @@ class DataAnalyzeRequestV05(ContractModel):
         return self
 
 
-class DataReviewResultV05(ContractModel):
+class DataReviewResultV05(ReviewAnalysisResponse, ContractModel):
     review_id: Identifier
-    rti: Score | None
-    level: Level | None
-    text_score: Score | None
-    behavior_score: Score | None
-    network_score: Score | None
-    reasons: list[Identifier]
-
-    @model_validator(mode="after")
-    def validate_result(self) -> Self:
-        if self.rti is None:
-            if self.level is not None:
-                raise ValueError("RTI null requires level=null")
-        else:
-            if all(value is None for value in (
-                self.text_score, self.behavior_score, self.network_score
-            )):
-                raise ValueError("RTI requires at least one score")
-            if self.level != classify_rti(self.rti).value:
-                raise ValueError("Level must use safe>=80, warn>=50, danger<50")
-        return self
 
 
-class DataAnalyzeResponseV05(ContractModel):
+class DataAnalyzeResponseV05(ProductAnalysisResponse, ContractModel):
     platform: Identifier
     product_id: Identifier
-    review_count: int | None = Field(default=None, strict=True, ge=0)
+    review_count: int = Field(strict=True, ge=0)
     results: list[DataReviewResultV05]
 
     @model_validator(mode="after")
     def validate_results(self) -> Self:
-        if self.review_count is not None and self.review_count != len(self.results):
+        if self.review_count != len(self.results):
             raise ValueError("review_count must equal results length")
         ids = [result.review_id for result in self.results]
         if len(ids) != len(set(ids)):

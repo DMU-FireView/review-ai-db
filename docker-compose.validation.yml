@@ -1,0 +1,28 @@
+# Local-only disposable integration stack; never use for Azure deployment.
+# Run with -p review-ai-runtime-check and --env-file .env.example.
+services:
+  ai:
+    image: review-ai-runtime-check:local
+    container_name: review-ai-runtime-check-api
+    ports: !override
+      - "127.0.0.1::8000"
+    restart: "no"
+    cpus: 2.0
+    mem_limit: 4g
+    environment:
+      DB_NAME: runtime_validation
+      ENABLE_EXPERIMENTAL_COLLECTION: "1"
+      REQUIRE_INTERNAL_TOKEN: "1"
+      INTERNAL_TOKEN: synthetic-local-validation-token
+      DATA_SERVER_BASE_URL: https://data.test
+      DATA_INTERNAL_TOKEN: synthetic-local-validation-token
+  ai-db:
+    container_name: review-ai-runtime-check-db
+    ports: !override
+      - "127.0.0.1::3306"
+    restart: "no"
+    environment:
+      MYSQL_DATABASE: runtime_validation
+    volumes: !override []
+    tmpfs:
+      - /var/lib/mysql
