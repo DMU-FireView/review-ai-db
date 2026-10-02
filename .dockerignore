@@ -2,6 +2,7 @@
 **
 !Dockerfile
 !requirements.txt
+!requirements-ml.txt
 !main.py
 !ai/
 !ai/*.py
@@ -20,3 +21,7 @@ ai/rti_score_repository.py
 ai/rti_result_mapper.py
 ai/normalizer.py
 ai/rti_scoring.py
+# 모델 가중치와 로컬 모델 폴더는 어떤 경로에서도 이미지에 포함하지 않는다.
+**/*.safetensors
+**/models/
+**/ptext-koelectra*/

@@ -1,0 +1,8 @@
+# 인수인계 CPU 추론 환경의 KoELECTRA 의존성. CUDA 패키지는 설치하지 않는다.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.8.0+cpu
+transformers==4.57.6
+numpy==2.5.3
+tokenizers==0.22.2
+safetensors==0.8.0
+huggingface-hub==0.36.2

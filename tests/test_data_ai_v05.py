@@ -12,6 +12,8 @@ from app.integrations.data_ai_v05_mapping import map_v05_results
 from app.repositories.analysis_jobs import SQLiteJobStore
 from app.services.team_analysis import AnalysisSignal, AnalysisSignals, ReviewAnalysisInput, analyze_product_reviews
 
+pytestmark = pytest.mark.usefixtures("model_free_prediction")
+
 
 def payload():
     return {"platform": "mall", "product_id": "0007", "reviews": [
@@ -37,8 +39,8 @@ def test_v05_text_only_and_durable_response(client):
     assert response.status_code == 200
     result = response.json()
     assert result == {"platform": "mall", "product_id": "0007", "review_count": 1, "results": [{
-        "review_id": "00:01", "rti": 75.0, "level": "warn", "text_score": 75.0,
-        "behavior_score": None, "network_score": None, "reasons": ["SHORT_REVIEW"],
+        "review_id": "00:01", "rti": 87.0, "level": "safe", "text_score": 87.0,
+        "behavior_score": -1.0, "network_score": -1.0, "reasons": ["TEXT_SHORT_REVIEW"],
     }]}
     saved = store.get(response.headers["X-Analysis-Job-ID"])
     assert saved["status"] == "DONE" and saved["result"] == result
@@ -51,11 +53,11 @@ def test_v05_duplicate_text_and_available_weight_normalization(client):
     result = client[0].post("/api/v1/data/analyze", json=body).json()
     assert [r["review_id"] for r in result["results"]] == ["00:01", "0002"]
     for review in result["results"]:
-        assert review["text_score"] == 75 and review["network_score"] == 85
-        assert review["behavior_score"] is None
-        assert review["rti"] == pytest.approx((75 * .5 + 85 * .2) / .7)
+        assert review["text_score"] == 87 and review["network_score"] == 9.1
+        assert review["behavior_score"] == -1
+        assert review["rti"] == round((87 * .5 + review["network_score"] * .2) / .7, 1)
         assert review["level"] == "warn"
-        assert review["reasons"] == ["SHORT_REVIEW", "SIMILAR_REVIEW_PATTERN"]
+        assert review["reasons"] == ["TEXT_SHORT_REVIEW", "NETWORK_SIMILAR_REVIEW_PATTERN"]
 
 
 @pytest.mark.parametrize("field,value", [("rating", None), ("rating", 1), ("written_at", None)])
@@ -63,7 +65,7 @@ def test_unobserved_behavior_is_not_invented(client, field, value):
     body = payload()
     body["reviews"][0][field] = value
     review = client[0].post("/api/v1/data/analyze", json=body).json()["results"][0]
-    assert review["behavior_score"] is None and review["rti"] == 75
+    assert review["behavior_score"] == -1 and review["rti"] == 87
 
 
 @pytest.mark.parametrize("kind", ["empty", "duplicate", "numeric_id", "blank_content", "too_many"])
@@ -80,28 +82,30 @@ def test_invalid_batch(client, kind):
 @pytest.mark.parametrize("target", ["create", "complete", "analyzer"])
 def test_failures_are_503_not_null_success(client, target):
     http, store = client
-    mocker = patch("app.services.data_analysis.analyze_product_reviews", side_effect=RuntimeError("failed")) if target == "analyzer" else patch.object(store, target, side_effect=OSError("failed"))
+    mocker = patch("app.services.data_analysis.analyze_reviews", side_effect=RuntimeError("failed")) if target == "analyzer" else patch.object(store, target, side_effect=OSError("failed"))
     with mocker:
         response = http.post("/api/v1/data/analyze", json=payload())
     assert response.status_code == 503 and "results" not in response.json()
     assert "X-Analysis-Job-ID" not in response.headers
 
 
-@pytest.mark.parametrize("score,level", [(0,"danger"), (49.9,"danger"), (50,"warn"), (79.99,"warn"), (80,"safe"), (100,"safe")])
+@pytest.mark.parametrize("score,level", [(0,"danger"), (39.9,"danger"), (40,"warn"), (69.9,"warn"), (70,"safe"), (100,"safe")])
 def test_threshold_contract(score, level):
     result = DataReviewResultV05(review_id="r", rti=score, level=level,
-                                 text_score=score, behavior_score=None, network_score=None, reasons=[])
+                                 text_score=score, behavior_score=-1, network_score=-1, reasons=[])
     assert result.level == level
 
 
 def test_all_unavailable_contract_and_bad_example():
-    result = DataReviewResultV05(review_id="r", rti=None, level=None,
-                                 text_score=None, behavior_score=None, network_score=None, reasons=[])
-    assert result.model_dump()["rti"] is None
+    result = DataReviewResultV05(review_id="r", rti=-1, level=None,
+                                 text_score=-1, behavior_score=-1, network_score=-1, reasons=[])
+    assert result.model_dump()["rti"] == -1
     with pytest.raises(ValidationError):
-        DataReviewResultV05(**{**result.model_dump(), "rti": 76, "level": "safe", "text_score": 76})
+        DataReviewResultV05(**{**result.model_dump(), "rti": 69, "level": "safe", "text_score": 69})
     with pytest.raises(ValidationError):
         DataReviewResultV05(**{**result.model_dump(), "rti": 0, "level": "danger"})
+    with pytest.raises(ValidationError):
+        DataReviewResultV05(**{**result.model_dump(), "text_score": None})
 
 
 def test_mapping_reorders_and_rejects_wrong_identity():
@@ -117,22 +121,24 @@ def test_mapping_reorders_and_rejects_wrong_identity():
             map_v05_results(request, invalid)
 
 
-def test_optional_count_and_no_internal_fields():
-    response = DataAnalyzeResponseV05(platform="m", product_id="p", results=[])
-    assert "review_count" not in response.model_dump(exclude_unset=True)
+def test_required_count_and_no_internal_fields():
+    with pytest.raises(ValidationError):
+        DataAnalyzeResponseV05(platform="m", product_id="p", results=[])
+    response = DataAnalyzeResponseV05(platform="m", product_id="p", review_count=0, results=[])
+    assert response.review_count == 0
     assert set(DataReviewResultV05.model_fields) == {
         "review_id", "rti", "level", "text_score", "behavior_score", "network_score", "reasons"}
 
 
-def test_all_unavailable_mapping_preserves_null_without_recalculation():
+def test_all_unavailable_mapping_preserves_sentinel_without_recalculation():
     request = DataAnalyzeRequestV05(**payload())
     original = analyze_product_reviews("0007", [ReviewAnalysisInput("00:01", "0007", "테스트")])[0]
     missing = AnalysisSignal(available=False, score=None, unavailable_reasons=("synthetic_missing",))
     unavailable = replace(original, available=False, rti=None, level=None,
                           signals=AnalysisSignals(missing, missing, missing), reasons=())
     result = map_v05_results(request, [unavailable]).results[0]
-    assert result.model_dump() == dict(review_id="00:01", rti=None, level=None,
-                                      text_score=None, behavior_score=None, network_score=None, reasons=[])
+    assert result.model_dump() == dict(review_id="00:01", rti=-1, level=None,
+                                      text_score=-1, behavior_score=-1, network_score=-1, reasons=[])
     with pytest.raises(ValueError, match="Inconsistent signal"):
         map_v05_results(request, [replace(unavailable, signals=AnalysisSignals(
             replace(missing, score=0), missing, missing))])

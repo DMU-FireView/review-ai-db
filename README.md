@@ -2,9 +2,11 @@
 
 Data 서버가 HTTP로 전달한 리뷰를 분석해 JSON을 반환합니다.
 분석 결과는 AI 자체 MySQL DB에 먼저 저장합니다. Redis는 사용하지 않습니다.
-v0.5 Data 분석 API와 팀원 분석기를 통합했습니다. 공식 분석 경로는 `POST /api/v1/data/analyze`입니다.
+`FireViewLab/review-ai-new` main(`ff3c149`)에서 검증한 KoELECTRA·행동·네트워크 런타임을
+기존 운영 구조에 통합하는 로컬 검증 단계입니다. 공식 분석 경로는 `POST /api/v1/data/analyze`입니다.
 새 연동은 [v0.5 API·인증·계산 정책](docs/data-ai-v05-integration.md)을 먼저 확인하세요.
 수집/SSE 실험 경로는 기본 비활성화입니다. [통합 상태·미확정 사항](docs/integration-preparation.md)을 먼저 확인하세요.
+검증 결과와 배포 전 TODO는 [2차 런타임 통합 보고서](docs/validation/review-ai-runtime-integration-20261002.md)를 참고하세요.
 
 ## 현재 상태와 역할
 
@@ -18,7 +20,9 @@ v0.5 Data 분석 API와 팀원 분석기를 통합했습니다. 공식 분석 �
 기본 API 처리 순서는 **요청 → 입력 저장 → 점수 계산 → 결과 저장 → HTTP 응답**입니다.
 현재는 `202`로 접수만 알리는 작업 큐가 아니라, 계산·저장을 마친 최종 결과를 반환합니다.
 크롤링 자체는 외부 크롤러가 담당하며, 이 저장소의 실험 기능은 그 스트림을 받아 분석에 연결합니다.
-새 Data API와 SSE는 승인된 팀원 분석기(.5/.3/.2)를 사용합니다.
+Data API와 SSE는 `app.services.analysis.analyze_reviews()`와 같은 결과 serializer를 사용합니다.
+기본 가중치는 .5/.3/.2이며, 계산 불가 점수는 `-1`, RTI 등급 경계는 70/40입니다.
+이전 운영 응답의 null·80/50·접두사 없는 사유 코드와 차이가 있으므로 Data 소비자 확인 후 배포해야 합니다.
 과거 호환 분석 라우트는 운영 API에서 제거했습니다.
 
 > 운영에서는 `REQUIRE_INTERNAL_TOKEN=1`과 `INTERNAL_TOKEN`을 설정하고 HTTPS로 공개하세요.
@@ -32,10 +36,10 @@ Python 3.12와 Git이 필요합니다. 이미 저장소가 있다면 복제 단�
 ### 1. 설치와 서버 실행 (Windows PowerShell)
 
 ```powershell
-git clone --branch main https://github.com/DMU-FireView/review-ai-db.git
+git clone --branch main https://github.com/FireViewLab/review-ai-db.git
 cd review-ai-db
 if (-not (Test-Path .venv)) { py -3.12 -m venv .venv }
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -r requirements-ml.txt
 if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 
 # .env의 DB_PASSWORD를 기존 MySQL 비밀번호로 설정한 뒤 DB를 실행합니다.
@@ -43,7 +47,11 @@ if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 docker compose up -d ai-db
 $env:ENABLE_EXPERIMENTAL_COLLECTION = "0"
 $env:GOOGLE_APPLICATION_CREDENTIALS = ""
-.\.venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8000
+# 외부 모델 폴더의 실제 경로로 바꿉니다. 모델 파일을 저장소에 복사하지 않습니다.
+$env:PTEXT_MODEL_PATH = "C:/models/ptext-koelectra-v1-2epoch-20260929"
+$env:OMP_NUM_THREADS = "2"
+$env:MKL_NUM_THREADS = "2"
+.\.venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8000 --workers 1
 ```
 
 macOS/Linux에서는 가상환경 생성·설치·실행 명령을 다음처럼 바꾸면 됩니다.
@@ -51,10 +59,12 @@ macOS/Linux에서는 가상환경 생성·설치·실행 명령을 다음처럼 
 
 ```sh
 if [ ! -d .venv ]; then python3.12 -m venv .venv; fi
-.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pip install -r requirements-dev.txt -r requirements-ml.txt
 docker compose up -d ai-db
 ENABLE_EXPERIMENTAL_COLLECTION=0 GOOGLE_APPLICATION_CREDENTIALS="" \
-  .venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8000
+  PTEXT_MODEL_PATH=/absolute/models/ptext-koelectra-v1-2epoch-20260929 \
+  OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 \
+  .venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8000 --workers 1
 ```
 
 서버가 켜지면 [Swagger UI](http://localhost:8000/docs)에서 API를 실행할 수 있습니다.
@@ -92,8 +102,9 @@ $analysisResponse.Headers["X-Analysis-Job-ID"]
 $analysisResponse.Content | ConvertFrom-Json | ConvertTo-Json -Depth 10
 ```
 
-기대 결과는 health의 `status: ok`, 분석 HTTP `200`, RTI `75`, 등급 `warn`입니다.
-이 예시는 비교 리뷰와 행동 근거가 없어 텍스트 점수만 RTI에 반영합니다.
+기대 결과는 health의 `status: ok`, 분석 HTTP `200`입니다. 점수는 실제 모델 추론 결과에 따라 달라집니다.
+이 예시는 비교 리뷰와 행동 근거가 없어 해당 점수가 `-1`이며 텍스트 점수만 RTI에 반영합니다.
+모델을 읽지 못하면 text_score도 `-1`입니다. 세 신호 모두 계산 불가이면 rti=`-1`, level=null입니다.
 macOS/Linux에서는 Swagger UI의 `POST /api/v1/data/analyze` → **Try it out**에
 아래 API 절의 JSON을 넣어 동일하게 확인할 수 있습니다.
 
@@ -108,7 +119,7 @@ macOS/Linux에서는 Swagger UI의 `POST /api/v1/data/analyze` → **Try it out*
 
 운영 Swagger에는 다음 두 경로만 표시됩니다 (`ENABLE_EXPERIMENTAL_COLLECTION=0`).
 
-- `GET /health`: `{"status":"ok"}`
+- `GET /health`: `{"status":"ok"}` (프로세스 liveness, 모델 lazy load/readiness 검사는 아님)
 - `POST /api/v1/data/analyze`: Data/AI v0.5 공식 리뷰 배치 분석
 
 `/docs`, `/redoc`, `/openapi.json`은 API 문서이며 `/`는 문서 화면으로 이동합니다.
@@ -129,7 +140,7 @@ macOS/Linux에서는 Swagger UI의 `POST /api/v1/data/analyze` → **Try it out*
 }
 ```
 
-응답 예시:
+응답 형태 예시 (text_score를 87로 고정한 모의 결과이며 위 문장의 실제 추론값이 아님):
 
 ```json
 {
@@ -138,12 +149,12 @@ macOS/Linux에서는 Swagger UI의 `POST /api/v1/data/analyze` → **Try it out*
   "review_count": 1,
   "results": [{
     "review_id": "1001",
-    "rti": 75.0,
-    "level": "warn",
-    "text_score": 75.0,
-    "behavior_score": null,
-    "network_score": null,
-    "reasons": ["SHORT_REVIEW"]
+    "rti": 87.0,
+    "level": "safe",
+    "text_score": 87.0,
+    "behavior_score": -1,
+    "network_score": -1,
+    "reasons": ["TEXT_SHORT_REVIEW"]
   }]
 }
 ```
@@ -152,11 +163,14 @@ macOS/Linux에서는 Swagger UI의 `POST /api/v1/data/analyze` → **Try it out*
 rating/written_at은 선택입니다. 리뷰 1~500개, 단일 상품 배치이며 ID와 요청 순서를 보존합니다.
 누락·중복 리뷰 ID·잘못된 타입·알 수 없는 입력 필드는 422입니다.
 기본 가중치는 text/behavior/network = 50/30/20이며 사용 가능한 신호만 재정규화합니다.
-근거가 부족한 점수는 null입니다. 80 이상 safe, 50 이상 warn, 50 미만 danger입니다.
+계산 불가 점수는 `-1`이며 null이나 0으로 대체하지 않습니다. 세 점수가 모두 -1일 때만 rti=-1/level=null입니다.
+RTI는 소수점 한 자리로 반올림하며 70 이상 safe, 40 이상 warn, 40 미만 danger입니다.
+reasons는 `TEXT_*`/`BEHAVIOR_*`/`NETWORK_*` 코드 배열입니다. `review_count`는 응답 필수 필드입니다.
 작업·입력·결과를 MySQL에 저장하고, 커밋 성공 후 X-Analysis-Job-ID와 최종 결과를 반환합니다.
 분석·저장 실패는 503입니다. 자세한 내용은 [v0.5 연동 문서](docs/data-ai-v05-integration.md)를 참고하세요.
 
 `POST /api/v1/analyze`는 **retired legacy endpoint**이며 라우트와 Swagger에서 제거되어 404를 반환합니다.
+원본 review-ai-new의 `/analysis/...` 라우트는 추가하지 않았습니다. 기존 운영·실험 경로를 유지합니다.
 
 ## 테스트와 Docker 실행
 
@@ -167,11 +181,18 @@ rating/written_at은 선택입니다. 리뷰 1~500개, 단일 상품 배치이�
 ```
 
 macOS/Linux에서는 `.venv/bin/python -m pytest -q`를 사용합니다.
-2026-09-09 검증 기록은 42개 통과입니다. 가짜 크롤러 SSE와 로컬 DB를 사용하는 테스트이며,
+2026-09-09의 과거 검증 기록은 42개 통과입니다. 가짜 크롤러 SSE와 로컬 DB를 사용하는 테스트이며,
 실제 크롤러·Spring·Azure 연동 검증을 대신하지 않습니다.
+현재 통합 코드의 결과는 [2차 런타임 통합 보고서](docs/validation/review-ai-runtime-integration-20261002.md)에 별도 기록합니다.
+2026-10-02 로컬 통합 검증은 Windows와 Docker Linux에서 각각 전체 pytest **327개 통과**입니다.
+실제 KoELECTRA CPU 추론·일반 API·MySQL 저장과 Docker config/build/up/healthy를 확인했습니다.
+SSE는 실제 모델·MySQL과 모의 HTTPS Data 전송을 사용해 API/저장 결과 일치를 검증했으며 실제 Data 서버 왕복 검증은 남아 있습니다.
 
 Docker Desktop의 **Linux 엔진** 또는 Linux Docker Engine이 실행 중이어야 합니다.
 로컬 Uvicorn이 8000 포트를 쓰고 있다면 먼저 종료하세요.
+`.env`에 `PTEXT_MODEL_HOST_PATH`를 외부 모델 폴더로 지정합니다. 컨테이너의 `PTEXT_MODEL_PATH`는
+기본 `/models/ptext-koelectra-v1-2epoch-20260929`이며 해당 폴더를 읽기 전용으로 마운트합니다.
+호스트 경로가 없으면 Compose 기동이 실패하며 빈 모델 폴더를 자동 생성하지 않습니다.
 
 ```sh
 docker compose config --quiet
@@ -181,12 +202,14 @@ docker compose ps
 docker compose logs --tail 50 ai
 ```
 
-이후 위의 health·분석 요청으로 확인합니다. 2026-09-09 통합 변경 당시에는
+이후 위의 health·분석 요청으로 확인합니다. 아래 내용은 과거 기록입니다. 2026-09-09 통합 변경 당시에는
 엔진 미실행으로 새 이미지 빌드·실행 검증을 완료하지 못했습니다.
 
 Docker에는 AI 서비스와 MySQL 8.0이 있으며 AI 프로세스는 비-root 사용자로 실행합니다.
 소스·실행 의존성만 복사하고 .env, 데이터, 팀원 DB, artifacts, 크롤링 도구는 제외합니다.
-production에서는 reload를 사용하지 않습니다.
+production에서는 reload를 사용하지 않고 worker는 1개입니다. `requirements-ml.txt`의 CPU 전용 torch와
+transformers를 설치하며 OMP/MKL 스레드는 기본 2개입니다. 모델 lazy loading·프로세스 내 캐시·RLock을 유지합니다.
+모델 파일은 이미지/Git에 포함하지 않습니다. CPU 이미지와 별개로 코드의 CUDA 자동 선택/CPU fallback 경로는 보존합니다.
 MySQL은 기존 `ai-db-data` 볼륨(`/var/lib/mysql`)을 재사용합니다.
 Compose 프로젝트 이름을 바꾸면 다른 볼륨이 생성되므로 기존 프로젝트 이름을 유지하세요.
 MySQL 호스트 포트는 기본 `127.0.0.1:3307`이며 외부 네트워크에 공개하지 않습니다.
@@ -203,8 +226,11 @@ MySQL 호스트 포트는 기본 `127.0.0.1:3307`이며 외부 네트워크에 �
 - `POST /experimental/analysis/collect/stream`
 - `GET /experimental/analysis/jobs/{job_id}`
 
+조회 API는 저장된 JSON을 그대로 반환합니다. 신규 작업 결과는 통합 v0.5 계약이지만,
+과거 null·80/50 정책으로 저장된 작업은 자동 변환·재계산하지 않습니다. 과거 조회까지 새 계약이라고 간주하지 마세요.
+
 실험 경로 등록에는 `ENABLE_EXPERIMENTAL_COLLECTION=1`과 명시적 `DATA_SERVER_BASE_URL`이 필요합니다.
-새 SSE는 팀원 분석기를 사용하고 v0.5 결과를 반환합니다. 누락 근거는 null로 처리하며
+SSE는 일반 API와 같은 KoELECTRA·행동·네트워크 분석 및 v0.5 결과를 반환합니다. 누락 근거 점수는 `-1`로 처리하며
 `ALLOW_LEGACY_CRAWLER_DEFAULTS`는 더 이상 사용하지 않습니다. 토큰 전송은 HTTPS만 허용합니다.
 실제 이벤트 계약 확인 전 운영에서 켜지 마세요.
 세부 입력 매핑·이벤트·연결 중단 한계는 [통합 준비 문서](docs/integration-preparation.md)에 정리돼 있습니다.
@@ -218,9 +244,10 @@ MySQL 호스트 포트는 기본 `127.0.0.1:3307`이며 외부 네트워크에 �
 - app/repositories/analysis_jobs.py: 저장소 인터페이스와 테스트·과거 파일 조회용 SQLite 구현
 - app/contracts/, app/integrations/: 크롤러 SSE 계약과 수신 어댑터
 - app/services/collection_stream.py: 수집 진행, 분석 중 heartbeat, 저장 후 result
-- app/services/data_analysis.py, app/scoring/meta_scorer.py: 공식 v0.5 분석·저장과 RTI 계산
+- app/services/data_analysis.py, app/services/analysis.py, app/scoring/meta_scorer.py: 공식 v0.5 분석·저장, 공통 진입점, RTI 계산
+- app/schemas/analysis.py: Python 진입점·API·SSE가 공유하는 평면 -1 결과 serializer
 - ai/analysis.py: 과거 스크립트 호환용 비운영 분석 모듈
-- app/analyzers/: 공식 v0.5 분석 알고리즘 (이번 제거 작업에서 변경 없음)
+- app/analyzers/: KoELECTRA P_text, 검증된 P_behavior/P_network (review-ai-new ff3c149 기준)
 - ai/text_analyzer.py, behavior_analyzer.py, network_analyzer.py: 과거 스크립트 참고용 비운영 분석기
 - ai/sentiment_client.py: 기존 선택적 Google Cloud 감성 분석
 - tests/: HTTP·입력 검증·점수 회귀 검사

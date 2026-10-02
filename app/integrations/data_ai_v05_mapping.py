@@ -5,6 +5,7 @@ from app.contracts.data_ai_v05 import (
     DataAnalyzeRequestV05, DataAnalyzeResponseV05, DataReviewResultV05,
 )
 from app.services.team_analysis import ReviewAnalysisResult
+from app.schemas.analysis import to_review_response
 
 
 def map_v05_results(payload: DataAnalyzeRequestV05,
@@ -25,14 +26,10 @@ def map_v05_results(payload: DataAnalyzeRequestV05,
         for signal in (item.signals.text, item.signals.behavior, item.signals.network):
             if signal.available != (signal.score is not None):
                 raise ValueError("Inconsistent signal availability")
-        results.append(DataReviewResultV05(
-            review_id=review.review_id, rti=item.rti,
-            level=item.level.value if item.level is not None else None,
-            text_score=item.signals.text.score,
-            behavior_score=item.signals.behavior.score,
-            network_score=item.signals.network.score,
-            # source와 message는 내부에만 남긴다. code 문자열·순서를 임의 변경하지 않는다.
-            reasons=[reason.code for reason in item.reasons],
-        ))
+        # Python 진입점·운영 API·SSE 모두 같은 serializer를 사용한다.
+        results.append(DataReviewResultV05.model_validate(to_review_response(
+            item, platform=payload.platform, product_id=payload.product_id,
+            review_id=review.review_id,
+        ).model_dump()))
     return DataAnalyzeResponseV05(platform=payload.platform, product_id=payload.product_id,
                                   review_count=len(results), results=results)

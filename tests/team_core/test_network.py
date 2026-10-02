@@ -4,12 +4,13 @@
 import pytest
 
 from app.analyzers.network import NetworkReview, analyze_network
+from app.integrations.similarity import NormalizedTextSimilarityAdapter
 
 
 TARGET = NetworkReview(
     review_id="review-1",
     product_id="product-1",
-    content="정말 좋은 상품입니다!",
+    content="정말 좋은 상품이라 꾸준하게 사용하고 있습니다!",
 )
 
 
@@ -51,12 +52,12 @@ def test_target_itself_is_excluded() -> None:
 def test_normalized_duplicate_increases_similar_review_count() -> None:
     result = analyze_network(
         TARGET,
-        (review("review-2", "  정말   좋은 상품입니다!  "),),
+        (review("review-2", "  정말   좋은 상품이라 꾸준하게 사용하고 있습니다!  "),),
     )
 
     assert result.features.similar_review_count == 1
     assert result.features.similarity_max == 1.0
-    assert result.p_network == 85.0
+    assert result.p_network == 9.1
 
 
 def test_no_duplicate_has_zero_count() -> None:
@@ -67,7 +68,7 @@ def test_no_duplicate_has_zero_count() -> None:
 
     assert result.available is True
     assert result.features.similar_review_count == 0
-    assert result.features.similarity_max == 0.0
+    assert result.features.similarity_max < 0.5
     assert result.p_network == 100.0
 
 
@@ -75,10 +76,11 @@ def test_compared_review_count_counts_only_similarity_results() -> None:
     result = analyze_network(
         TARGET,
         (
-            review("review-2", "정말 좋은 상품입니다!"),
+            review("review-2", TARGET.content),
             review("review-3", ""),
-            review("review-4", "다른 내용입니다."),
+            review("review-4", "충분한 길이를 가진 다른 내용입니다."),
         ),
+        similarity_adapter=NormalizedTextSimilarityAdapter(),
     )
 
     assert result.features.compared_review_count == 2
@@ -109,7 +111,7 @@ def test_empty_target_content_is_unavailable() -> None:
 def test_missing_similarity_is_not_replaced_with_a_number() -> None:
     result = analyze_network(
         TARGET,
-        (review("review-2", "비교 대상"),),
+        (review("review-2", "비교 가능한 충분히 긴 후기 본문입니다."),),
         similarity_adapter=UnavailableSimilarityAdapter(),
     )
 

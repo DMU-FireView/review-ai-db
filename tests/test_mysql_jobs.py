@@ -1,5 +1,6 @@
 """MySQL 설정·커밋·롤백과 선택 실행하는 실제 DB 저장 계약을 검증한다."""
 import os
+import json
 from unittest.mock import MagicMock
 
 import pymysql
@@ -8,6 +9,8 @@ from fastapi.testclient import TestClient
 
 from app.factory import create_app
 from app.repositories.mysql_jobs import MySQLJobStore
+
+pytestmark = pytest.mark.usefixtures("model_free_prediction")
 
 
 def test_requires_mysql_credentials(monkeypatch):
@@ -45,6 +48,20 @@ def test_create_commits_parameterized_unicode(fake_db):
     db.commit.assert_called_once()
     db.rollback.assert_not_called()
     db.close.assert_called_once()
+
+
+def test_complete_preserves_numeric_unavailable_and_null_level(fake_db):
+    store, db, _ = fake_db
+    response = {"platform": "mall", "product_id": "0007", "review_count": 1, "results": [{
+        "review_id": "00:01", "rti": -1, "level": None, "text_score": -1,
+        "behavior_score": -1, "network_score": -1, "reasons": [],
+    }]}
+    store.complete("job", response)
+    sql, params = db.cursor.return_value.__enter__.return_value.execute.call_args.args
+    assert "result_json=%s" in sql
+    assert json.loads(params[0]) == response
+    assert params[1] == "job"
+    db.commit.assert_called_once()
 
 
 @pytest.mark.parametrize("failure", ["execute", "commit"])
@@ -111,7 +128,19 @@ def test_live_mysql_lifecycle_and_http(monkeypatch):
             }]})
             assert response.status_code == 200
             ids.append(response.headers["X-Analysis-Job-ID"])
-            assert response.json()["results"][0]["rti"] == 75
+            assert response.json()["results"][0]["rti"] == 87
+            assert response.json()["results"][0]["behavior_score"] == -1
+            assert response.json()["results"][0]["network_score"] == -1
+            assert store.get(ids[-1])["result"] == response.json()
+            monkeypatch.setattr("app.services.analysis.predict_text_score", lambda content: {"text_score": -1})
+            response = client.post("/api/v1/data/analyze", json={"platform": "test", "product_id": "mysql-missing", "reviews": [{
+                "review_id": "00:01", "content": "누락 신호 검증 😃",
+            }]})
+            assert response.status_code == 200
+            ids.append(response.headers["X-Analysis-Job-ID"])
+            result = response.json()["results"][0]
+            assert result["rti"] == result["text_score"] == result["behavior_score"] == result["network_score"] == -1
+            assert result["level"] is None
             assert store.get(ids[-1])["result"] == response.json()
     finally:
         for job_id in ids:

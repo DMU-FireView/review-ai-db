@@ -21,6 +21,19 @@ services:
       CRAWLER_BASE_URL: ${CRAWLER_BASE_URL:-}
       CRAWLER_STREAM_TIMEOUT: ${CRAWLER_STREAM_TIMEOUT:-60}
       CRAWLER_MAX_RETRIES: ${CRAWLER_MAX_RETRIES:-0}
+      PTEXT_MODEL_PATH: ${PTEXT_MODEL_PATH:-/models/ptext-koelectra-v1-2epoch-20260929}
+      OMP_NUM_THREADS: ${OMP_NUM_THREADS:-2}
+      MKL_NUM_THREADS: ${MKL_NUM_THREADS:-2}
+      TOKENIZERS_PARALLELISM: "false"
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    volumes:
+      - type: bind
+        source: ${PTEXT_MODEL_HOST_PATH:-./models/ptext-koelectra-v1-2epoch-20260929}
+        target: ${PTEXT_MODEL_PATH:-/models/ptext-koelectra-v1-2epoch-20260929}
+        read_only: true
+        bind:
+          create_host_path: false
     depends_on:
       ai-db:
         condition: service_healthy

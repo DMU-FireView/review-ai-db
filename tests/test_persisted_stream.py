@@ -16,6 +16,8 @@ from app.integrations.crawler_stream import CrawlerStreamClient, iter_sse_frames
 from app.services.collection_stream import collection_events
 from tests.test_data_ai_v05 import payload
 
+pytestmark = pytest.mark.usefixtures("model_free_prediction")
+
 
 @pytest.fixture
 def store(tmp_path):
@@ -33,7 +35,7 @@ def test_http_result_is_durable(store, monkeypatch):
         saved = SQLiteJobStore(store.path).get(r.headers["X-Analysis-Job-ID"])
         assert saved["status"] == "DONE"
         assert saved["result"] == r.json()
-        assert saved["result"]["results"][0]["rti"] == 75
+        assert saved["result"]["results"][0]["rti"] == 87
         assert client.post("/experimental/analysis/collect/stream").status_code == 404
 
 
@@ -92,7 +94,7 @@ def test_stream_stores_before_result_and_deduplicates(store):
     [review().model_copy(update={"product_id": "other"})],
 ])
 def test_invalid_collection_never_scores(store, events):
-    with patch("app.services.data_analysis.analyze_product_reviews") as scorer:
+    with patch("app.services.data_analysis.analyze_reviews") as scorer:
         job_id, frames = run_stream(store, events)
     scorer.assert_not_called()
     assert frames[-1].event == "error"
@@ -104,8 +106,8 @@ def test_v05_mapping_preserves_ids_and_missing_evidence(store):
     result = json.loads(frames[-1].data)
     assert result["platform"] == "mall" and result["product_id"] == "p"
     assert result["results"][0]["review_id"] == "r"
-    assert result["results"][0]["behavior_score"] is None
-    assert result["results"][0]["network_score"] is None
+    assert result["results"][0]["behavior_score"] == -1
+    assert result["results"][0]["network_score"] == -1
     assert store.get(job_id)["result"] == result
 
 
@@ -193,7 +195,7 @@ def test_experimental_rejects_product_regrouping(store, monkeypatch):
 
 
 def test_analyzer_failure_is_persisted(store):
-    with patch("app.services.data_analysis.analyze_product_reviews", side_effect=RuntimeError("model")):
+    with patch("app.services.data_analysis.analyze_reviews", side_effect=RuntimeError("model")):
         job_id, frames = run_stream(store, [review(), DoneEvent(job_id="up", collected=1)])
     assert frames[-1].event == "error"
     assert store.get(job_id)["status"] == "FAILED"
