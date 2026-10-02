@@ -53,6 +53,11 @@ GROQ_TIMEOUT_SECONDS=5
 redirect와 환경 proxy를 따르지 않는다.
 외부 모델 지원·가용성은 운영자가 [Groq Structured Outputs](https://console.groq.com/docs/structured-outputs)에서 확인해야 한다.
 
+Groq 요청에는 `reasoning_effort: "low"`를 고정해 전달한다. 계획된 운영 모델
+`openai/gpt-oss-20b`는 운영자가 `GROQ_MODEL` 환경변수로 명시해야 하며 자동 기본 모델로 선택하지 않는다.
+`GROQ_MODEL`이 없거나 비어 있으면 기존과 같이 외부 요청 없이 원래 코드를 반환한다.
+모델별 reasoning effort 지원은 [Groq Reasoning](https://console.groq.com/docs/reasoning)을 참고한다.
+
 ## 입력과 출력 검증
 
 Groq에는 리뷰 본문 전체와 이미 계산된 사유 코드만 전달한다. 점수·등급·실제

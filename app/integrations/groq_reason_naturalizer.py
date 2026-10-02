@@ -216,6 +216,7 @@ async def _enrich(chunks: list[list[dict]], result: list[list[str]],
 def _request_payload(items: list[dict], settings: GroqReasonSettings) -> dict:
     return {
         "model": settings.model,
+        "reasoning_effort": "low",
         "temperature": 0,
         "max_completion_tokens": 4096,
         "messages": [

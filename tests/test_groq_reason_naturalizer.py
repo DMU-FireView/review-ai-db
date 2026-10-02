@@ -8,7 +8,7 @@ import httpx
 import pytest
 
 from app.integrations.groq_reason_naturalizer import (
-    GroqReasonSettings, naturalize_reasons, naturalize_reasons_batch,
+    GroqReasonSettings, load_settings, naturalize_reasons, naturalize_reasons_batch,
 )
 
 
@@ -60,6 +60,45 @@ def test_primary_success_preserves_content_codes_and_structured_prompt(settings)
                                transport=httpx.MockTransport(handler), settings=settings)
     assert result == [MESSAGE, MESSAGE]
     assert original_codes == CODES and len(calls) == 1
+
+
+@pytest.mark.parametrize("failover", [False, True])
+def test_request_uses_low_reasoning_effort_and_explicit_env_model(monkeypatch, failover):
+    monkeypatch.setenv("ENABLE_GROQ_REASON_NATURALIZATION", "1")
+    monkeypatch.setenv("GROQ_API_KEY_PRIMARY", PRIMARY)
+    monkeypatch.setenv("GROQ_API_KEY_SECONDARY", SECONDARY)
+    monkeypatch.setenv("GROQ_MODEL", "openai/gpt-oss-20b")
+    monkeypatch.setenv("GROQ_TIMEOUT_SECONDS", "5")
+    keys = []
+
+    def handler(request):
+        body = json.loads(request.content)
+        assert body["reasoning_effort"] == "low"
+        assert body["model"] == "openai/gpt-oss-20b"
+        keys.append(request.headers["authorization"])
+        if failover and len(keys) == 1:
+            return httpx.Response(429)
+        return completion(valid_output(request))
+
+    result = naturalize_reasons(content=CONTENT, reasons=CODES,
+                               transport=httpx.MockTransport(handler))
+    assert result == [MESSAGE, MESSAGE]
+    assert keys == (["Bearer " + PRIMARY, "Bearer " + SECONDARY] if failover
+                    else ["Bearer " + PRIMARY])
+
+
+@pytest.mark.parametrize("model_value", [None, ""])
+def test_missing_env_model_does_not_default_to_gpt_oss_or_call_provider(monkeypatch, model_value):
+    monkeypatch.setenv("ENABLE_GROQ_REASON_NATURALIZATION", "1")
+    monkeypatch.setenv("GROQ_API_KEY_PRIMARY", PRIMARY)
+    monkeypatch.setenv("GROQ_TIMEOUT_SECONDS", "5")
+    if model_value is None:
+        monkeypatch.delenv("GROQ_MODEL", raising=False)
+    else:
+        monkeypatch.setenv("GROQ_MODEL", model_value)
+    transport = httpx.MockTransport(lambda request: pytest.fail("Missing model made a request"))
+    assert load_settings().model is None
+    assert naturalize_reasons(content=CONTENT, reasons=CODES, transport=transport) == CODES
 
 
 def test_provider_may_preserve_a_code_it_cannot_explain_faithfully(settings):
